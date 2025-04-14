@@ -118,6 +118,7 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                           artisanName: artisan['name'],
                           category: artisan['category'],
                           avatar: artisan['avatar'],
+                          hasToNavigateToFillDirectOrder: true,
                         ),
                       ),
                     );

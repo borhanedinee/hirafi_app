@@ -119,7 +119,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                           artisanName: artisan['name'],
                           category: artisan['category'],
                           avatar: artisan['avatar'],
-                          isToSendOffer: true,
                         ),
                       ),
                     );

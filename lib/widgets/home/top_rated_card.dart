@@ -26,6 +26,7 @@ class TopRatedArtisanCard extends StatelessWidget {
               avatar: avatar,
               artisanName: name,
               category: artisanity,
+              hasToNavigateToFillDirectOrder: true,
             ),
           ),
         );

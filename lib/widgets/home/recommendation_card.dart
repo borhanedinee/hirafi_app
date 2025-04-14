@@ -70,6 +70,7 @@ class RecommendationCard extends StatelessWidget {
                       availability,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
+                            fontSize: 12,
                           ),
                     ),
                   ],

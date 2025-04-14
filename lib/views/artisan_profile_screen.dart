@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/views/fill_offer_screen.dart';
 
 class ArtisanProfileScreen extends StatelessWidget {
   const ArtisanProfileScreen({
@@ -7,13 +8,13 @@ class ArtisanProfileScreen extends StatelessWidget {
     required this.artisanName,
     required this.category,
     required this.avatar,
-    this.isToSendOffer = false,
+    this.hasToNavigateToFillDirectOrder = false,
   });
 
   final String artisanName;
   final String category;
   final String avatar;
-  final bool isToSendOffer;
+  final bool hasToNavigateToFillDirectOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -71,13 +72,14 @@ class ArtisanProfileScreen extends StatelessWidget {
           ),
 
           // Contact Artisan Button
-          _buildContactButton(isToSendOffer),
+          _buildContactButton(hasToNavigateToFillDirectOrder, context),
         ],
       ),
     );
   }
 
-  Positioned _buildContactButton(bool isToSendOffer) {
+  Positioned _buildContactButton(
+      bool hasToNavigateToFillDirectOrder, BuildContext context) {
     return Positioned(
       bottom: 20,
       left: 20,
@@ -86,7 +88,19 @@ class ArtisanProfileScreen extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-            // Implement contact logic
+            if (hasToNavigateToFillDirectOrder) {
+              // Navigate to Fill Direct Order screen
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const FillOfferDetailsScreen(
+                    isDirectOffer: true,
+                    isSendDirectly: true,
+                  ),
+                ),
+              );
+            } else {
+              // Navigate to Fill Service Request screen
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
@@ -105,7 +119,9 @@ class ArtisanProfileScreen extends StatelessWidget {
                 color: Colors.white,
               ),
               Text(
-                isToSendOffer ? 'Send Offer' : 'Send Service',
+                hasToNavigateToFillDirectOrder
+                    ? 'Fill Offer and Send'
+                    : 'Send Offer',
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -446,6 +462,32 @@ class ArtisanProfileScreen extends StatelessWidget {
     );
   }
 
+  // Add the helper function within the same class or as a standalone widget
+  Widget _buildInfoRow(
+    BuildContext context, {
+    required IconData icon,
+    required Color iconColor,
+    required String text,
+  }) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: iconColor,
+          size: 16,
+        ),
+        const SizedBox(width: 5),
+        Text(
+          text,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColors.greyColor,
+                fontSize: 12,
+              ),
+        ),
+      ],
+    );
+  }
+
   Container _buildProfileSection(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -491,46 +533,14 @@ class ArtisanProfileScreen extends StatelessWidget {
                             fontSize: 14,
                           ),
                     ),
-                    const SizedBox(height: 5),
-                    // Location
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          color: AppColors.primaryColor,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          'Annaba, Annaba', // Replace with actual location
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.greyColor,
-                                    fontSize: 12,
-                                  ),
-                        ),
-                      ],
-                    ),
+
                     const SizedBox(height: 5),
                     // Rating and Availability
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          '4.9 (24 reviews)', // Replace with actual rating
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.greyColor,
-                                    fontSize: 12,
-                                  ),
-                        ),
-                        const SizedBox(width: 10),
-                      ],
+                    _buildInfoRow(
+                      context,
+                      icon: Icons.star,
+                      iconColor: Colors.yellow,
+                      text: '4.7 (24 reviews )',
                     ),
                   ],
                 ),
@@ -538,6 +548,57 @@ class ArtisanProfileScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
+
+          const SizedBox(height: 5),
+          // Location
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 16,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInfoRow(
+                    context,
+                    icon: Icons.location_on,
+                    iconColor: AppColors.primaryColor,
+                    text: 'Annaba, Annaba',
+                  ),
+
+                  // Services Completed
+                  _buildInfoRow(
+                    context,
+                    icon: Icons.build,
+                    iconColor: AppColors.primaryColor,
+                    text: '34 services done',
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              // Years of Experience
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInfoRow(
+                    context,
+                    icon: Icons.access_time,
+                    iconColor: AppColors.primaryColor,
+                    text: '5 years of experience',
+                  ),
+                  const SizedBox(height: 5),
+                  // Number of Different Clients
+                  _buildInfoRow(
+                    context,
+                    icon: Icons.people,
+                    iconColor: AppColors.primaryColor,
+                    text: 'served 12 different clients',
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 16,

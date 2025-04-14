@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/views/add_service_screens/fill_offer_screen.dart';
+import 'package:hirafi/views/fill_offer_screen.dart';
 import 'package:hirafi/widgets/app_card.dart';
 
 class ChooseOfferTypeScreen extends StatelessWidget {
@@ -45,6 +45,7 @@ class ChooseOfferTypeScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const FillOfferDetailsScreen(
                       isDirectOffer: true,
+                      isSendDirectly: false,
                     ),
                   ),
                 );
@@ -61,6 +62,7 @@ class ChooseOfferTypeScreen extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const FillOfferDetailsScreen(
                       isDirectOffer: false,
+                      isSendDirectly: false,
                     ),
                   ),
                 );
