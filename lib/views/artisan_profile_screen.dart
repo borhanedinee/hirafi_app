@@ -101,14 +101,13 @@ class ArtisanProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                isToSendOffer ? Icons.send : Icons.send,
+                Icons.send,
                 color: Colors.white,
               ),
               Text(
-                isToSendOffer ? 'Send Offer' : 'Contact Artisan',
+                isToSendOffer ? 'Send Offer' : 'Send Service',
                 style: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
