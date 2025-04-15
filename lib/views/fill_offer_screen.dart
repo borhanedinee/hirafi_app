@@ -8,22 +8,18 @@ import 'package:hirafi/views/add_service_screens/posted_offer_screen.dart';
 import 'package:ionicons/ionicons.dart';
 
 class FillOfferDetailsScreen extends StatefulWidget {
-  final bool isDirectOffer;
-  final bool isSendDirectly;
-
   const FillOfferDetailsScreen(
       {super.key, required this.isDirectOffer, required this.isSendDirectly});
+
+  final bool isDirectOffer;
+  final bool isSendDirectly;
 
   @override
   State<FillOfferDetailsScreen> createState() => _FillOfferDetailsScreenState();
 }
 
 class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
   final _budgetController = TextEditingController();
-  String? _selectedCategory;
   final List<String> _categories = [
     'Plumbing',
     'Electrical',
@@ -31,6 +27,11 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
     'Painting',
     'Masonry',
   ];
+
+  final _descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String? _selectedCategory;
+  final _titleController = TextEditingController();
 
   @override
   void dispose() {
@@ -58,6 +59,90 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
         ),
       );
     }
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    int maxLines = 1,
+    TextInputType keyboardType = TextInputType.text,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      maxLines: maxLines,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        fillColor: Colors.white70,
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 12,
+          horizontal: 15,
+        ),
+        hintText:
+            label, // Use hintText instead of labelText since we have a heading
+        hintStyle: const TextStyle(
+          color: AppColors.greyColor,
+          fontSize: 12,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: AppColors.greyColor
+                .withOpacity(0.1), // Light grey for unfocused border
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: AppColors.primaryColor),
+        ),
+      ),
+      validator: validator,
+    );
+  }
+
+  Widget _buildDropdownField() {
+    return DropdownButtonFormField<String>(
+      value: _selectedCategory,
+      hint: const Text(
+        'Select Category',
+        style: TextStyle(
+          color: AppColors.greyColor,
+          fontSize: 14,
+        ),
+      ),
+      decoration: InputDecoration(
+        labelText: 'Category',
+        labelStyle: const TextStyle(color: AppColors.greyColor),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: AppColors.greyColor
+                .withOpacity(0.5), // Light grey for unfocused border
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: AppColors.primaryColor),
+        ),
+      ),
+      items: _categories.map((category) {
+        return DropdownMenuItem<String>(
+          value: category,
+          child: Text(category),
+        );
+      }).toList(),
+      onChanged: (value) {
+        setState(() {
+          _selectedCategory = value;
+        });
+      },
+      validator: (value) {
+        if (value == null) {
+          return 'Please select a category';
+        }
+        return null;
+      },
+    );
   }
 
   @override
@@ -359,90 +444,6 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    int maxLines = 1,
-    TextInputType keyboardType = TextInputType.text,
-    String? Function(String?)? validator,
-  }) {
-    return TextFormField(
-      controller: controller,
-      maxLines: maxLines,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        fillColor: Colors.white70,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 15,
-        ),
-        hintText:
-            label, // Use hintText instead of labelText since we have a heading
-        hintStyle: const TextStyle(
-          color: AppColors.greyColor,
-          fontSize: 12,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: AppColors.greyColor
-                .withOpacity(0.1), // Light grey for unfocused border
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.primaryColor),
-        ),
-      ),
-      validator: validator,
-    );
-  }
-
-  Widget _buildDropdownField() {
-    return DropdownButtonFormField<String>(
-      value: _selectedCategory,
-      hint: const Text(
-        'Select Category',
-        style: TextStyle(
-          color: AppColors.greyColor,
-          fontSize: 14,
-        ),
-      ),
-      decoration: InputDecoration(
-        labelText: 'Category',
-        labelStyle: const TextStyle(color: AppColors.greyColor),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: AppColors.greyColor
-                .withOpacity(0.5), // Light grey for unfocused border
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: AppColors.primaryColor),
-        ),
-      ),
-      items: _categories.map((category) {
-        return DropdownMenuItem<String>(
-          value: category,
-          child: Text(category),
-        );
-      }).toList(),
-      onChanged: (value) {
-        setState(() {
-          _selectedCategory = value;
-        });
-      },
-      validator: (value) {
-        if (value == null) {
-          return 'Please select a category';
-        }
-        return null;
-      },
     );
   }
 }

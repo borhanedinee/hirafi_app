@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart'; // Assuming this contains size and other utilities
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/enums/status_enum.dart';
+import 'package:hirafi/utils/enums/booking_status_enum.dart';
 
 class RecentBookingCard extends StatelessWidget {
   final String artisanName;

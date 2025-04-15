@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/views/artisan_profile_screen.dart';
 
 class TopRatedArtisanCard extends StatelessWidget {
-  final String avatar;
-  final String name;
-  final String artisanity;
+  final ArtisanModel artisan;
 
-  const TopRatedArtisanCard({
-    super.key,
-    required this.avatar,
-    required this.name,
-    required this.artisanity,
-  });
+  const TopRatedArtisanCard({super.key, required this.artisan});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +17,7 @@ class TopRatedArtisanCard extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (c) => ArtisanProfileScreen(
-              avatar: avatar,
-              artisanName: name,
-              category: artisanity,
+              artisan: artisan,
               hasToNavigateToFillDirectOrder: true,
             ),
           ),
@@ -51,7 +43,7 @@ class TopRatedArtisanCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.asset(
-                avatar,
+                artisan.avatar,
                 width: size.width * 0.7 * 0.25,
                 height: size.width * 0.7 * 0.25,
                 fit: BoxFit.cover,
@@ -63,7 +55,7 @@ class TopRatedArtisanCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  artisan.fullName,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -71,7 +63,7 @@ class TopRatedArtisanCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      artisanity,
+                      artisan.category,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
                           ),

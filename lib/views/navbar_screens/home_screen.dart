@@ -1,15 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/enums/status_enum.dart';
-import 'package:hirafi/widgets/home/home_appbar.dart';
-import 'package:hirafi/widgets/home/home_seacrhbar.dart';
-import 'package:hirafi/widgets/home/recent_booking_card.dart';
-import 'package:hirafi/widgets/home/recommendation_card.dart';
-import 'package:hirafi/widgets/home/tip_card.dart';
-import 'package:hirafi/widgets/home/top_rated_card.dart';
-import 'package:hirafi/widgets/home/wrap_item.dart';
+import 'package:hirafi/utils/enums/booking_status_enum.dart';
+import 'package:hirafi/widgets/home_page/home_appbar.dart';
+import 'package:hirafi/widgets/home_page/home_seacrhbar.dart';
+import 'package:hirafi/widgets/home_page/recent_booking_card.dart';
+import 'package:hirafi/widgets/home_page/recommendation_card.dart';
+import 'package:hirafi/widgets/home_page/tip_card.dart';
+import 'package:hirafi/widgets/home_page/top_rated_card.dart';
+import 'package:hirafi/widgets/home_page/wrap_item.dart';
 import 'package:hirafi/widgets/my_header.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -52,6 +53,46 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Actual content when data is loaded
   Widget _buildContent() {
+    // Mock data for artisanDummyData (replace with actual data from your backend)
+    final List<Map<String, dynamic>> artisanDummyData = [
+      {
+        'id': 1,
+        'fullName': 'Ali Mansouri',
+        'location': 'Algiers',
+        'email': 'ali.mansouri@example.com',
+        'phoneNumber': '+213661234567',
+        'password': 'password123',
+        'avatar': 'avatar1.jpg',
+        'category': 'Electrician',
+        'stars': 4.8,
+      },
+      {
+        'id': 2,
+        'fullName': 'Sami Bouzid',
+        'location': 'Oran',
+        'email': 'sami.bouzid@example.com',
+        'phoneNumber': '+213662345678',
+        'password': 'password123',
+        'avatar': 'avatar2.jpg',
+        'category': 'Plumber',
+        'stars': 4.7,
+      },
+      {
+        'id': 3,
+        'fullName': 'Meriem Bensalem',
+        'location': 'Constantine',
+        'email': 'meriem.bensalem@example.com',
+        'phoneNumber': '+213663456789',
+        'password': 'password123',
+        'avatar': 'avatar3.jpg',
+        'category': 'Carpenter',
+        'stars': 4.5,
+      },
+    ];
+
+    final List<ArtisanModel> artisanDummyModels =
+        artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
+
     return SingleChildScrollView(
       child: SizedBox(
         width: size.width,
@@ -74,19 +115,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: const [
                     WrapItem(
                       title: 'Electrical',
-                      icon: 'assets/icons/electrician.png',
+                      icon: 'assets/icons/electrician.jpg',
                     ),
                     WrapItem(
                       title: 'Plumbing',
-                      icon: 'assets/icons/plumber.png',
+                      icon: 'assets/icons/plumber.jpg',
                     ),
                     WrapItem(
                       title: 'Carpentry',
-                      icon: 'assets/icons/carpenter.png',
+                      icon: 'assets/icons/carpenter.jpg',
                     ),
                     WrapItem(
                       title: 'Painture',
-                      icon: 'assets/icons/painter.png',
+                      icon: 'assets/icons/painter.jpg',
                     ),
                   ],
                 ),
@@ -115,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onRebook: () {},
                       artisanName: 'Borhanedine B',
                       service: 'Electrician',
-                      icon: 'assets/images/avatars/avatar4.png',
+                      icon: 'assets/images/avatars/avatar4.jpg',
                       date: '12 Avril 2025 at 12:00 PM',
                       status: BookingStatus.inProgress,
                     ),
@@ -152,23 +193,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     left: 10, right: 10, bottom: 10, top: 15),
                 child: Row(
                   spacing: 20,
-                  children: [
-                    TopRatedArtisanCard(
-                      avatar: 'assets/images/avatars/avatar4.png',
-                      name: 'Borhanedine B',
-                      artisanity: 'Electrician',
-                    ),
-                    TopRatedArtisanCard(
-                      avatar: 'assets/images/avatars/avatar2.jpg',
-                      name: 'Saada Abdelkader',
-                      artisanity: 'Plumber',
-                    ),
-                    TopRatedArtisanCard(
-                      avatar: 'assets/images/avatars/avatar3.jpg',
-                      name: 'Riyad Mokhi',
-                      artisanity: 'Mason',
-                    ),
-                  ],
+                  children: List.generate(
+                    artisanDummyModels.length,
+                    (index) {
+                      final artisan = artisanDummyModels[index];
+                      return TopRatedArtisanCard(artisan: artisan);
+                    },
+                  ),
                 ),
               ),
             ),

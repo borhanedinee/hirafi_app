@@ -1,6 +1,7 @@
 // lib/presentation/pages/artisans_matching_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/views/artisan_profile_screen.dart';
 import 'package:hirafi/widgets/app_card.dart';
@@ -31,31 +32,56 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Mock data for artisans (replace with actual data from your backend)
-    final artisans = [
+    // Mock data for artisanDummyData (replace with actual data from your backend)
+    final List<Map<String, dynamic>> artisanDummyData = [
       {
-        'name': 'John Doe',
-        'category': 'Plumbing',
+        'id': 1,
+        'fullName': 'Ali Mansouri',
+        'location': 'Algiers',
+        'email': 'ali.mansouri@example.com',
+        'phoneNumber': '+213661234567',
+        'password': 'password123',
+        'avatar': 'avatar1.jpg',
+        'category': 'Electrician',
         'stars': 4.8,
-        'avatar': 'assets/images/avatars/avatar.jpg',
       },
       {
-        'name': 'Jane Smith',
-        'category': 'Electrical',
+        'id': 2,
+        'fullName': 'Sami Bouzid',
+        'location': 'Oran',
+        'email': 'sami.bouzid@example.com',
+        'phoneNumber': '+213662345678',
+        'password': 'password123',
+        'avatar': 'avatar2.jpg',
+        'category': 'Plumber',
         'stars': 4.7,
-        'avatar': 'assets/images/avatars/avatar2.jpg',
       },
       {
-        'name': 'Mike Johnson',
-        'category': 'Carpentry',
+        'id': 3,
+        'fullName': 'Meriem Bensalem',
+        'location': 'Constantine',
+        'email': 'meriem.bensalem@example.com',
+        'phoneNumber': '+213663456789',
+        'password': 'password123',
+        'avatar': 'avatar3.jpg',
+        'category': 'Carpenter',
         'stars': 4.5,
-        'avatar': 'assets/images/avatars/avatar3.jpg',
+      },
+      {
+        'id': 4,
+        'fullName': 'Khaled Haroun',
+        'location': 'Blida',
+        'email': 'khaled.haroun@example.com',
+        'phoneNumber': '+213664567890',
+        'password': 'password123',
+        'avatar': 'avatar4.jpg',
+        'category': 'Painter',
+        'stars': 4.2,
       },
     ];
 
-    // Sort artisans by stars (descending)
-    artisans
-        .sort((a, b) => (b['stars'] as double).compareTo(a['stars'] as double));
+    final List<ArtisanModel> artisanDummyModels =
+        artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -77,12 +103,12 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
-      body: isLoading ? _buildShimmer() : _buildContent(artisans),
+      body: isLoading ? _buildShimmer() : _buildContent(artisanDummyModels),
     );
   }
 
   // Actual content when data is loaded
-  Widget _buildContent(List<Map<String, dynamic>> artisans) {
+  Widget _buildContent(List<ArtisanModel> artisanDummyModels) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -103,22 +129,17 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                 mainAxisSpacing: 15,
                 childAspectRatio: 0.55, // Adjusted to prevent overflow
               ),
-              itemCount: artisans.length,
+              itemCount: artisanDummyModels.length,
               itemBuilder: (context, index) {
-                final artisan = artisans[index];
+                final artisan = artisanDummyModels[index];
                 return _buildArtisanCard(
                   context,
-                  name: artisan['name'] as String,
-                  category: artisan['category'] as String,
-                  stars: artisan['stars'] as double,
-                  avatar: artisan['avatar'] as String,
+                  artisan: artisan,
                   onCardClicked: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (c) => ArtisanProfileScreen(
-                          artisanName: artisan['name'],
-                          category: artisan['category'],
-                          avatar: artisan['avatar'],
+                          artisan: artisan,
                         ),
                       ),
                     );
@@ -247,10 +268,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
 
   Widget _buildArtisanCard(
     BuildContext context, {
-    required String name,
-    required String category,
-    required double stars,
-    required String avatar,
+    required ArtisanModel artisan,
     required VoidCallback onSendOffer,
     required VoidCallback onCardClicked,
   }) {
@@ -269,7 +287,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                   topRight: Radius.circular(20),
                 ),
                 child: Image.asset(
-                  avatar,
+                  artisan.avatar,
                   height: 120, // Adjusted height to fit better
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -293,34 +311,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                   ),
                 ),
               ),
-              // Positioned(
-              //   bottom: 10,
-              //   left: 10,
-              //   child: Container(
-              //     padding: const EdgeInsets.symmetric(
-              //       horizontal: 10,
-              //       vertical: 5,
-              //     ),
-              //     decoration: BoxDecoration(
-              //       color: AppColors.primaryColor.withValues(alpha: .6),
-              //       borderRadius: BorderRadius.circular(10),
-              //     ),
-              //     child: Text(
-              //       category,
-              //       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              //         color: Colors.white,
-              //         fontWeight: FontWeight.bold,
-              //         shadows: [
-              //           const Shadow(
-              //             color: Colors.black45,
-              //             offset: Offset(1, 1),
-              //             blurRadius: 2,
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
 
@@ -332,7 +322,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
               children: [
                 const SizedBox(height: 5),
                 Text(
-                  name,
+                  artisan.fullName,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -379,7 +369,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      stars.toString(),
+                      artisan.stars.toString(),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
                             fontSize: 14,
