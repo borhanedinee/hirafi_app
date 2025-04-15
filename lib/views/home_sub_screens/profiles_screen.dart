@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/constants/urls.dart';
+import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/views/artisan_profile_screen.dart';
 import 'package:hirafi/widgets/app_card.dart';
 import 'package:shimmer/shimmer.dart';
@@ -31,54 +33,6 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Mock data for artisanDummyData (replace with actual data from your backend)
-    final List<Map<String, dynamic>> artisanDummyData = [
-      {
-        'id': 1,
-        'fullName': 'Ali Mansouri',
-        'location': 'Algiers',
-        'email': 'ali.mansouri@example.com',
-        'phoneNumber': '+213661234567',
-        'password': 'password123',
-        'avatar': 'avatar1.jpg',
-        'category': 'Electrician',
-        'stars': 4.8,
-      },
-      {
-        'id': 2,
-        'fullName': 'Sami Bouzid',
-        'location': 'Oran',
-        'email': 'sami.bouzid@example.com',
-        'phoneNumber': '+213662345678',
-        'password': 'password123',
-        'avatar': 'avatar2.jpg',
-        'category': 'Plumber',
-        'stars': 4.7,
-      },
-      {
-        'id': 3,
-        'fullName': 'Meriem Bensalem',
-        'location': 'Constantine',
-        'email': 'meriem.bensalem@example.com',
-        'phoneNumber': '+213663456789',
-        'password': 'password123',
-        'avatar': 'avatar3.jpg',
-        'category': 'Carpenter',
-        'stars': 4.5,
-      },
-      {
-        'id': 4,
-        'fullName': 'Khaled Haroun',
-        'location': 'Blida',
-        'email': 'khaled.haroun@example.com',
-        'phoneNumber': '+213664567890',
-        'password': 'password123',
-        'avatar': 'avatar4.jpg',
-        'category': 'Painter',
-        'stars': 4.2,
-      },
-    ];
-
     final List<ArtisanModel> artisanDummyModels =
         artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
 
@@ -379,7 +333,10 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                SizedBox(
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                  ),
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: onContactArtisan,
@@ -390,18 +347,18 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                       ),
                       foregroundColor: AppColors.primaryColor,
                       padding: const EdgeInsets.symmetric(
-                        vertical: 8, // Reduced padding
+                        horizontal: 10,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: Text(
-                      'Contact',
+                      'View Details',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13, // Slightly smaller font
+                            fontSize: 12, // Slightly smaller font
                           ),
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/views/fill_offer_screen.dart';
 import 'package:hirafi/widgets/artisan_profile_page/profile_section.dart';
 
@@ -33,10 +34,10 @@ class ArtisanProfileScreen extends StatelessWidget {
                 _buildProfileActions(),
                 const SizedBox(height: 8),
                 // Work Gallery
-                _buildWorkGallery(context),
+                _buildWorkGallery(context, artisan.category),
                 const SizedBox(height: 8),
                 // Working Fileds
-                _buildWorkingFields(context),
+                _buildWorkingFields(context, artisan.category),
                 const SizedBox(height: 8),
 
                 // Professional Certificates
@@ -63,6 +64,52 @@ class ArtisanProfileScreen extends StatelessWidget {
     );
   }
 
+  // Function to show the image viewer dialog
+  void _showImageViewerDialog(BuildContext context, String imagePath) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.all(0),
+          child: Stack(
+            children: [
+              // Image viewer with zooming
+              InteractiveViewer(
+                minScale: 0.5,
+                maxScale: 4.0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                    height: double.infinity,
+                  ),
+                ),
+              ),
+              // Close button
+              Positioned(
+                top: 10,
+                right: 10,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   AppBar _buildAppBar() {
     return AppBar(
       actions: [
@@ -82,7 +129,7 @@ class ArtisanProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWorkingFields(context) {
+  Widget _buildWorkingFields(context, artisanCategory) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -103,24 +150,13 @@ class ArtisanProfileScreen extends StatelessWidget {
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _workField(
-                context,
-                '- Home wiring & rewiring',
-              ),
-              _workField(
-                context,
-                '- Installing light fixtures and ceiling fans',
-              ),
-              _workField(
-                context,
-                '- Power outlets and switches installation',
-              ),
-              _workField(
-                context,
-                '- Electrical troubleshooting and repairs',
-              ),
-            ],
+            children: List.generate(
+              fieldsByCategory[artisanCategory]!.length,
+              (index) {
+                return _workField(
+                    context, '-  ${fieldsByCategory[artisanCategory]![index]}');
+              },
+            ),
           ),
         ],
       ),
@@ -379,7 +415,7 @@ class ArtisanProfileScreen extends StatelessWidget {
     );
   }
 
-  Container _buildWorkGallery(BuildContext context) {
+  Container _buildWorkGallery(BuildContext context, artisanCategory) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -407,20 +443,25 @@ class ArtisanProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(6, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Image ${index + 1}',
-                          style: const TextStyle(color: Colors.grey),
+                children: List.generate(
+                    imagesByCategories[artisanCategory]!.length, (index) {
+                  final image = imagesByCategories[artisanCategory]![index];
+                  return GestureDetector(
+                    onTap: () => _showImageViewerDialog(context, image),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.asset(
+                          image,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
                         ),
                       ),
                     ),

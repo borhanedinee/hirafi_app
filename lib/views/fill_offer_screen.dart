@@ -44,7 +44,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
   void _submitForm() {
     // if (_formKey.currentState!.validate()) {}
     // Navigate based on offer type
-    if (widget.isDirectOffer) {
+    if (widget.isDirectOffer && !widget.isSendDirectly) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -332,15 +332,6 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                             width: double.infinity,
                           ),
                         ),
-                        // Container(
-                        //   height: 100,
-                        //   width: double.infinity,
-                        //   decoration: BoxDecoration(
-                        //     color: AppColors.greyColor.withOpacity(0.05),
-                        //     borderRadius: BorderRadius.circular(10),
-                        //   ),
-                        // ),
-                        // add icon
                         Positioned(
                           top: 20,
                           left: (size.width - 40 - 50) / 2,

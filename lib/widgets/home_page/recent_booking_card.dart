@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart'; // Assuming this contains size and other utilities
+import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/enums/booking_status_enum.dart';
 
 class RecentBookingCard extends StatelessWidget {
-  final String artisanName;
-  final String service;
+  final ArtisanModel artisan;
   final String date;
-  final BookingStatus status; // Updated to use enum
-  final String icon;
+  final BookingStatus status;
   final VoidCallback onRebook;
 
   const RecentBookingCard({
     super.key,
-    required this.artisanName,
-    required this.service,
+    required this.artisan,
     required this.date,
     required this.status,
     required this.onRebook,
-    required this.icon,
   });
 
   @override
@@ -59,7 +56,7 @@ class RecentBookingCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
-                      icon,
+                      artisan.avatar,
                       width: 25,
                       height: 25,
                     ),
@@ -68,7 +65,7 @@ class RecentBookingCard extends StatelessWidget {
                   SizedBox(
                     width: 120,
                     child: Text(
-                      artisanName,
+                      artisan.fullName,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
@@ -95,7 +92,7 @@ class RecentBookingCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      service,
+                      artisan.category,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
                           ),

@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 
 class RecommendationCard extends StatelessWidget {
-  final String avatar;
-  final String artisan;
+  final ArtisanModel artisan;
   final String availability;
-  final String stars;
   final String description;
   final String distance;
   final VoidCallback onBookNow;
 
   const RecommendationCard({
     super.key,
-    required this.avatar,
-    required this.artisan,
     required this.availability,
-    required this.stars,
     required this.description,
     required this.distance,
     required this.onBookNow,
+    required this.artisan,
   });
 
   @override
@@ -50,18 +47,19 @@ class RecommendationCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Image.asset(
-                  avatar,
-                  width: 50,
-                  height: 50,
+                  artisan.avatar,
+                  width: 40,
+                  height: 40,
                   fit: BoxFit.cover,
                 ),
               ),
+              const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      artisan,
+                      artisan.fullName,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -91,7 +89,7 @@ class RecommendationCard extends StatelessWidget {
                     const Icon(Icons.star, color: Colors.amber, size: 15),
                     const SizedBox(width: 5),
                     Text(
-                      stars,
+                      artisan.stars.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/constants/urls.dart';
+import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/utils/enums/booking_status_enum.dart';
 import 'package:hirafi/widgets/home_page/home_appbar.dart';
 import 'package:hirafi/widgets/home_page/home_seacrhbar.dart';
@@ -53,43 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Actual content when data is loaded
   Widget _buildContent() {
-    // Mock data for artisanDummyData (replace with actual data from your backend)
-    final List<Map<String, dynamic>> artisanDummyData = [
-      {
-        'id': 1,
-        'fullName': 'Ali Mansouri',
-        'location': 'Algiers',
-        'email': 'ali.mansouri@example.com',
-        'phoneNumber': '+213661234567',
-        'password': 'password123',
-        'avatar': 'avatar1.jpg',
-        'category': 'Electrician',
-        'stars': 4.8,
-      },
-      {
-        'id': 2,
-        'fullName': 'Sami Bouzid',
-        'location': 'Oran',
-        'email': 'sami.bouzid@example.com',
-        'phoneNumber': '+213662345678',
-        'password': 'password123',
-        'avatar': 'avatar2.jpg',
-        'category': 'Plumber',
-        'stars': 4.7,
-      },
-      {
-        'id': 3,
-        'fullName': 'Meriem Bensalem',
-        'location': 'Constantine',
-        'email': 'meriem.bensalem@example.com',
-        'phoneNumber': '+213663456789',
-        'password': 'password123',
-        'avatar': 'avatar3.jpg',
-        'category': 'Carpenter',
-        'stars': 4.5,
-      },
-    ];
-
     final List<ArtisanModel> artisanDummyModels =
         artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
 
@@ -115,19 +80,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: const [
                     WrapItem(
                       title: 'Electrical',
-                      icon: 'assets/icons/electrician.jpg',
+                      icon: 'assets/icons/electrician.png',
                     ),
                     WrapItem(
                       title: 'Plumbing',
-                      icon: 'assets/icons/plumber.jpg',
+                      icon: 'assets/icons/plumber.png',
                     ),
                     WrapItem(
                       title: 'Carpentry',
-                      icon: 'assets/icons/carpenter.jpg',
+                      icon: 'assets/icons/carpenter.png',
                     ),
                     WrapItem(
                       title: 'Painture',
-                      icon: 'assets/icons/painter.jpg',
+                      icon: 'assets/icons/painter.png',
                     ),
                   ],
                 ),
@@ -146,33 +111,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     RecentBookingCard(
                       onRebook: () {},
-                      icon: 'assets/images/avatars/avatar2.jpg',
-                      artisanName: 'Saada Abdelkader hhhhhhhh',
-                      service: 'Plumber',
+                      artisan: artisanDummyModels[0],
                       date: '12 Avril 2025 at 12:00 PM',
                       status: BookingStatus.pending,
                     ),
                     RecentBookingCard(
                       onRebook: () {},
-                      artisanName: 'Borhanedine B',
-                      service: 'Electrician',
-                      icon: 'assets/images/avatars/avatar4.jpg',
+                      artisan: artisanDummyModels[1],
                       date: '12 Avril 2025 at 12:00 PM',
                       status: BookingStatus.inProgress,
                     ),
                     RecentBookingCard(
                       onRebook: () {},
-                      icon: 'assets/images/avatars/avatar3.jpg',
-                      artisanName: 'Riyad Mokhi',
-                      service: 'Mason',
+                      artisan: artisanDummyModels[2],
                       date: '12 Avril 2025 at 12:00 PM',
                       status: BookingStatus.waitingReply,
                     ),
                     RecentBookingCard(
                       onRebook: () {},
-                      icon: 'assets/images/avatars/avatar3.jpg',
-                      artisanName: 'Riyad Mokhi',
-                      service: 'Mason',
+                      artisan: artisanDummyModels[3],
                       date: '12 Avril 2025 at 12:00 PM',
                       status: BookingStatus.completed,
                     ),
@@ -212,31 +169,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   items: [
                     RecommendationCard(
                       onBookNow: () {},
-                      artisan: 'Expert Electrician',
-                      avatar: 'assets/images/avatars/avatar.jpg',
+                      artisan: artisanDummyModels[0],
                       availability: 'Available Now',
-                      stars: '4.8',
                       distance: '2.5km away',
                       description:
                           'Get 20% off carpentry services this week – perfect time to fix that old closet or build new shelves.',
                     ),
                     RecommendationCard(
                       onBookNow: () {},
-                      artisan: 'Expert Plumber',
-                      avatar: 'assets/images/avatars/avatar2.jpg',
+                      artisan: artisanDummyModels[2],
                       availability: 'Available Now',
-                      stars: '4.8',
-                      distance: '2.5km away',
+                      distance: '2.2km away',
                       description:
                           'Get 20% off plumbing services this week – perfect time to fix that old closet or build new shelves.',
                     ),
                     RecommendationCard(
                       onBookNow: () {},
-                      artisan: 'Expert Carpenter',
-                      avatar: 'assets/images/avatars/avatar3.jpg',
+                      artisan: artisanDummyModels[3],
                       availability: 'Available Now',
-                      stars: '4.8',
-                      distance: '2.5km away',
+                      distance: '6.5km away',
                       description:
                           'Get 20% off carpentry services this week – perfect time to fix that old closet or build new shelves.',
                     ),
