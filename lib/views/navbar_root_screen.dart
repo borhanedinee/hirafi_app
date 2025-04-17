@@ -23,7 +23,9 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
   }
 
   final List<Widget> pages = [
-    HomeScreen(),
+    HomeScreen(
+      isArtisan: true,
+    ),
     ChatsScreen(),
     SearchScreen(),
     ProfileScreen(),
