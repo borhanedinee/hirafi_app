@@ -38,6 +38,7 @@ dependencies:
   ionicons: ^0.2.2
   carousel_slider: ^5.0.0
   shimmer: ^3.0.0
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   flutter_test:
