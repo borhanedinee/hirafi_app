@@ -53,17 +53,24 @@ class RecentBookingCard extends StatelessWidget {
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      artisan.avatar,
-                      width: 25,
-                      height: 25,
+                  Container(
+                    padding: EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: BorderRadius.circular(100)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        artisan.avatar,
+                        width: 25,
+                        height: 25,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10),
                   SizedBox(
-                    width: 120,
+                    width: 100,
                     child: Text(
                       artisan.fullName,
                       overflow: TextOverflow.ellipsis,

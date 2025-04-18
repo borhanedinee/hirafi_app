@@ -154,7 +154,7 @@ class ArtisanProfileScreen extends StatelessWidget {
               fieldsByCategory[artisanCategory]!.length,
               (index) {
                 return _workField(
-                    context, '-  ${fieldsByCategory[artisanCategory]![index]}');
+                    context, ' ${fieldsByCategory[artisanCategory]![index]}');
               },
             ),
           ),
@@ -166,11 +166,21 @@ class ArtisanProfileScreen extends StatelessWidget {
   Widget _workField(context, field) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-      child: Text(
-        field,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.greyColor,
-            ),
+      child: Row(
+        spacing: 4,
+        children: [
+          Icon(
+            Icons.check,
+            color: AppColors.greyColor,
+            size: 16,
+          ),
+          Text(
+            field,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.greyColor,
+                ),
+          ),
+        ],
       ),
     );
   }
@@ -379,7 +389,7 @@ class ArtisanProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
             decoration: BoxDecoration(
               color: AppColors.greyColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
@@ -397,7 +407,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                     ),
               ),
               subtitle: Text(
-                'Certified by NY State - Expires 2025',
+                'Certified by USTHB - Expires 2025',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.greyColor,
                       fontSize: 14,
@@ -406,7 +416,7 @@ class ArtisanProfileScreen extends StatelessWidget {
               leading: const Icon(
                 Icons.verified_rounded,
                 color: AppColors.greyColor,
-                size: 24,
+                size: 30,
               ),
             ),
           ),

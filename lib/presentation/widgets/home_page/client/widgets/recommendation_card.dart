@@ -44,13 +44,19 @@ class RecommendationCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: Image.asset(
-                  artisan.avatar,
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
+              Container(
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(100)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Image.asset(
+                    artisan.avatar,
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),

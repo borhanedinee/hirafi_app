@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/presentation/widgets/home_page/artisan/artisan_home_body.dart';
 import 'package:hirafi/presentation/widgets/home_page/client/client_home_content.dart';
-import 'package:hirafi/presentation/widgets/home_page/client/widgets/home_appbar.dart';
+import 'package:hirafi/presentation/widgets/home_page/home_appbar.dart';
 import 'package:hirafi/presentation/shimmers/home_shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,9 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white.withValues(alpha: .8),
       drawer: const Drawer(),
       appBar: HomeAppBar(
-        onMenuPressed: () {
-          Scaffold.of(context).openDrawer();
-        },
+        isArtisan: widget.isArtisan,
+        onMenuPressed: () {},
         onNotificationsPressed: () {},
       ),
       body: isLoading

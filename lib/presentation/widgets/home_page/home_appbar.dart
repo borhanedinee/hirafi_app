@@ -9,8 +9,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.onMenuPressed,
     required this.onNotificationsPressed,
+    required this.isArtisan,
   });
-
+  final bool isArtisan;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -31,26 +32,34 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 60,
             fit: BoxFit.fill,
           ),
-          const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Borhanedine B',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+          const SizedBox(width: 16),
+          isArtisan
+              ? Text(
+                  'Herrafi',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Borhanedine B',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
                     ),
-              ),
-              Text(
-                'Annaba, Algeria',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.greyColor,
-                      fontSize: 12,
+                    Text(
+                      'Annaba, Algeria',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.greyColor,
+                            fontSize: 12,
+                          ),
                     ),
-              ),
-            ],
-          ),
+                  ],
+                ),
         ],
       ),
       actions: [

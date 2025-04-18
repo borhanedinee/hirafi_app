@@ -5,7 +5,7 @@ import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/utils/enums/booking_status_enum.dart';
-import 'package:hirafi/presentation/widgets/home_page/client/widgets/home_seacrhbar.dart';
+import 'package:hirafi/presentation/widgets/home_page/home_seacrhbar.dart';
 import 'package:hirafi/presentation/widgets/home_page/client/widgets/recent_booking_card.dart';
 import 'package:hirafi/presentation/widgets/home_page/client/widgets/recommendation_card.dart';
 import 'package:hirafi/presentation/widgets/home_page/client/widgets/tip_card.dart';

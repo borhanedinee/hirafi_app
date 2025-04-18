@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 
@@ -46,12 +47,33 @@ class ProfileSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     // Category
-                    Text(
-                      artisan.category,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                            fontSize: 14,
+                    Row(
+                      spacing: 12,
+                      children: [
+                        Text(
+                          artisan.category,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.greyColor,
+                                    fontSize: 14,
+                                  ),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withValues(alpha: .4),
+                            borderRadius: BorderRadius.circular(8),
                           ),
+                          child: Text(
+                            'Available Now',
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: Colors.green,
+                                    ),
+                          ),
+                        )
+                      ],
                     ),
 
                     const SizedBox(height: 5),
@@ -69,8 +91,6 @@ class ProfileSection extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          const SizedBox(height: 5),
-          // Location
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 16,
@@ -119,15 +139,44 @@ class ProfileSection extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 16,
-            children: [
-              _generateStatus('Available Now'),
-              _generateStatus('Verified'),
-              _generateStatus('Professional'),
-            ],
-          ),
+          // PARTNERSHIP
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor.withValues(alpha: .9),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Row(
+              spacing: 20,
+              children: [
+                // partneship icon
+                Icon(
+                  FontAwesomeIcons.crown,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Premium Gold Member',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Text(
+                      'Verfied  •  Professional',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: AppColors.whiteColor.withValues(alpha: .8),
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

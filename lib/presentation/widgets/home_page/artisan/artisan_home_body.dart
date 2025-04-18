@@ -6,7 +6,7 @@ import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/widgets/home_page/artisan/widgets/artisan_control_card.dart';
 import 'package:hirafi/presentation/widgets/home_page/artisan/widgets/client_direct_offer_item.dart';
 import 'package:hirafi/presentation/widgets/home_page/artisan/widgets/offer_by_tender_item.dart';
-import 'package:hirafi/presentation/widgets/home_page/client/widgets/home_seacrhbar.dart';
+import 'package:hirafi/presentation/widgets/home_page/home_seacrhbar.dart';
 import 'package:hirafi/presentation/widgets/my_header.dart';
 
 class ArtisanHomeContent extends StatelessWidget {
