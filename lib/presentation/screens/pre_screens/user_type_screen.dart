@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/screens/pre_screens/artisan_signup_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/client_signup_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/client_login_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 
@@ -75,12 +78,10 @@ class UserTypeScreen extends StatelessWidget {
       width: size.width * 0.8,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NavBarRootScreen(
-                isArtisan: true,
-              ),
+              builder: (context) => ArtisanSignupScreen(),
             ),
           );
         },
@@ -95,7 +96,7 @@ class UserTypeScreen extends StatelessWidget {
           backgroundColor: AppColors.whiteColor.withValues(alpha: .8),
           padding: const EdgeInsets.symmetric(
             horizontal: 40,
-            vertical: 15,
+            vertical: 10,
           ),
         ),
         child: Row(
@@ -125,12 +126,10 @@ class UserTypeScreen extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           // Navigate to the client screen
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NavBarRootScreen(
-                isArtisan: false,
-              ),
+              builder: (context) => ClientSignupScreen(),
             ),
           );
         },
@@ -138,7 +137,7 @@ class UserTypeScreen extends StatelessWidget {
           backgroundColor: AppColors.primaryColor,
           padding: const EdgeInsets.symmetric(
             horizontal: 40,
-            vertical: 15,
+            vertical: 10,
           ),
         ),
         child: Row(

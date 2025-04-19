@@ -38,7 +38,7 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
     return Scaffold(
       body: pages[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: widget.isArtisan ? null : _buildFAB(context),
+      floatingActionButton: _buildFAB(context),
       bottomNavigationBar: _buildBottomNavBar(),
     );
   }
@@ -47,12 +47,11 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
     return FloatingActionButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       onPressed: () {
-        // Handle floating action button press
-        // For example, navigate to a new screen or show a dialog
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ChooseOfferTypeScreen(),
+            builder: (context) =>
+                widget.isArtisan ? ChatsScreen() : ChooseOfferTypeScreen(),
           ),
         );
       },
