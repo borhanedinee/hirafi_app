@@ -10,31 +10,7 @@ class UploadLicenseWidget extends StatefulWidget {
   State<UploadLicenseWidget> createState() => _UploadLicenseWidgetState();
 }
 
-class _UploadLicenseWidgetState extends State<UploadLicenseWidget>
-    with TickerProviderStateMixin {
-  bool _showExclamation = true;
-
-  @override
-  void initState() {
-    super.initState();
-    // Start the animation loop
-    Future.delayed(const Duration(seconds: 1), _toggleIcon);
-  }
-
-  void _toggleIcon() {
-    if (mounted) {
-      setState(() {
-        _showExclamation = !_showExclamation;
-      });
-      Future.delayed(const Duration(seconds: 1), _toggleIcon);
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+class _UploadLicenseWidgetState extends State<UploadLicenseWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -58,16 +34,12 @@ class _UploadLicenseWidgetState extends State<UploadLicenseWidget>
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.grey, width: 1),
                 ),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: Text(
-                    _showExclamation ? '!' : '?',
-                    key: ValueKey(_showExclamation),
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
+                child: Text(
+                  '!',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
                   ),
                 ),
               ),
@@ -86,8 +58,8 @@ class _UploadLicenseWidgetState extends State<UploadLicenseWidget>
               ElevatedButton.icon(
                 onPressed: () {},
                 icon: Icon(
-                  FontAwesomeIcons.upload,
-                  size: 16,
+                  Icons.upload,
+                  size: 20,
                   color: AppColors.blackColor,
                 ),
                 label: Text(
@@ -98,9 +70,9 @@ class _UploadLicenseWidgetState extends State<UploadLicenseWidget>
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor.withValues(alpha: .8),
+                  backgroundColor: AppColors.primaryColor,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

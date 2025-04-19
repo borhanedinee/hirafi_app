@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/pre_screens/artisan_signup_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/client_signup_screen.dart';
-import 'package:hirafi/presentation/screens/pre_screens/client_login_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
+import 'package:hirafi/utils/app_theme.dart';
 
 class UserTypeScreen extends StatelessWidget {
   const UserTypeScreen({Key? key}) : super(key: key);
@@ -13,60 +13,153 @@ class UserTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
+      body: Container(
         width: size.width,
         height: size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/logos/logo1.png',
-              width: size.width * 0.5,
-              height: size.height * 0.3,
-            ),
-
-            // WELCOMING TEXT
-            Text(
-              'Welcome to Herrafi',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+        decoration: AppThemes.scaffoldBackgroundDecoration,
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Logo Section with a subtle container
+              Hero(
+                tag: 'logo-animation',
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 8,
+                        spreadRadius: 2,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-            ),
-            Text(
-              'Connecting artisans with clients for unique creations.',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: AppColors.greyColor),
-            ),
-
-            const SizedBox(height: 32),
-            // USER TYPE BUTTONS
-            _buildRegisterAsClientButton(context),
-            const SizedBox(height: 10),
-            _buildRegisterAsArtisanButton(context),
-
-            const SizedBox(height: 20),
-
-            // ALREADY HAVE AN ACCOUNT
-            Text(
-              'Already have an account?',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: AppColors.greyColor,
+                  child: Image.asset(
+                    'assets/images/logos/logo1.png',
+                    width: size.width * 0.5,
+                    height: size.height * 0.3,
                   ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Text(
-                'Login here',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: AppColors.primaryColor,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Welcoming Text with Improved Hierarchy
+              Text(
+                'Welcome to Herrafi',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                      fontSize: 28,
                     ),
               ),
+              const SizedBox(height: 8),
+              Text(
+                'Connecting Artisans & Clients Seamlessly',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.greyColor.withOpacity(0.8),
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40),
+
+              // User Type Buttons
+              _buildRegisterAsClientButton(context),
+              const SizedBox(height: 16),
+              _buildRegisterAsArtisanButton(context),
+              const SizedBox(height: 32),
+
+              // Divider for Visual Separation
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Divider(
+                  color: AppColors.greyColor.withOpacity(0.3),
+                  thickness: 1,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Already Have an Account Section
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Have an Account? ',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.greyColor,
+                          fontSize: 14,
+                        ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Log In',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox _buildRegisterAsClientButton(BuildContext context) {
+    return SizedBox(
+      width: size.width * 0.85,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ClientSignupScreen(),
             ),
-            const SizedBox(height: 32),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 5,
+          shadowColor: AppColors.primaryColor.withOpacity(0.3),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.person,
+              color: Colors.white,
+              size: 22,
+            ),
+            const SizedBox(width: 12),
+            Text(
+              'Register as a Client',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
           ],
         ),
       ),
@@ -75,7 +168,7 @@ class UserTypeScreen extends StatelessWidget {
 
   SizedBox _buildRegisterAsArtisanButton(BuildContext context) {
     return SizedBox(
-      width: size.width * 0.8,
+      width: size.width * 0.85,
       child: ElevatedButton(
         onPressed: () {
           Navigator.push(
@@ -86,73 +179,34 @@ class UserTypeScreen extends StatelessWidget {
           );
         },
         style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: AppColors.primaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
             side: BorderSide(
               color: AppColors.primaryColor,
-              width: 1,
+              width: 1.5,
             ),
           ),
-          backgroundColor: AppColors.whiteColor.withValues(alpha: .8),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 40,
-            vertical: 10,
-          ),
+          elevation: 5,
+          shadowColor: AppColors.greyColor.withOpacity(0.2),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              FontAwesomeIcons.brush,
+              Icons.work,
               color: AppColors.primaryColor,
-              size: 20,
+              size: 22,
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 12),
             Text(
-              'Register as Artisan',
+              'Register as an Artisan',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: AppColors.primaryColor,
-                  ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  SizedBox _buildRegisterAsClientButton(BuildContext context) {
-    return SizedBox(
-      width: size.width * 0.8,
-      child: ElevatedButton(
-        onPressed: () {
-          // Navigate to the client screen
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ClientSignupScreen(),
-            ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 40,
-            vertical: 10,
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.person,
-              color: Colors.white,
-              size: 20,
-            ),
-            const SizedBox(width: 16),
-            Text(
-              'Register as Client',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
             ),
           ],

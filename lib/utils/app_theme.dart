@@ -4,6 +4,16 @@ import 'package:hirafi/utils/app_colors.dart';
 class AppThemes {
   // Shadows
   static const double SHADOW_OPACITY = .2; // Define your shadow opacity here
+  static const BoxDecoration scaffoldBackgroundDecoration = const BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        AppColors.whiteColor,
+        AppColors.gradiantColor, // Light blue-grey for a subtle gradient
+      ],
+    ),
+  );
 
   // Light Theme
   static final ThemeData lightTheme = ThemeData(
