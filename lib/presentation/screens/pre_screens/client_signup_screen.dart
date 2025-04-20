@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
+import 'package:hirafi/presentation/widgets/my_field_header.dart';
 import 'package:hirafi/presentation/widgets/my_header.dart';
+import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 
@@ -89,13 +91,11 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        _buildFieldHeading(
+                        MyFieldHeader(
                           headingText: 'Full name',
-                          context,
                         ),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: 'Enter your full name',
                           prefixIcon: Icon(
                             Icons.person_2_rounded,
@@ -107,17 +107,15 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         SizedBox(height: 16),
 
                         // Gender
-                        _buildFieldHeading(context, headingText: 'Sex'),
+                        MyFieldHeader(headingText: 'Sex'),
                         SizedBox(height: 8),
                         _buildSexDropdownField(),
                         SizedBox(height: 16),
 
                         // Phone Number
-                        _buildFieldHeading(context,
-                            headingText: 'Phone Number'),
+                        MyFieldHeader(headingText: 'Phone Number'),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: '+213',
                           prefixIcon: Icon(
                             FontAwesomeIcons.phone,
@@ -129,11 +127,9 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         SizedBox(height: 16),
 
                         // EMAIL ADDRESS
-                        _buildFieldHeading(context,
-                            headingText: 'Email address'),
+                        MyFieldHeader(headingText: 'Email address'),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: 'email@exemple.com',
                           prefixIcon: Icon(
                             Icons.email,
@@ -145,13 +141,11 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         SizedBox(height: 16),
 
                         // DATE OF BIRTH
-                        _buildFieldHeading(
-                          context,
+                        MyFieldHeader(
                           headingText: 'Date of birth',
                         ),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: 'DD/MM/YYY',
                           prefixIcon: Icon(
                             Icons.calendar_today,
@@ -168,10 +162,9 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         SizedBox(height: 16),
 
                         // DATE OF BIRTH
-                        _buildFieldHeading(context, headingText: 'Password'),
+                        MyFieldHeader(headingText: 'Password'),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: '*********',
                           prefixIcon: Icon(
                             Icons.lock,
@@ -188,11 +181,9 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         SizedBox(height: 16),
 
                         // DATE OF BIRTH
-                        _buildFieldHeading(context,
-                            headingText: 'Confirm password'),
+                        MyFieldHeader(headingText: 'Confirm password'),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: '*********',
                           prefixIcon: Icon(
                             Icons.lock,
@@ -209,11 +200,10 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         SizedBox(height: 16),
 
                         // DATE OF BIRTH
-                        _buildFieldHeading(context,
+                        MyFieldHeader(
                             headingText: 'Additional information ( optional )'),
                         SizedBox(height: 8),
-                        _buildTextField(
-                          context,
+                        MyTextField(
                           hintText: 'Tell us a bit about your self...',
                           maxLines: 3,
                         ),
@@ -430,49 +420,6 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
         }
         return null;
       },
-    );
-  }
-
-  Text _buildFieldHeading(
-    BuildContext context, {
-    required String headingText,
-  }) {
-    return Text(
-      headingText,
-      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-            color: AppColors.blackColor.withValues(alpha: .8),
-            fontSize: 13,
-          ),
-    );
-  }
-
-  TextFormField _buildTextField(
-    BuildContext context, {
-    Widget? prefixIcon,
-    Widget? suffixIcon,
-    int? maxLines,
-    required String hintText,
-  }) {
-    return TextFormField(
-      maxLines: maxLines,
-      decoration: InputDecoration(
-          fillColor: AppColors.greyColor.withValues(alpha: .05),
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          hintText: hintText,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: AppColors.greyColor
-                  .withOpacity(0.2), // Light grey for unfocused border
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: AppColors.primaryColor),
-          ),
-          hintStyle: Theme.of(context).textTheme.bodyMedium),
     );
   }
 }

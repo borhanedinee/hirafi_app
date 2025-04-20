@@ -498,11 +498,10 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
             );
 
             // Navigate to the client screen
-            Navigator.pushReplacement(
-              context,
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => NavBarRootScreen(
-                  isArtisan: false,
+                  isArtisan: true,
                 ),
               ),
             );

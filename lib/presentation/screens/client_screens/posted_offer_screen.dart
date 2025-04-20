@@ -1,7 +1,9 @@
 // lib/presentation/pages/post_offer_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/app_theme.dart';
 
 class PostOfferScreen extends StatelessWidget {
   const PostOfferScreen({super.key});
@@ -14,8 +16,11 @@ class PostOfferScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: Container(
+        decoration: AppThemes.scaffoldBackgroundDecoration,
+        height: size.height,
+        width: size.width,
+        margin: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

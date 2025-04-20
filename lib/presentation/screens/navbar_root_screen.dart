@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/presentation/screens/choose_offer_type_screen.dart';
+import 'package:hirafi/presentation/screens/artisan_screens/add_offer_by_artisan_screen.dart';
+import 'package:hirafi/presentation/screens/client_screens/choose_offer_type_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/chats_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/home_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/profile_screen.dart';
@@ -35,6 +36,8 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
       ProfileScreen(),
     ];
 
+    print(widget.isArtisan);
+
     return Scaffold(
       body: pages[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -50,8 +53,9 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                widget.isArtisan ? ChatsScreen() : ChooseOfferTypeScreen(),
+            builder: (context) => widget.isArtisan
+                ? AddOfferByArtisanScreen()
+                : ChooseOfferTypeScreen(),
           ),
         );
       },

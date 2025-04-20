@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/utils/enums/booking_status_enum.dart';
 import 'package:hirafi/presentation/widgets/home_page/home_seacrhbar.dart';
@@ -29,8 +30,9 @@ class _ClientHomeContentState extends State<ClientHomeContent> {
         artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
 
     return SingleChildScrollView(
-      child: SizedBox(
+      child: Container(
         width: size.width,
+        decoration: AppThemes.scaffoldBackgroundDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/dummy_data.dart';
-import 'package:hirafi/presentation/screens/fill_offer_screen.dart';
+import 'package:hirafi/presentation/screens/client_screens/fill_offer_screen.dart';
 import 'package:hirafi/presentation/widgets/artisan_profile_page/profile_section.dart';
 
 class ArtisanProfileScreen extends StatelessWidget {
@@ -17,43 +19,47 @@ class ArtisanProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withValues(alpha: .96),
       appBar: _buildAppBar(),
       body: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Profile Section
-                ProfileSection(artisan: artisan),
-                Container(
-                  height: 8,
-                ),
-                // Profile Actions
-                _buildProfileActions(),
-                const SizedBox(height: 8),
-                // Work Gallery
-                _buildWorkGallery(context, artisan.category),
-                const SizedBox(height: 8),
-                // Working Fileds
-                _buildWorkingFields(context, artisan.category),
-                const SizedBox(height: 8),
+          Container(
+            decoration: AppThemes.scaffoldBackgroundDecoration,
+            height: size.height,
+            width: size.width,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Profile Section
+                  ProfileSection(artisan: artisan),
+                  Container(
+                    height: 8,
+                  ),
+                  // Profile Actions
+                  _buildProfileActions(),
+                  const SizedBox(height: 8),
+                  // Work Gallery
+                  _buildWorkGallery(context, artisan.category),
+                  const SizedBox(height: 8),
+                  // Working Fileds
+                  _buildWorkingFields(context, artisan.category),
+                  const SizedBox(height: 8),
 
-                // Professional Certificates
-                _buildProfessionalCertifs(context),
-                const SizedBox(height: 8),
-                // Service Area
-                _buildServiceArea(context),
-                const SizedBox(height: 8),
-                // Working Hours
-                _buildWorkingHours(context),
-                const SizedBox(height: 8),
-                // Reviews
-                _buildReviews(context),
+                  // Professional Certificates
+                  _buildProfessionalCertifs(context),
+                  const SizedBox(height: 8),
+                  // Service Area
+                  _buildServiceArea(context),
+                  const SizedBox(height: 8),
+                  // Working Hours
+                  _buildWorkingHours(context),
+                  const SizedBox(height: 8),
+                  // Reviews
+                  _buildReviews(context),
 
-                const SizedBox(height: 80),
-              ],
+                  const SizedBox(height: 80),
+                ],
+              ),
             ),
           ),
 

@@ -1,11 +1,13 @@
 // lib/presentation/pages/artisans_matching_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/constants/urls.dart';
 import 'package:hirafi/utils/dummy_data.dart';
-import 'package:hirafi/presentation/screens/artisan_profile_screen.dart';
+import 'package:hirafi/presentation/screens/client_screens/artisan_profile_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -63,46 +65,51 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
 
   // Actual content when data is loaded
   Widget _buildContent(List<ArtisanModel> artisanDummyModels) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Artisans matching your offer.',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
-            ),
-            const SizedBox(height: 20),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                childAspectRatio: 0.55, // Adjusted to prevent overflow
+    return Container(
+      decoration: AppThemes.scaffoldBackgroundDecoration,
+      height: size.height,
+      width: size.width,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Artisans matching your offer.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
               ),
-              itemCount: artisanDummyModels.length,
-              itemBuilder: (context, index) {
-                final artisan = artisanDummyModels[index];
-                return _buildArtisanCard(
-                  context,
-                  artisan: artisan,
-                  onCardClicked: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (c) => ArtisanProfileScreen(
-                          artisan: artisan,
+              const SizedBox(height: 20),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  childAspectRatio: 0.55, // Adjusted to prevent overflow
+                ),
+                itemCount: artisanDummyModels.length,
+                itemBuilder: (context, index) {
+                  final artisan = artisanDummyModels[index];
+                  return _buildArtisanCard(
+                    context,
+                    artisan: artisan,
+                    onCardClicked: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (c) => ArtisanProfileScreen(
+                            artisan: artisan,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  onSendOffer: () {},
-                );
-              },
-            ),
-          ],
+                      );
+                    },
+                    onSendOffer: () {},
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

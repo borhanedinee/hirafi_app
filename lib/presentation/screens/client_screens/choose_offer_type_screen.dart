@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/presentation/screens/fill_offer_screen.dart';
+import 'package:hirafi/presentation/screens/client_screens/fill_offer_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
+import 'package:hirafi/utils/app_theme.dart';
 
 class ChooseOfferTypeScreen extends StatelessWidget {
   const ChooseOfferTypeScreen({super.key});
@@ -22,8 +23,11 @@ class ChooseOfferTypeScreen extends StatelessWidget {
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: Container(
+        decoration: AppThemes.scaffoldBackgroundDecoration,
+        height: size.height,
+        width: size.width,
+        margin: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
