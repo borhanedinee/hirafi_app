@@ -74,80 +74,84 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: AppThemes.scaffoldBackgroundDecoration,
-        child: Center(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Logo with Fade and Scale Animation
-                  Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: Transform.scale(
-                      scale: _scaleAnimation.value,
-                      child: Hero(
-                        tag: 'logo-animation',
-                        child: Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                blurRadius: 8,
-                                spreadRadius: 2,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Image.asset(
-                            'assets/images/logos/logo1.png',
-                            width: size.width * 0.5,
-                            height: size.height * 0.3,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          decoration: AppThemes.scaffoldBackgroundDecoration,
+          child: Center(
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Logo with Fade and Scale Animation
+                    Opacity(
+                      opacity: _fadeAnimation.value,
+                      child: Transform.scale(
+                        scale: _scaleAnimation.value,
+                        child: Hero(
+                          tag: 'logo-animation',
+                          child: Container(
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Image.asset(
+                              'assets/images/logos/logo1.png',
+                              width: size.width * 0.5,
+                              height: size.height * 0.3,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  // App Name with Fade Animation
-                  Opacity(
-                    opacity: _textFadeAnimation.value,
-                    child: Text(
-                      'Herrafi',
-                      style:
-                          Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primaryColor,
-                                fontSize: 32,
-                              ),
+                    // App Name with Fade Animation
+                    Opacity(
+                      opacity: _textFadeAnimation.value,
+                      child: Text(
+                        'Herrafi',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primaryColor,
+                              fontSize: 32,
+                            ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
+                    const SizedBox(height: 8),
 
-                  // Tagline with Fade Animation
-                  Opacity(
-                    opacity: _textFadeAnimation.value,
-                    child: Text(
-                      'Crafting Connections',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppColors.greyColor.withOpacity(0.8),
-                            fontSize: 16,
-                            fontStyle: FontStyle.italic,
-                          ),
+                    // Tagline with Fade Animation
+                    Opacity(
+                      opacity: _textFadeAnimation.value,
+                      child: Text(
+                        'Crafting Connections',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: AppColors.greyColor.withOpacity(0.8),
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                            ),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),

@@ -34,274 +34,277 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: AppThemes.scaffoldBackgroundDecoration,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 80),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          decoration: AppThemes.scaffoldBackgroundDecoration,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 80),
 
-                  // LOGO
-                  Image.asset(
-                    'assets/images/logos/logo1.png',
-                    height: 100,
-                    width: 180,
-                    fit: BoxFit.fill,
-                  ),
-
-                  SizedBox(height: 32),
-
-                  Container(
-                    width: size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.whiteColor,
-                          AppColors.gradiantColor,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadowColor,
-                          blurRadius: 7,
-                          spreadRadius: 2,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
+                    // LOGO
+                    Image.asset(
+                      'assets/images/logos/logo1.png',
+                      height: 100,
+                      width: 180,
+                      fit: BoxFit.fill,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Complete your Registration',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
+
+                    SizedBox(height: 32),
+
+                    Container(
+                      width: size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.whiteColor,
+                            AppColors.gradiantColor,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
-                        SizedBox(height: 16),
-
-                        // SIGN UP PROCEDURE PROGRESS
-                        Hero(
-                          tag: 'progress',
-                          child: LinearProgressIndicator(
-                            value: 0.99,
-                            backgroundColor:
-                                AppColors.greyColor.withOpacity(0.2),
-                            color: AppColors.primaryColor,
-                            borderRadius: BorderRadius.circular(20),
-                            minHeight: 8,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.shadowColor,
+                            blurRadius: 7,
+                            spreadRadius: 2,
+                            offset: Offset(0, 2),
                           ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        MyFieldHeader(headingText: 'Working Days'),
-                        SizedBox(height: 8),
-                        _buildWorkingDaysDrowDownField(),
-
-                        SizedBox(height: 16),
-
-                        // WORKING HOURS
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: AppColors.greyColor.withValues(alpha: .1),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Working Hours',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                      color: AppColors.blackColor,
-                                    ),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      MyFieldHeader(
-                                        headingText: 'Start Time',
-                                        color: AppColors.greyColor
-                                            .withValues(alpha: .8),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      SizedBox(
-                                        width: ((size.width - 32) / 2) - 40,
-                                        child: MyTextField(
-                                          hintText: 'eg. 9:00',
-                                          fillColor: AppColors.whiteColor,
-                                        ),
-                                      ),
-                                    ],
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                              'Complete your Registration',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      MyFieldHeader(
-                                        headingText: 'End Time',
-                                        color: AppColors.greyColor
-                                            .withValues(alpha: .8),
-                                      ),
-                                      SizedBox(
-                                        height: 4,
-                                      ),
-                                      SizedBox(
-                                        width: ((size.width - 32) / 2) - 40,
-                                        child: MyTextField(
-                                          hintText: 'eg. 16:00',
-                                          fillColor: AppColors.whiteColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 16,
-                        ),
-
-                        _buildUploadIDCard(context),
-                        SizedBox(
-                          height: 16,
-                        ),
-
-                        // AGREEMENETTO TERMS AND CONDITIONS
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Checkbox(
-                              value: _checked,
-                              onChanged: (value) {
-                                setState(() {
-                                  _checked = value!;
-                                });
-                              },
                             ),
-                            SizedBox(
-                              width: size.width * .7,
-                              child: RichText(
-                                text: TextSpan(
+                          ),
+                          SizedBox(height: 16),
+
+                          // SIGN UP PROCEDURE PROGRESS
+                          Hero(
+                            tag: 'progress',
+                            child: LinearProgressIndicator(
+                              value: 0.99,
+                              backgroundColor:
+                                  AppColors.greyColor.withOpacity(0.2),
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(20),
+                              minHeight: 8,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          MyFieldHeader(headingText: 'Working Days'),
+                          SizedBox(height: 8),
+                          _buildWorkingDaysDrowDownField(),
+
+                          SizedBox(height: 16),
+
+                          // WORKING HOURS
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: AppColors.greyColor.withValues(alpha: .1),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Working Hours',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                        color: AppColors.blackColor,
+                                      ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    TextSpan(
-                                      text: 'I agree to the ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor
-                                                .withValues(alpha: .7),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        MyFieldHeader(
+                                          headingText: 'Start Time',
+                                          color: AppColors.greyColor
+                                              .withValues(alpha: .8),
+                                        ),
+                                        SizedBox(
+                                          height: 4,
+                                        ),
+                                        SizedBox(
+                                          width: ((size.width - 32) / 2) - 40,
+                                          child: MyTextField(
+                                            hintText: 'eg. 9:00',
+                                            fillColor: AppColors.whiteColor,
                                           ),
+                                        ),
+                                      ],
                                     ),
-                                    TextSpan(
-                                      text: 'Terms of Service ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor,
-                                            fontWeight: FontWeight.bold,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        MyFieldHeader(
+                                          headingText: 'End Time',
+                                          color: AppColors.greyColor
+                                              .withValues(alpha: .8),
+                                        ),
+                                        SizedBox(
+                                          height: 4,
+                                        ),
+                                        SizedBox(
+                                          width: ((size.width - 32) / 2) - 40,
+                                          child: MyTextField(
+                                            hintText: 'eg. 16:00',
+                                            fillColor: AppColors.whiteColor,
                                           ),
-                                    ),
-                                    TextSpan(
-                                      text: 'and ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor
-                                                .withValues(alpha: .7),
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: 'Privacy Policy.',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
 
-                        SizedBox(height: 24),
-                      ],
+                          SizedBox(
+                            height: 16,
+                          ),
+
+                          _buildUploadIDCard(context),
+                          SizedBox(
+                            height: 16,
+                          ),
+
+                          // AGREEMENETTO TERMS AND CONDITIONS
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Checkbox(
+                                value: _checked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _checked = value!;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: size.width * .7,
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'I agree to the ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor
+                                                  .withValues(alpha: .7),
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Terms of Service ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: 'and ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor
+                                                  .withValues(alpha: .7),
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Privacy Policy.',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 24),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  SizedBox(
-                    height: 150,
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              left: 16,
-              top: 16,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                    SizedBox(
+                      height: 150,
+                    )
+                  ],
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 16,
-              left: 16,
-              right: 16,
-              child: Column(
-                children: [
-                  _buildCreateNowButton(),
-                  SizedBox(
-                    height: 16,
+              Positioned(
+                left: 16,
+                top: 16,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.primaryColor,
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 16,
+                left: 16,
+                right: 16,
+                child: Column(
+                  children: [
+                    _buildCreateNowButton(),
+                    SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

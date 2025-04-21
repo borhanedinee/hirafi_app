@@ -35,19 +35,21 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
     final subCategories =
         _getSubCategories(widget.clickedCategory.toLowerCase());
 
-    return Scaffold(
-      backgroundColor: Colors.white.withValues(alpha: .96),
-      appBar: AppBar(
-        title: Text(
-          widget.clickedCategory,
-          style: const TextStyle(
-            fontSize: 18,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white.withValues(alpha: .96),
+        appBar: AppBar(
+          title: Text(
+            widget.clickedCategory,
+            style: const TextStyle(
+              fontSize: 18,
+            ),
           ),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
         ),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
+        body: isLoading ? _buildShimmer() : _buildContent(subCategories),
       ),
-      body: isLoading ? _buildShimmer() : _buildContent(subCategories),
     );
   }
 

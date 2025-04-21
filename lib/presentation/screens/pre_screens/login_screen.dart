@@ -17,174 +17,178 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: AppThemes.scaffoldBackgroundDecoration,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 100),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          decoration: AppThemes.scaffoldBackgroundDecoration,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 100),
 
-                  // LOGO
-                  Image.asset(
-                    'assets/images/logos/logo1.png',
-                    height: 100,
-                    width: 180,
-                    fit: BoxFit.fill,
-                  ),
-
-                  SizedBox(height: 32),
-
-                  Container(
-                    width: size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.whiteColor,
-                          AppColors.gradiantColor,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadowColor,
-                          blurRadius: 7,
-                          spreadRadius: 2,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
+                    // LOGO
+                    Image.asset(
+                      'assets/images/logos/logo1.png',
+                      height: 100,
+                      width: 180,
+                      fit: BoxFit.fill,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Log in',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
+
+                    SizedBox(height: 32),
+
+                    Container(
+                      width: size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.whiteColor,
+                            AppColors.gradiantColor,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
-
-                        SizedBox(height: 16),
-
-                        // EMAIL ADDRESS
-                        _buildFieldHeading(context,
-                            headingText: 'Phone Number'),
-                        SizedBox(height: 8),
-                        _buildTextField(
-                          context,
-                          hintText: 'email@exemple.com',
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 20,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.shadowColor,
+                            blurRadius: 7,
+                            spreadRadius: 2,
+                            offset: Offset(0, 2),
                           ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // DATE OF BIRTH
-                        _buildFieldHeading(context, headingText: 'Password'),
-                        SizedBox(height: 8),
-                        _buildTextField(
-                          context,
-                          hintText: '*********',
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 20,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: AppColors.blackColor,
-                            size: 20,
-                          ),
-                        ),
-
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: GestureDetector(
-                            onTap: () {},
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
                             child: Text(
-                              'Forgot password?',
+                              'Log in',
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodySmall!
+                                  .titleMedium!
                                   .copyWith(
-                                    color: AppColors.primaryColor,
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 24),
 
-                        _buildLoginButton(),
-                        SizedBox(height: 16),
+                          SizedBox(height: 16),
+
+                          // EMAIL ADDRESS
+                          _buildFieldHeading(context,
+                              headingText: 'Phone Number'),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                            context,
+                            hintText: 'email@exemple.com',
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 20,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // DATE OF BIRTH
+                          _buildFieldHeading(context, headingText: 'Password'),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                            context,
+                            hintText: '*********',
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 20,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.visibility,
+                              color: AppColors.blackColor,
+                              size: 20,
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                'Forgot password?',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(
+                                      color: AppColors.primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 24),
+
+                          _buildLoginButton(),
+                          SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 32,
+                    ),
+
+                    // LOGIN BUTTON
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Don\'t have an account?'),
+                        GestureDetector(
+                          onTap: () {
+                            _showRegistrationDialog(context);
+                          },
+                          child: Text(
+                            '  Sign up',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  color: AppColors.primaryColor,
+                                ),
+                          ),
+                        )
                       ],
                     ),
-                  ),
-
-                  SizedBox(
-                    height: 32,
-                  ),
-
-                  // LOGIN BUTTON
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Don\'t have an account?'),
-                      GestureDetector(
-                        onTap: () {
-                          _showRegistrationDialog(context);
-                        },
-                        child: Text(
-                          '  Sign up',
-                          style:
-                              Theme.of(context).textTheme.titleSmall!.copyWith(
-                                    color: AppColors.primaryColor,
-                                  ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 80,
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              left: 16,
-              top: 16,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                    SizedBox(
+                      height: 80,
+                    )
+                  ],
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                left: 16,
+                top: 16,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

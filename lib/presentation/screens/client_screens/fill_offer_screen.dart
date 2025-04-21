@@ -164,298 +164,303 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Fill Offer Details',
-          style: TextStyle(
-            fontSize: 18,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Fill Offer Details',
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
         ),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
-      ),
-      body: Stack(
-        children: [
-          Container(
-            decoration: AppThemes.scaffoldBackgroundDecoration,
-            height: size.height,
-            width: size.width,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    Text(
-                      widget.isDirectOffer
-                          ? 'Direct Offer Details.'
-                          : 'Tender Offer Details.',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: AppColors.blackColor,
-                            fontSize: 16,
-                          ),
-                    ),
-                    const SizedBox(height: 20),
-                    // Problem Title
-                    Text(
-                      'Problem Title',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 5),
-                    _buildTextField(
-                      controller: _titleController,
-                      label: 'e.g., Leaking Pipe',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a problem title';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    // Problem Description
-                    Text(
-                      'Problem Description',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 5),
-                    _buildTextField(
-                      controller: _descriptionController,
-                      label: 'Describe the issue in detail...',
-                      maxLines: 4,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a description';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    // Budget
-                    Text(
-                      'Budget',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 5),
-                    _buildTextField(
-                      controller: _budgetController,
-                      label: 'e.g., 3500 DZ',
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a budget';
-                        }
-                        if (double.tryParse(value) == null) {
-                          return 'Please enter a valid number';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    Text(
-                      'Working Hours',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 5),
-                    _buildTextField(
-                      controller: _budgetController,
-                      label: 'e.g., from 9:00 to 12:00',
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a budget';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    // Category (no heading as per request)
-                    _buildDropdownField(),
-                    const SizedBox(height: 15),
-                    // Pictures
-                    Text(
-                      'Upload Pictures',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[200],
-                        border: Border.all(
-                          color: AppColors.greyColor.withOpacity(0.2),
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          Opacity(
-                            opacity: .3,
-                            child: Image(
-                              image: AssetImage(
-                                  'assets/images/placeholders/image_picker_placeholder.webp'),
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                          // add icon
-                          Positioned(
-                            top: 20,
-                            left: (size.width - 40 - 50) / 2,
-                            child: Icon(
-                              Icons.add_photo_alternate_rounded,
-                              color: AppColors.greyColor.withValues(alpha: .6),
-                              size: 50,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    // Upload Video
-                    Text(
-                      'Upload Videos',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[200],
-                        border: Border.all(
-                          color: AppColors.greyColor.withOpacity(0.2),
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          Opacity(
-                            opacity: .1,
-                            child: Image(
-                              image: AssetImage(
-                                  'assets/images/placeholders/image_picker_placeholder.webp'),
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                          Positioned(
-                            top: 20,
-                            left: (size.width - 40 - 50) / 2,
-                            child: Icon(
-                              Icons.video_call,
-                              color: AppColors.greyColor.withValues(alpha: .6),
-                              size: 50,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    // Location
-                    Text(
-                      'Your Location',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.greyColor,
-                          ),
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[200],
-                        border: Border.all(
-                          color: AppColors.greyColor.withOpacity(0.2),
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          Opacity(
-                            opacity: .3,
-                            child: Image(
-                              image: AssetImage(
-                                  'assets/images/placeholders/location_picker_placeholder.webp'),
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                          // add icon
-                          Positioned(
-                            top: 20,
-                            left: (size.width - 40 - 50) / 2,
-                            child: Icon(
-                              Icons.add_location_alt,
-                              color: AppColors.greyColor.withValues(alpha: .9),
-                              size: 50,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 80),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
-          // Next Button
-          Positioned(
-            bottom: 20,
-            left: 20,
-            right: 20,
-            child: SizedBox(
+        body: Stack(
+          children: [
+            Container(
+              decoration: AppThemes.scaffoldBackgroundDecoration,
+              height: size.height,
               width: size.width,
-              child: ElevatedButton(
-                onPressed: _submitForm,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 16,
-                  children: [
-                    widget.isSendDirectly
-                        ? Icon(
-                            Icons.send,
-                            color: Colors.white,
-                          )
-                        : SizedBox(),
-                    Text(
-                      widget.isSendDirectly ? 'Send Now' : 'Next',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      Text(
+                        widget.isDirectOffer
+                            ? 'Direct Offer Details.'
+                            : 'Tender Offer Details.',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: AppColors.blackColor,
+                              fontSize: 16,
+                            ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      // Problem Title
+                      Text(
+                        'Problem Title',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 5),
+                      _buildTextField(
+                        controller: _titleController,
+                        label: 'e.g., Leaking Pipe',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a problem title';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      // Problem Description
+                      Text(
+                        'Problem Description',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 5),
+                      _buildTextField(
+                        controller: _descriptionController,
+                        label: 'Describe the issue in detail...',
+                        maxLines: 4,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a description';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      // Budget
+                      Text(
+                        'Budget',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 5),
+                      _buildTextField(
+                        controller: _budgetController,
+                        label: 'e.g., 3500 DZ',
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a budget';
+                          }
+                          if (double.tryParse(value) == null) {
+                            return 'Please enter a valid number';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        'Working Hours',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 5),
+                      _buildTextField(
+                        controller: _budgetController,
+                        label: 'e.g., from 9:00 to 12:00',
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a budget';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      // Category (no heading as per request)
+                      _buildDropdownField(),
+                      const SizedBox(height: 15),
+                      // Pictures
+                      Text(
+                        'Upload Pictures',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[200],
+                          border: Border.all(
+                            color: AppColors.greyColor.withOpacity(0.2),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Opacity(
+                              opacity: .3,
+                              child: Image(
+                                image: AssetImage(
+                                    'assets/images/placeholders/image_picker_placeholder.webp'),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
+                            ),
+                            // add icon
+                            Positioned(
+                              top: 20,
+                              left: (size.width - 40 - 50) / 2,
+                              child: Icon(
+                                Icons.add_photo_alternate_rounded,
+                                color:
+                                    AppColors.greyColor.withValues(alpha: .6),
+                                size: 50,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      // Upload Video
+                      Text(
+                        'Upload Videos',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[200],
+                          border: Border.all(
+                            color: AppColors.greyColor.withOpacity(0.2),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Opacity(
+                              opacity: .1,
+                              child: Image(
+                                image: AssetImage(
+                                    'assets/images/placeholders/image_picker_placeholder.webp'),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
+                            ),
+                            Positioned(
+                              top: 20,
+                              left: (size.width - 40 - 50) / 2,
+                              child: Icon(
+                                Icons.video_call,
+                                color:
+                                    AppColors.greyColor.withValues(alpha: .6),
+                                size: 50,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      // Location
+                      Text(
+                        'Your Location',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.greyColor,
+                            ),
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[200],
+                          border: Border.all(
+                            color: AppColors.greyColor.withOpacity(0.2),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Opacity(
+                              opacity: .3,
+                              child: Image(
+                                image: AssetImage(
+                                    'assets/images/placeholders/location_picker_placeholder.webp'),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
+                            ),
+                            // add icon
+                            Positioned(
+                              top: 20,
+                              left: (size.width - 40 - 50) / 2,
+                              child: Icon(
+                                Icons.add_location_alt,
+                                color:
+                                    AppColors.greyColor.withValues(alpha: .9),
+                                size: 50,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 80),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+
+            // Next Button
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: SizedBox(
+                width: size.width,
+                child: ElevatedButton(
+                  onPressed: _submitForm,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 15,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 16,
+                    children: [
+                      widget.isSendDirectly
+                          ? Icon(
+                              Icons.send,
+                              color: Colors.white,
+                            )
+                          : SizedBox(),
+                      Text(
+                        widget.isSendDirectly ? 'Send Now' : 'Next',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

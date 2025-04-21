@@ -39,27 +39,29 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
     final List<ArtisanModel> artisanDummyModels =
         artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.favorite,
-              color: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.favorite,
+                color: Colors.white,
+              ),
+              onPressed: () {},
             ),
-            onPressed: () {},
+          ],
+          title: const Text(
+            'Profiles',
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
-        ],
-        title: const Text(
-          'Profiles',
-          style: TextStyle(
-            fontSize: 18,
-          ),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
         ),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
+        body: isLoading ? _buildShimmer() : _buildContent(artisanDummyModels),
       ),
-      body: isLoading ? _buildShimmer() : _buildContent(artisanDummyModels),
     );
   }
 

@@ -27,19 +27,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white.withValues(alpha: .8),
-      drawer: const Drawer(),
-      appBar: HomeAppBar(
-        isArtisan: widget.isArtisan,
-        onMenuPressed: () {},
-        onNotificationsPressed: () {},
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white.withValues(alpha: .8),
+        drawer: const Drawer(),
+        appBar: HomeAppBar(
+          isArtisan: widget.isArtisan,
+          onMenuPressed: () {},
+          onNotificationsPressed: () {},
+        ),
+        body: isLoading
+            ? HomeShimmers(isArtisan: widget.isArtisan)
+            : widget.isArtisan
+                ? ArtisanHomeContent(isArtisan: widget.isArtisan)
+                : ClientHomeContent(),
       ),
-      body: isLoading
-          ? HomeShimmers(isArtisan: widget.isArtisan)
-          : widget.isArtisan
-              ? ArtisanHomeContent(isArtisan: widget.isArtisan)
-              : ClientHomeContent(),
     );
   }
 }

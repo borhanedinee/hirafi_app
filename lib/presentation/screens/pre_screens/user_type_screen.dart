@@ -12,110 +12,112 @@ class UserTypeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: AppThemes.scaffoldBackgroundDecoration,
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Logo Section with a subtle container
-              Hero(
-                tag: 'logo-animation',
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: const Offset(0, 2),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          decoration: AppThemes.scaffoldBackgroundDecoration,
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo Section with a subtle container
+                Hero(
+                  tag: 'logo-animation',
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(
+                      'assets/images/logos/logo1.png',
+                      width: size.width * 0.5,
+                      height: size.height * 0.3,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Welcoming Text with Improved Hierarchy
+                Text(
+                  'Welcome to Herrafi',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor,
+                        fontSize: 28,
                       ),
-                    ],
-                  ),
-                  child: Image.asset(
-                    'assets/images/logos/logo1.png',
-                    width: size.width * 0.5,
-                    height: size.height * 0.3,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Connecting Artisans & Clients Seamlessly',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: AppColors.greyColor.withOpacity(0.8),
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+
+                // User Type Buttons
+                _buildRegisterAsClientButton(context),
+                const SizedBox(height: 16),
+                _buildRegisterAsArtisanButton(context),
+                const SizedBox(height: 32),
+
+                // Divider for Visual Separation
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Divider(
+                    color: AppColors.greyColor.withOpacity(0.3),
+                    thickness: 1,
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              // Welcoming Text with Improved Hierarchy
-              Text(
-                'Welcome to Herrafi',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor,
-                      fontSize: 28,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Connecting Artisans & Clients Seamlessly',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: AppColors.greyColor.withOpacity(0.8),
-                      fontSize: 16,
-                      fontStyle: FontStyle.italic,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 40),
-
-              // User Type Buttons
-              _buildRegisterAsClientButton(context),
-              const SizedBox(height: 16),
-              _buildRegisterAsArtisanButton(context),
-              const SizedBox(height: 32),
-
-              // Divider for Visual Separation
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Divider(
-                  color: AppColors.greyColor.withOpacity(0.3),
-                  thickness: 1,
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Already Have an Account Section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Have an Account? ',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.greyColor,
-                          fontSize: 14,
-                        ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Log In',
+                // Already Have an Account Section
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Have an Account? ',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold,
+                            color: AppColors.greyColor,
                             fontSize: 14,
                           ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32),
-            ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Log In',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+              ],
+            ),
           ),
         ),
       ),

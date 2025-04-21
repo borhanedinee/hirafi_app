@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/screens/help__center_screen.dart';
+import 'package:hirafi/presentation/screens/notifications_screen.dart';
+import 'package:hirafi/presentation/screens/payment_methods_screen.dart';
+import 'package:hirafi/presentation/screens/personal_information_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -79,6 +83,9 @@ class ClientProfileScreen extends StatelessWidget {
                   color: AppColors.blackColor,
                 ),
           ),
+          SizedBox(
+            height: 16,
+          ),
           // SETTINGS LIST
           ListView.separated(
             shrinkWrap: true,
@@ -93,21 +100,50 @@ class ClientProfileScreen extends StatelessWidget {
                   'title': 'Personal Information',
                   'prefixIcon': Icons.person,
                   'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PersonalInformationScreen(),
+                      ),
+                    );
+                  },
                 },
                 {
                   'title': 'Notifications',
                   'prefixIcon': Icons.notifications,
                   'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NotificationsScreen()),
+                    );
+                  },
                 },
                 {
                   'title': 'Payment Methods',
                   'prefixIcon': Icons.payment,
                   'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaymentMethodsScreen()),
+                    );
+                  },
                 },
                 {
                   'title': 'Help Center',
                   'prefixIcon': Icons.help_center,
                   'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HelpCenterScreen(),
+                      ),
+                    );
+                  },
                 },
               ];
 
@@ -138,11 +174,7 @@ class ClientProfileScreen extends StatelessWidget {
                     color: AppColors.greyColor.withOpacity(0.5),
                     size: 16,
                   ),
-                  onTap: () {
-                    // Handle tap event here
-                    // For example, navigate to another screen or show a dialog
-                    print('Tapped on ${option['title']}');
-                  },
+                  onTap: option['onTap'],
                 ),
               );
             },

@@ -17,356 +17,359 @@ class AddOfferByArtisanScreen extends StatefulWidget {
 class _AddOfferByArtisanScreenState extends State<AddOfferByArtisanScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Add Offer to Clients',
-          style: TextStyle(
-            fontSize: 18,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Add Offer to Clients',
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
         ),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
-      ),
-      body: Container(
-        width: size.width,
-        height: size.height,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        decoration: AppThemes.scaffoldBackgroundDecoration,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 32,
-              ),
-              Text(
-                'Add a New Offer for Your Customers',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(color: AppColors.blackColor, fontSize: 16),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                'Create a special promotion to attract more clients.',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: AppColors.greyColor,
-                    ),
-              ),
-
-              SizedBox(
-                height: 16,
-              ),
-
-              // OFFER TITLE
-              MyFieldHeader(headingText: 'Offer Title'),
-              SizedBox(
-                height: 8,
-              ),
-              MyTextField(
-                  hintText:
-                      'eg. 20% discount on electrical repairs this week.'),
-
-              SizedBox(
-                height: 16,
-              ),
-
-              // OFFER DESCRIPTION
-              MyFieldHeader(headingText: 'Offer Description'),
-              SizedBox(
-                height: 8,
-              ),
-              MyTextField(
-                hintText:
-                    'eg. The offer appies to all electrical home maintenance services within aint temouchenet city.',
-                maxLines: 4,
-              ),
-
-              SizedBox(
-                height: 16,
-              ),
-
-              // OFFER TYPE
-              MyFieldHeader(headingText: 'Offer Description'),
-              SizedBox(
-                height: 16,
-              ),
-              _buildSexDropdownField(),
-
-              SizedBox(
-                height: 16,
-              ),
-
-              // PRICE RANGE
-              Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppColors.greyColor.withValues(alpha: .1),
-                  borderRadius: BorderRadius.circular(16),
+        body: Container(
+          width: size.width,
+          height: size.height,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          decoration: AppThemes.scaffoldBackgroundDecoration,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 32,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Price',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: AppColors.blackColor,
-                          ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MyFieldHeader(headingText: 'Original Price'),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            SizedBox(
-                              width: ((size.width - 32) / 2) - 20,
-                              child: MyTextField(
-                                hintText: 'eg. 5000DA',
-                                fillColor: AppColors.whiteColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            MyFieldHeader(headingText: 'Price after discount'),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            SizedBox(
-                              width: ((size.width - 32) / 2) - 20,
-                              child: MyTextField(
-                                hintText: 'eg. 3000DA',
-                                fillColor: AppColors.whiteColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: 16,
-                    ),
-
-                    // DISCOUNT FIELD
-                    MyFieldHeader(
-                      headingText: 'Discount',
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    MyTextField(
-                      hintText: 'eg, 25%',
-                      fillColor: AppColors.whiteColor,
-                      prefixIcon: Icon(
-                        Icons.discount_outlined,
-                        size: 16,
+                Text(
+                  'Add a New Offer for Your Customers',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: AppColors.blackColor, fontSize: 16),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Create a special promotion to attract more clients.',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.greyColor,
                       ),
-                    ),
-                  ],
                 ),
-              ),
 
-              SizedBox(
-                height: 16,
-              ),
-
-              // OFFER VALIDITY
-              Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: AppColors.greyColor.withValues(alpha: .1),
-                  borderRadius: BorderRadius.circular(16),
+                SizedBox(
+                  height: 16,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Offer Validity',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: AppColors.blackColor,
-                          ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MyFieldHeader(headingText: 'Start Date'),
-                            SizedBox(
-                              height: 4,
+
+                // OFFER TITLE
+                MyFieldHeader(headingText: 'Offer Title'),
+                SizedBox(
+                  height: 8,
+                ),
+                MyTextField(
+                    hintText:
+                        'eg. 20% discount on electrical repairs this week.'),
+
+                SizedBox(
+                  height: 16,
+                ),
+
+                // OFFER DESCRIPTION
+                MyFieldHeader(headingText: 'Offer Description'),
+                SizedBox(
+                  height: 8,
+                ),
+                MyTextField(
+                  hintText:
+                      'eg. The offer appies to all electrical home maintenance services within aint temouchenet city.',
+                  maxLines: 4,
+                ),
+
+                SizedBox(
+                  height: 16,
+                ),
+
+                // OFFER TYPE
+                MyFieldHeader(headingText: 'Offer Description'),
+                SizedBox(
+                  height: 16,
+                ),
+                _buildSexDropdownField(),
+
+                SizedBox(
+                  height: 16,
+                ),
+
+                // PRICE RANGE
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.greyColor.withValues(alpha: .1),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Price',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: AppColors.blackColor,
                             ),
-                            SizedBox(
-                              width: ((size.width - 32) / 2) - 20,
-                              child: MyTextField(
-                                hintText: '19/04/2025',
-                                fillColor: AppColors.whiteColor,
-                                suffixIcon: Icon(
-                                  Icons.calendar_month,
-                                  color: AppColors.blackColor,
-                                  size: 16,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MyFieldHeader(headingText: 'Original Price'),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              SizedBox(
+                                width: ((size.width - 32) / 2) - 20,
+                                child: MyTextField(
+                                  hintText: 'eg. 5000DA',
+                                  fillColor: AppColors.whiteColor,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            MyFieldHeader(headingText: 'End Date'),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            SizedBox(
-                              width: ((size.width - 32) / 2) - 20,
-                              child: MyTextField(
-                                hintText: '26/04/2025',
-                                fillColor: AppColors.whiteColor,
-                                suffixIcon: Icon(
-                                  Icons.calendar_month,
-                                  color: AppColors.blackColor,
-                                  size: 16,
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              MyFieldHeader(
+                                  headingText: 'Price after discount'),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              SizedBox(
+                                width: ((size.width - 32) / 2) - 20,
+                                child: MyTextField(
+                                  hintText: 'eg. 3000DA',
+                                  fillColor: AppColors.whiteColor,
                                 ),
                               ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: 16,
+                      ),
+
+                      // DISCOUNT FIELD
+                      MyFieldHeader(
+                        headingText: 'Discount',
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      MyTextField(
+                        hintText: 'eg, 25%',
+                        fillColor: AppColors.whiteColor,
+                        prefixIcon: Icon(
+                          Icons.discount_outlined,
+                          size: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: 16,
+                ),
+
+                // OFFER VALIDITY
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.greyColor.withValues(alpha: .1),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Offer Validity',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: AppColors.blackColor,
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(
-                      height: 16,
-                    ),
-
-                    // INFO
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 8,
-                      children: [
-                        Icon(
-                          Icons.info,
-                          size: 20,
-                          color: AppColors.greyColor.withValues(alpha: .7),
-                        ),
-                        SizedBox(
-                          width: size.width - 100,
-                          child: Text(
-                            'Your offer will automatically expire after the end date.',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: AppColors.greyColor,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              MyFieldHeader(headingText: 'Start Date'),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              SizedBox(
+                                width: ((size.width - 32) / 2) - 20,
+                                child: MyTextField(
+                                  hintText: '19/04/2025',
+                                  fillColor: AppColors.whiteColor,
+                                  suffixIcon: Icon(
+                                    Icons.calendar_month,
+                                    color: AppColors.blackColor,
+                                    size: 16,
+                                  ),
                                 ),
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              MyFieldHeader(headingText: 'End Date'),
+                              SizedBox(
+                                height: 4,
+                              ),
+                              SizedBox(
+                                width: ((size.width - 32) / 2) - 20,
+                                child: MyTextField(
+                                  hintText: '26/04/2025',
+                                  fillColor: AppColors.whiteColor,
+                                  suffixIcon: Icon(
+                                    Icons.calendar_month,
+                                    color: AppColors.blackColor,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
 
-              SizedBox(
-                height: 16,
-              ),
+                      SizedBox(
+                        height: 16,
+                      ),
 
-              // TARGETED AREAS
-              MyFieldHeader(
-                headingText: 'Targeted Areas',
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              MyTextField(
-                hintText: 'Search for targeted areas for your offer',
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: AppColors.greyColor,
+                      // INFO
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        spacing: 8,
+                        children: [
+                          Icon(
+                            Icons.info,
+                            size: 20,
+                            color: AppColors.greyColor.withValues(alpha: .7),
+                          ),
+                          SizedBox(
+                            width: size.width - 100,
+                            child: Text(
+                              'Your offer will automatically expire after the end date.',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    color: AppColors.greyColor,
+                                  ),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Container(
-                width: 170,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: AppColors.greyColor.withValues(alpha: .15),
-                  borderRadius: BorderRadius.circular(16),
+
+                SizedBox(
+                  height: 16,
                 ),
-                child: Row(
-                  spacing: 8,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Ain Temochenet',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: AppColors.blackColor,
+
+                // TARGETED AREAS
+                MyFieldHeader(
+                  headingText: 'Targeted Areas',
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                MyTextField(
+                  hintText: 'Search for targeted areas for your offer',
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: AppColors.greyColor,
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  width: 170,
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.greyColor.withValues(alpha: .15),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    spacing: 8,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Ain Temochenet',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: AppColors.blackColor,
+                            ),
+                      ),
+                      Icon(
+                        Icons.close,
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: 32,
+                ),
+
+                SizedBox(
+                  width: size.width,
+                  child: ElevatedButton.icon(
+                    onPressed: () {},
+                    label: Text('Post Offer'),
+                    icon: Icon(
+                      FontAwesomeIcons.paperPlane,
+                      color: AppColors.whiteColor,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 8,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: size.width - 50,
+                    child: Text(
+                      'This offer will be displayed in the special offers section in client feed, and interested customers will contact you directly. ',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: AppColors.greyColor.withValues(alpha: .7),
                           ),
                     ),
-                    Icon(
-                      Icons.close,
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(
-                height: 32,
-              ),
-
-              SizedBox(
-                width: size.width,
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  label: Text('Post Offer'),
-                  icon: Icon(
-                    FontAwesomeIcons.paperPlane,
-                    color: AppColors.whiteColor,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
-              ),
 
-              SizedBox(
-                height: 8,
-              ),
-              Center(
-                child: SizedBox(
-                  width: size.width - 50,
-                  child: Text(
-                    'This offer will be displayed in the special offers section in client feed, and interested customers will contact you directly. ',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          color: AppColors.greyColor.withValues(alpha: .7),
-                        ),
-                  ),
+                SizedBox(
+                  height: 60,
                 ),
-              ),
-
-              SizedBox(
-                height: 60,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -18,54 +18,56 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: Stack(
-        children: [
-          Container(
-            decoration: AppThemes.scaffoldBackgroundDecoration,
-            height: size.height,
-            width: size.width,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Profile Section
-                  ProfileSection(artisan: artisan),
-                  Container(
-                    height: 8,
-                  ),
-                  // Profile Actions
-                  _buildProfileActions(),
-                  const SizedBox(height: 8),
-                  // Work Gallery
-                  _buildWorkGallery(context, artisan.category),
-                  const SizedBox(height: 8),
-                  // Working Fileds
-                  _buildWorkingFields(context, artisan.category),
-                  const SizedBox(height: 8),
+    return SafeArea(
+      child: Scaffold(
+        appBar: _buildAppBar(),
+        body: Stack(
+          children: [
+            Container(
+              decoration: AppThemes.scaffoldBackgroundDecoration,
+              height: size.height,
+              width: size.width,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Profile Section
+                    ProfileSection(artisan: artisan),
+                    Container(
+                      height: 8,
+                    ),
+                    // Profile Actions
+                    _buildProfileActions(),
+                    const SizedBox(height: 8),
+                    // Work Gallery
+                    _buildWorkGallery(context, artisan.category),
+                    const SizedBox(height: 8),
+                    // Working Fileds
+                    _buildWorkingFields(context, artisan.category),
+                    const SizedBox(height: 8),
 
-                  // Professional Certificates
-                  _buildProfessionalCertifs(context),
-                  const SizedBox(height: 8),
-                  // Service Area
-                  _buildServiceArea(context),
-                  const SizedBox(height: 8),
-                  // Working Hours
-                  _buildWorkingHours(context),
-                  const SizedBox(height: 8),
-                  // Reviews
-                  _buildReviews(context),
+                    // Professional Certificates
+                    _buildProfessionalCertifs(context),
+                    const SizedBox(height: 8),
+                    // Service Area
+                    _buildServiceArea(context),
+                    const SizedBox(height: 8),
+                    // Working Hours
+                    _buildWorkingHours(context),
+                    const SizedBox(height: 8),
+                    // Reviews
+                    _buildReviews(context),
 
-                  const SizedBox(height: 80),
-                ],
+                    const SizedBox(height: 80),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Contact Artisan Button
-          _buildContactButton(hasToNavigateToFillDirectOrder, context),
-        ],
+            // Contact Artisan Button
+            _buildContactButton(hasToNavigateToFillDirectOrder, context),
+          ],
+        ),
       ),
     );
   }

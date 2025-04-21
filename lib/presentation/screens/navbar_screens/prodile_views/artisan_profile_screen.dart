@@ -359,7 +359,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                         ),
                   ),
                   Text(
-                    'Orders Completed',
+                    'Completed Orders',
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                           fontWeight: FontWeight.w600,

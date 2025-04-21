@@ -30,286 +30,289 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: AppThemes.scaffoldBackgroundDecoration,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 80),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: size.width,
+          height: size.height,
+          decoration: AppThemes.scaffoldBackgroundDecoration,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 80),
 
-                  // LOGO
-                  Image.asset(
-                    'assets/images/logos/logo1.png',
-                    height: 100,
-                    width: 180,
-                    fit: BoxFit.fill,
-                  ),
-
-                  SizedBox(height: 32),
-
-                  Container(
-                    width: size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          AppColors.whiteColor,
-                          AppColors.gradiantColor,
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.shadowColor,
-                          blurRadius: 7,
-                          spreadRadius: 2,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
+                    // LOGO
+                    Image.asset(
+                      'assets/images/logos/logo1.png',
+                      height: 100,
+                      width: 180,
+                      fit: BoxFit.fill,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Client Registration',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
+
+                    SizedBox(height: 32),
+
+                    Container(
+                      width: size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.whiteColor,
+                            AppColors.gradiantColor,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
-                        SizedBox(height: 16),
-                        MyFieldHeader(
-                          headingText: 'Full name',
-                        ),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: 'Enter your full name',
-                          prefixIcon: Icon(
-                            Icons.person_2_rounded,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 22,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.shadowColor,
+                            blurRadius: 7,
+                            spreadRadius: 2,
+                            offset: Offset(0, 2),
                           ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // Gender
-                        MyFieldHeader(headingText: 'Sex'),
-                        SizedBox(height: 8),
-                        _buildSexDropdownField(),
-                        SizedBox(height: 16),
-
-                        // Phone Number
-                        MyFieldHeader(headingText: 'Phone Number'),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: '+213',
-                          prefixIcon: Icon(
-                            FontAwesomeIcons.phone,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 18,
-                          ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // EMAIL ADDRESS
-                        MyFieldHeader(headingText: 'Email address'),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: 'email@exemple.com',
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 20,
-                          ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // DATE OF BIRTH
-                        MyFieldHeader(
-                          headingText: 'Date of birth',
-                        ),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: 'DD/MM/YYY',
-                          prefixIcon: Icon(
-                            Icons.calendar_today,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 20,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.calendar_month,
-                            color: AppColors.blackColor,
-                            size: 20,
-                          ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // DATE OF BIRTH
-                        MyFieldHeader(headingText: 'Password'),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: '*********',
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 20,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: AppColors.blackColor,
-                            size: 20,
-                          ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // DATE OF BIRTH
-                        MyFieldHeader(headingText: 'Confirm password'),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: '*********',
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: AppColors.greyColor.withValues(alpha: .5),
-                            size: 20,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: AppColors.blackColor,
-                            size: 20,
-                          ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // DATE OF BIRTH
-                        MyFieldHeader(
-                            headingText: 'Additional information ( optional )'),
-                        SizedBox(height: 8),
-                        MyTextField(
-                          hintText: 'Tell us a bit about your self...',
-                          maxLines: 3,
-                        ),
-
-                        SizedBox(height: 16),
-
-                        // AGREEMENETTO TERMS AND CONDITIONS
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Checkbox(
-                              value: _checked,
-                              onChanged: (value) {
-                                setState(() {
-                                  _checked = value!;
-                                });
-                              },
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                              'Client Registration',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
-                            SizedBox(
-                              width: size.width * .7,
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'I agree to the ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor
-                                                .withValues(alpha: .7),
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: 'Terms of Service ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: 'and ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor
-                                                .withValues(alpha: .7),
-                                          ),
-                                    ),
-                                    TextSpan(
-                                      text: 'Privacy Policy.',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                            color: AppColors.blackColor,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                  ],
+                          ),
+                          SizedBox(height: 16),
+                          MyFieldHeader(
+                            headingText: 'Full name',
+                          ),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: 'Enter your full name',
+                            prefixIcon: Icon(
+                              Icons.person_2_rounded,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 22,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // Gender
+                          MyFieldHeader(headingText: 'Sex'),
+                          SizedBox(height: 8),
+                          _buildSexDropdownField(),
+                          SizedBox(height: 16),
+
+                          // Phone Number
+                          MyFieldHeader(headingText: 'Phone Number'),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: '+213',
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.phone,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 18,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // EMAIL ADDRESS
+                          MyFieldHeader(headingText: 'Email address'),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: 'email@exemple.com',
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 20,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // DATE OF BIRTH
+                          MyFieldHeader(
+                            headingText: 'Date of birth',
+                          ),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: 'DD/MM/YYY',
+                            prefixIcon: Icon(
+                              Icons.calendar_today,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 20,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.calendar_month,
+                              color: AppColors.blackColor,
+                              size: 20,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // DATE OF BIRTH
+                          MyFieldHeader(headingText: 'Password'),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: '*********',
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 20,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.visibility,
+                              color: AppColors.blackColor,
+                              size: 20,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // DATE OF BIRTH
+                          MyFieldHeader(headingText: 'Confirm password'),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: '*********',
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 20,
+                            ),
+                            suffixIcon: Icon(
+                              Icons.visibility,
+                              color: AppColors.blackColor,
+                              size: 20,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // DATE OF BIRTH
+                          MyFieldHeader(
+                              headingText:
+                                  'Additional information ( optional )'),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: 'Tell us a bit about your self...',
+                            maxLines: 3,
+                          ),
+
+                          SizedBox(height: 16),
+
+                          // AGREEMENETTO TERMS AND CONDITIONS
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Checkbox(
+                                value: _checked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _checked = value!;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: size.width * .7,
+                                child: RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: 'I agree to the ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor
+                                                  .withValues(alpha: .7),
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Terms of Service ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: 'and ',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor
+                                                  .withValues(alpha: .7),
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: 'Privacy Policy.',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                              color: AppColors.blackColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
 
-                        SizedBox(height: 24),
+                          SizedBox(height: 24),
 
-                        _buildCreateButton(),
+                          _buildCreateButton(),
 
-                        SizedBox(height: 16),
-                      ],
+                          SizedBox(height: 16),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  SizedBox(
-                    height: 32,
-                  ),
+                    SizedBox(
+                      height: 32,
+                    ),
 
-                  // LOGIN BUTTON
-                  _buildAlreayHaveAnAcount(context),
-                  SizedBox(
-                    height: 80,
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-              left: 16,
-              top: 16,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: AppColors.primaryColor,
+                    // LOGIN BUTTON
+                    _buildAlreayHaveAnAcount(context),
+                    SizedBox(
+                      height: 80,
+                    )
+                  ],
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                left: 16,
+                top: 16,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

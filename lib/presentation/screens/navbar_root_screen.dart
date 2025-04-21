@@ -3,7 +3,7 @@ import 'package:hirafi/presentation/screens/artisan_screens/add_offer_by_artisan
 import 'package:hirafi/presentation/screens/client_screens/choose_offer_type_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/chats_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/home_screen.dart';
-import 'package:hirafi/presentation/screens/navbar_screens/client_profile_screen.dart';
+import 'package:hirafi/presentation/screens/navbar_screens/prodile_views/client_profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/search_screen.dart';
 import 'package:ionicons/ionicons.dart';
@@ -34,33 +34,40 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
       ),
       ChatsScreen(),
       SearchScreen(),
-      ProfileScreen(),
+      ProfileScreen(
+        isArtisan: widget.isArtisan,
+      ),
     ];
 
     print(widget.isArtisan);
 
-    return Scaffold(
-      body: pages[_currentIndex],
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFAB(context),
-      bottomNavigationBar: _buildBottomNavBar(),
+    return SafeArea(
+      child: Scaffold(
+        body: pages[_currentIndex],
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: _buildFAB(context),
+        bottomNavigationBar: _buildBottomNavBar(),
+      ),
     );
   }
 
-  FloatingActionButton _buildFAB(BuildContext context) {
-    return FloatingActionButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => widget.isArtisan
-                ? AddOfferByArtisanScreen()
-                : ChooseOfferTypeScreen(),
-          ),
-        );
-      },
-      child: Icon(Icons.add),
+  Widget _buildFAB(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 30),
+      child: FloatingActionButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => widget.isArtisan
+                  ? AddOfferByArtisanScreen()
+                  : ChooseOfferTypeScreen(),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 
