@@ -7,8 +7,8 @@ import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/presentation/screens/client_screens/fill_offer_screen.dart';
 import 'package:hirafi/presentation/widgets/artisan_profile_page/profile_section.dart';
 
-class ArtisanProfileScreen extends StatelessWidget {
-  const ArtisanProfileScreen({
+class ArtisanProfileDetailsScreen extends StatelessWidget {
+  const ArtisanProfileDetailsScreen({
     super.key,
     required this.artisan,
     this.hasToNavigateToFillDirectOrder = false,

@@ -3,14 +3,22 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/utils/app_colors.dart';
 
-class UploadLicenseWidget extends StatefulWidget {
-  const UploadLicenseWidget({super.key});
+class DottedUploadDocument extends StatefulWidget {
+  const DottedUploadDocument(
+      {super.key,
+      required this.infoText,
+      required this.descriptionText,
+      required this.uploadButtonText});
+
+  final String infoText;
+  final String descriptionText;
+  final String uploadButtonText;
 
   @override
-  State<UploadLicenseWidget> createState() => _UploadLicenseWidgetState();
+  State<DottedUploadDocument> createState() => _DottedUploadDocumentState();
 }
 
-class _UploadLicenseWidgetState extends State<UploadLicenseWidget> {
+class _DottedUploadDocumentState extends State<DottedUploadDocument> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,8 +53,8 @@ class _UploadLicenseWidgetState extends State<UploadLicenseWidget> {
               ),
               const SizedBox(height: 8),
               // Main Text
-              const Text(
-                'Upload your professional license or certificate',
+              Text(
+                widget.descriptionText,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.black87,
@@ -63,7 +71,7 @@ class _UploadLicenseWidgetState extends State<UploadLicenseWidget> {
                   color: AppColors.blackColor,
                 ),
                 label: Text(
-                  'Upload Document',
+                  widget.uploadButtonText,
                   style: TextStyle(
                     fontSize: 14,
                     color: AppColors.blackColor,
@@ -84,8 +92,8 @@ class _UploadLicenseWidgetState extends State<UploadLicenseWidget> {
         ),
         const SizedBox(height: 8),
         // Note Text
-        const Text(
-          'You can add this later, but it will appear as a notification in your profile',
+        Text(
+          widget.infoText,
           style: TextStyle(
             fontSize: 12,
             color: Colors.grey,

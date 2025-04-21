@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/artisan_sinup2_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
 import 'package:hirafi/presentation/widgets/artisan_signup/upload_document.dart';
 import 'package:hirafi/utils/app_colors.dart';
@@ -99,7 +100,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                       children: [
                         Center(
                           child: Text(
-                            'Artisan Registration',
+                            'Complete your Registration',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -108,6 +109,21 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                 ),
                           ),
                         ),
+                        SizedBox(height: 16),
+
+                        // SIGN UP PROCEDURE PROGRESS
+                        Hero(
+                          tag: 'progress',
+                          child: LinearProgressIndicator(
+                            value: 0.5,
+                            backgroundColor:
+                                AppColors.greyColor.withOpacity(0.2),
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(20),
+                            minHeight: 8,
+                          ),
+                        ),
+
                         SizedBox(height: 16),
 
                         // ARTISAN INFORMATION
@@ -349,10 +365,6 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                         ),
 
                         SizedBox(height: 24),
-
-                        _buildCreateButton(),
-
-                        SizedBox(height: 16),
                       ],
                     ),
                   ),
@@ -364,7 +376,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                   // LOGIN BUTTON
                   _buildAlreadyHaveAnAccount(context),
                   SizedBox(
-                    height: 80,
+                    height: 150,
                   )
                 ],
               ),
@@ -380,6 +392,19 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                   Icons.arrow_back,
                   color: AppColors.primaryColor,
                 ),
+              ),
+            ),
+            Positioned(
+              bottom: 16,
+              left: 16,
+              right: 16,
+              child: Column(
+                children: [
+                  _buildNextButton(),
+                  SizedBox(
+                    height: 16,
+                  ),
+                ],
               ),
             ),
           ],
@@ -481,28 +506,25 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
         color: AppColors.greyColor.withValues(alpha: .05),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: UploadLicenseWidget(),
+      child: DottedUploadDocument(
+        descriptionText: 'Upload your professional Licence or Certificate',
+        infoText:
+            'You can add this later, but it will appear as a notification in your profile',
+        uploadButtonText: 'Upload Document',
+      ),
     );
   }
 
-  Center _buildCreateButton() {
+  Center _buildNextButton() {
     return Center(
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () async {
-            isLoading = true;
-            setState(() {});
-            await Future.delayed(
-              Duration(seconds: 2),
-            );
-
             // Navigate to the client screen
-            Navigator.of(context).pushReplacement(
+            Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => NavBarRootScreen(
-                  isArtisan: true,
-                ),
+                builder: (context) => ArtisanSignupTwoScreen(),
               ),
             );
             isLoading = false;
@@ -512,14 +534,19 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
             backgroundColor: AppColors.primaryColor,
             elevation: 2,
           ),
-          child: isLoading
-              ? Transform.scale(
-                  scale: .5,
-                  child: CircularProgressIndicator(
-                    color: AppColors.whiteColor,
-                  ),
-                )
-              : Text('Register as Artisan'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Next'),
+              SizedBox(
+                width: 8,
+              ),
+              Icon(
+                Icons.navigate_next,
+                color: AppColors.whiteColor,
+              ),
+            ],
+          ),
         ),
       ),
     );

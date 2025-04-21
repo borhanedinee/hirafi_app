@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/screens/client_screens/artisans_matching_screen.dart';
 import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
@@ -56,7 +57,22 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const PostOfferScreen(),
+          builder: (context) => PostedSuccessfully(
+            actionButtonText: 'Go to Home',
+            description:
+                'Your offer has been posted to the app. Artisans will contact you soon.',
+            title: 'Offer Posted Successfully',
+            onActionPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => NavBarRootScreen(
+                    isArtisan: false,
+                  ),
+                ),
+                (route) => route.isFirst,
+              );
+            },
+          ),
         ),
       );
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/presentation/screens/client_screens/artisan_profile_screen.dart';
+import 'package:hirafi/presentation/screens/client_screens/artisan_profile_details_screen.dart';
 
 class TopRatedArtisanCard extends StatelessWidget {
   final ArtisanModel artisan;
@@ -16,7 +16,7 @@ class TopRatedArtisanCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (c) => ArtisanProfileScreen(
+            builder: (c) => ArtisanProfileDetailsScreen(
               artisan: artisan,
               hasToNavigateToFillDirectOrder: true,
             ),

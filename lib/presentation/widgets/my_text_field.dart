@@ -21,23 +21,26 @@ class MyTextField extends StatelessWidget {
     return TextFormField(
       maxLines: maxLines,
       decoration: InputDecoration(
-          fillColor: fillColor ?? AppColors.greyColor.withValues(alpha: .05),
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          hintText: hintText,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: AppColors.greyColor
-                  .withOpacity(0.2), // Light grey for unfocused border
+        fillColor: fillColor ?? AppColors.greyColor.withValues(alpha: .05),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        hintText: hintText,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: AppColors.greyColor
+                .withOpacity(0.2), // Light grey for unfocused border
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: AppColors.primaryColor),
+        ),
+        hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.greyColor.withOpacity(0.5),
             ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: AppColors.primaryColor),
-          ),
-          hintStyle: Theme.of(context).textTheme.bodySmall),
+      ),
     );
   }
 }

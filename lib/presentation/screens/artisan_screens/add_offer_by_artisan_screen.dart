@@ -209,7 +209,7 @@ class _AddOfferByArtisanScreenState extends State<AddOfferByArtisanScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            MyFieldHeader(headingText: 'End Date'),
+                            MyFieldHeader(headingText: 'Start Date'),
                             SizedBox(
                               height: 4,
                             ),
@@ -308,7 +308,7 @@ class _AddOfferByArtisanScreenState extends State<AddOfferByArtisanScreen> {
                 width: 170,
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppColors.greyColor.withValues(alpha: .3),
+                  color: AppColors.greyColor.withValues(alpha: .15),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -356,6 +356,9 @@ class _AddOfferByArtisanScreenState extends State<AddOfferByArtisanScreen> {
                   child: Text(
                     'This offer will be displayed in the special offers section in client feed, and interested customers will contact you directly. ',
                     textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: AppColors.greyColor.withValues(alpha: .7),
+                        ),
                   ),
                 ),
               ),

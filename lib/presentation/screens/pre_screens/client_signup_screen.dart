@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
 import 'package:hirafi/presentation/widgets/my_field_header.dart';
@@ -340,37 +341,31 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () async {
-            // Navigate to the client screen
-            isLoading = true;
-            setState(() {});
-
-            await Future.delayed(
-              Duration(seconds: 2),
-            );
-
-            Navigator.pushReplacement(
-              context,
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => NavBarRootScreen(
-                  isArtisan: false,
+                builder: (context) => PostedSuccessfully(
+                  actionButtonText: 'Login Now',
+                  description:
+                      '“You’re all set! Discover the best artisans and enjoy top-quality services.”',
+                  title: 'Signed Up Successfully',
+                  onActionPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                      (route) => route.isFirst,
+                    );
+                  },
                 ),
               ),
             );
-            isLoading = false;
           },
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 14),
             backgroundColor: AppColors.primaryColor,
             elevation: 2,
           ),
-          child: isLoading
-              ? Transform.scale(
-                  scale: .5,
-                  child: CircularProgressIndicator(
-                    color: AppColors.whiteColor,
-                  ),
-                )
-              : Text('Register as Client'),
+          child: Text('Register as Client'),
         ),
       ),
     );

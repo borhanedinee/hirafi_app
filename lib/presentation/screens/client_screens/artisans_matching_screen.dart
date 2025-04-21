@@ -7,7 +7,7 @@ import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/constants/urls.dart';
 import 'package:hirafi/utils/dummy_data.dart';
-import 'package:hirafi/presentation/screens/client_screens/artisan_profile_screen.dart';
+import 'package:hirafi/presentation/screens/client_screens/artisan_profile_details_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -98,7 +98,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                     onCardClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (c) => ArtisanProfileScreen(
+                          builder: (c) => ArtisanProfileDetailsScreen(
                             artisan: artisan,
                           ),
                         ),

@@ -3,6 +3,7 @@ import 'package:hirafi/presentation/screens/artisan_screens/add_offer_by_artisan
 import 'package:hirafi/presentation/screens/client_screens/choose_offer_type_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/chats_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/home_screen.dart';
+import 'package:hirafi/presentation/screens/navbar_screens/client_profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/search_screen.dart';
 import 'package:ionicons/ionicons.dart';

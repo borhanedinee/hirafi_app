@@ -5,17 +5,27 @@ import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 
-class PostOfferScreen extends StatelessWidget {
-  const PostOfferScreen({super.key});
+class PostedSuccessfully extends StatelessWidget {
+  const PostedSuccessfully(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.actionButtonText,
+      required this.onActionPressed});
+
+  final String title;
+  final String description;
+  final String actionButtonText;
+  final VoidCallback onActionPressed;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Offer Posted'),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Offer Posted'),
+      //   backgroundColor: AppColors.primaryColor,
+      //   foregroundColor: Colors.white,
+      // ),
       body: Container(
         decoration: AppThemes.scaffoldBackgroundDecoration,
         height: size.height,
@@ -31,7 +41,7 @@ class PostOfferScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Offer Posted Successfully!',
+              title,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppColors.primaryColor,
                     fontSize: 24,
@@ -39,18 +49,16 @@ class PostOfferScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Your offer has been posted to the app. Artisans will contact you soon.',
+              description,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.greyColor,
+                    fontStyle: FontStyle.italic,
                   ),
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: () {
-                Navigator.popUntil(
-                    context, (route) => route.isFirst); // Return to HomeScreen
-              },
+              onPressed: onActionPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primaryColor,
                 foregroundColor: Colors.white,
@@ -62,8 +70,8 @@ class PostOfferScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: const Text(
-                'Back to Home',
+              child: Text(
+                actionButtonText,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
