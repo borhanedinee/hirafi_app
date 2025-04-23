@@ -101,10 +101,10 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Complete your Registration',
+                              'Complete your Registration as an Artisan',
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleMedium!
+                                  .titleSmall!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -131,19 +131,35 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           //UPLOAD PICTURE
                           _buildFieldHeading(
                             context,
-                            headingText: 'Profile Picture*',
+                            headingText: 'Profile Picture *',
                           ),
                           SizedBox(height: 8),
                           _buildUploadProfilePicture(context),
                           SizedBox(height: 16),
                           _buildFieldHeading(
-                            headingText: 'Full name',
+                            headingText: 'First name *',
                             context,
                           ),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'Enter your full name',
+                            hintText: 'eg. Borhanedine',
+                            prefixIcon: Icon(
+                              Icons.person_2_rounded,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 22,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+                          _buildFieldHeading(
+                            headingText: 'Second name *',
+                            context,
+                          ),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                            context,
+                            hintText: 'eg. Boussaha',
                             prefixIcon: Icon(
                               Icons.person_2_rounded,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -161,13 +177,27 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // Phone Number
                           _buildFieldHeading(context,
-                              headingText: 'Phone Number or Email'),
+                              headingText: 'Phone Number *'),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'Enter phone number or email',
+                            hintText: '+213',
                             prefixIcon: Icon(
                               FontAwesomeIcons.phone,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 18,
+                            ),
+                          ),
+                          SizedBox(height: 16),
+
+                          // Phone Number
+                          _buildFieldHeading(context, headingText: 'Email *'),
+                          SizedBox(height: 8),
+                          _buildTextField(
+                            context,
+                            hintText: 'eg. exemple@gmail.com',
+                            prefixIcon: Icon(
+                              FontAwesomeIcons.mailBulk,
                               color: AppColors.greyColor.withValues(alpha: .5),
                               size: 18,
                             ),
@@ -178,7 +208,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           // DATE OF BIRTH
                           _buildFieldHeading(
                             context,
-                            headingText: 'Date of birth',
+                            headingText: 'Date of birth *',
                           ),
                           SizedBox(height: 8),
                           _buildTextField(
@@ -247,7 +277,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // SELECT CATEGORY
                           _buildFieldHeading(context,
-                              headingText: 'Select Category*'),
+                              headingText: 'Select Category *'),
                           SizedBox(height: 16),
                           _buildCategoryDrowDownField(),
 
@@ -259,7 +289,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildFieldHeading(context,
-                                        headingText: 'Select Sub Category*'),
+                                        headingText: 'Select Sub Category *'),
                                     SizedBox(height: 8),
                                     _buildCategoryServicesDrowDownField(
                                         selectedCategory:
@@ -296,8 +326,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // UPLOAD RESUME
                           _buildFieldHeading(context,
-                              headingText:
-                                  'Work License/Certificate (optiona)'),
+                              headingText: 'Work License/Certificate'),
                           SizedBox(height: 8),
                           _buildUploadCertificate(context),
                           SizedBox(height: 16),
@@ -366,6 +395,11 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                             ],
                           ),
 
+                          SizedBox(
+                            height: 32,
+                          ),
+                          _buildNextButton(),
+
                           SizedBox(height: 24),
                         ],
                       ),
@@ -378,7 +412,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                     // LOGIN BUTTON
                     _buildAlreadyHaveAnAccount(context),
                     SizedBox(
-                      height: 150,
+                      height: 50,
                     )
                   ],
                 ),
@@ -394,19 +428,6 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                     Icons.arrow_back,
                     color: AppColors.primaryColor,
                   ),
-                ),
-              ),
-              Positioned(
-                bottom: 16,
-                left: 16,
-                right: 16,
-                child: Column(
-                  children: [
-                    _buildNextButton(),
-                    SizedBox(
-                      height: 16,
-                    ),
-                  ],
                 ),
               ),
             ],
@@ -510,6 +531,10 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
         borderRadius: BorderRadius.circular(16),
       ),
       child: DottedUploadDocument(
+        documentTypeIcon: Icon(
+          Icons.upload_file,
+          color: AppColors.greyColor.withValues(alpha: .7),
+        ),
         descriptionText: 'Upload your professional Licence or Certificate',
         infoText:
             'You can add this later, but it will appear as a notification in your profile',

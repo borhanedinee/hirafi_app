@@ -6,10 +6,12 @@ import 'package:hirafi/utils/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart'; // Assuming you have AppColors defined
 
 class HelpCenterScreen extends StatelessWidget {
-  const HelpCenterScreen({Key? key}) : super(key: key);
+  const HelpCenterScreen({super.key, required this.isArtisan});
+
+  final bool isArtisan;
 
   // Sample FAQ data (you can replace this with data from an API or database)
-  final List<Map<String, String>> faqs = const [
+  final List<Map<String, String>> artisanFAQs = const [
     {
       'question': 'What is Herrafi?',
       'answer':
@@ -34,6 +36,39 @@ class HelpCenterScreen extends StatelessWidget {
       'question': 'How do I update my profile?',
       'answer':
           'To update your profile, go to the profile section in the app. Tap on "Edit Profile," make the necessary changes (e.g., update your skills, contact info, or work samples), and save your changes.',
+    },
+  ];
+
+  final List<Map<String, String>> clientFaqs = const [
+    {
+      'question': 'What is Herrafi?',
+      'answer':
+          'Herrafi is a mobile app that connects clients with skilled artisans for custom services and projects. Clients can browse artisan profiles, send direct offers, and track their order history through a simple and intuitive app experience.'
+    },
+    {
+      'question': 'How do I register as a client?',
+      'answer':
+          'To register as a client, go to the user type screen and select "Join as a Client." Fill in your personal details, and you’ll instantly be able to browse artisan profiles, favorite artisans, and send offers for your projects.'
+    },
+    {
+      'question': 'How can I find artisans?',
+      'answer':
+          'You can explore available artisans by browsing the artisans list, filtering by categories, or viewing recommended profiles. You can also favorite artisans you like for easy access in the future.'
+    },
+    {
+      'question': 'How do I send an offer to an artisan?',
+      'answer':
+          'Once you find an artisan you’re interested in, open their profile and tap "Send Offer." Enter the project details, proposed budget, and your contact information, then submit your offer. The artisan will review and respond directly.'
+    },
+    {
+      'question': 'How do I track my past orders?',
+      'answer':
+          'You can view your order history by going to your profile and selecting "Order History." Here you’ll find a list of all your past orders, including service details, dates, statuses, and total prices.'
+    },
+    {
+      'question': 'How do I update my personal information?',
+      'answer':
+          'To update your information, go to your profile, tap "Personal Information," and edit your details such as your name, email, phone number, or address. Don’t forget to save your changes.'
     },
   ];
 
@@ -114,15 +149,20 @@ class HelpCenterScreen extends StatelessWidget {
                     ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: faqs.length,
+                      itemCount:
+                          isArtisan ? artisanFAQs.length : clientFaqs.length,
                       separatorBuilder: (context, index) => Divider(
                         color: AppColors.greyColor.withOpacity(0.5),
                       ),
                       itemBuilder: (context, index) {
                         return _buildFaqTile(
                           context,
-                          question: faqs[index]['question']!,
-                          answer: faqs[index]['answer']!,
+                          question: isArtisan
+                              ? artisanFAQs[index]['question']!
+                              : clientFaqs[index]['question']!,
+                          answer: isArtisan
+                              ? artisanFAQs[index]['answer']!
+                              : clientFaqs[index]['answer']!,
                         );
                       },
                     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/presentation/screens/artisan_screens/add_offer_by_artisan_screen.dart';
 import 'package:hirafi/presentation/screens/client_screens/choose_offer_type_screen.dart';
-import 'package:hirafi/presentation/screens/navbar_screens/chats_screen.dart';
+import 'package:hirafi/presentation/screens/navbar_screens/conversations_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/home_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/prodile_views/client_profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/profile_screen.dart';
@@ -32,8 +32,8 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
       HomeScreen(
         isArtisan: widget.isArtisan,
       ),
-      ChatsScreen(),
       SearchScreen(),
+      ConversationsScreen(),
       ProfileScreen(
         isArtisan: widget.isArtisan,
       ),

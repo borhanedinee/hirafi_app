@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/email_verification_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
 import 'package:hirafi/presentation/widgets/my_field_header.dart';
 import 'package:hirafi/presentation/widgets/my_header.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
@@ -83,10 +85,10 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Client Registration',
+                              'Complete your Registration as a Client',
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleMedium!
+                                  .titleSmall!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -94,11 +96,25 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           ),
                           SizedBox(height: 16),
                           MyFieldHeader(
-                            headingText: 'Full name',
+                            headingText: 'First name',
                           ),
                           SizedBox(height: 8),
                           MyTextField(
-                            hintText: 'Enter your full name',
+                            hintText: 'eg. Borhanedine',
+                            prefixIcon: Icon(
+                              Icons.person_2_rounded,
+                              color: AppColors.greyColor.withValues(alpha: .5),
+                              size: 22,
+                            ),
+                          ),
+
+                          SizedBox(height: 16),
+                          MyFieldHeader(
+                            headingText: 'Second name',
+                          ),
+                          SizedBox(height: 8),
+                          MyTextField(
+                            hintText: 'eg. Boussaha',
                             prefixIcon: Icon(
                               Icons.person_2_rounded,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -197,18 +213,6 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                               color: AppColors.blackColor,
                               size: 20,
                             ),
-                          ),
-
-                          SizedBox(height: 16),
-
-                          // DATE OF BIRTH
-                          MyFieldHeader(
-                              headingText:
-                                  'Additional information ( optional )'),
-                          SizedBox(height: 8),
-                          MyTextField(
-                            hintText: 'Tell us a bit about your self...',
-                            maxLines: 3,
                           ),
 
                           SizedBox(height: 16),
@@ -346,19 +350,9 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
           onPressed: () async {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => PostedSuccessfully(
-                  actionButtonText: 'Login Now',
-                  description:
-                      '“You’re all set! Discover the best artisans and enjoy top-quality services.”',
-                  title: 'Signed Up Successfully',
-                  onActionPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
-                      (route) => route.isFirst,
-                    );
-                  },
+                builder: (context) => EmailVerificationScreen(
+                  email: 'boussahaborhanedine@gmail.com',
+                  isArtisan: false,
                 ),
               ),
             );

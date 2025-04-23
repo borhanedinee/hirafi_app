@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
+import 'package:hirafi/services/show_image_view_dialog.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/dummy_data.dart';
@@ -69,52 +70,6 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  // Function to show the image viewer dialog
-  void _showImageViewerDialog(BuildContext context, String imagePath) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.all(0),
-          child: Stack(
-            children: [
-              // Image viewer with zooming
-              InteractiveViewer(
-                minScale: 0.5,
-                maxScale: 4.0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    imagePath,
-                    fit: BoxFit.contain,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-                ),
-              ),
-              // Close button
-              Positioned(
-                top: 10,
-                right: 10,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 
@@ -465,7 +420,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
                     imagesByCategories[artisanCategory]!.length, (index) {
                   final image = imagesByCategories[artisanCategory]![index];
                   return GestureDetector(
-                    onTap: () => _showImageViewerDialog(context, image),
+                    onTap: () => showImageViewerDialog(context, image),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(

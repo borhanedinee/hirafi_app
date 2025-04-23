@@ -8,12 +8,13 @@ class DottedUploadDocument extends StatefulWidget {
       {super.key,
       required this.infoText,
       required this.descriptionText,
-      required this.uploadButtonText});
+      required this.uploadButtonText,
+      required this.documentTypeIcon});
 
   final String infoText;
   final String descriptionText;
   final String uploadButtonText;
-
+  final Icon documentTypeIcon;
   @override
   State<DottedUploadDocument> createState() => _DottedUploadDocumentState();
 }
@@ -42,14 +43,7 @@ class _DottedUploadDocumentState extends State<DottedUploadDocument> {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.grey, width: 1),
                 ),
-                child: Text(
-                  '!',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
-                  ),
-                ),
+                child: widget.documentTypeIcon,
               ),
               const SizedBox(height: 8),
               // Main Text

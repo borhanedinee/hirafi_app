@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/screens/help__center_screen.dart';
+import 'package:hirafi/presentation/screens/notifications_screen.dart';
+import 'package:hirafi/presentation/screens/payment_methods_screen.dart';
+import 'package:hirafi/presentation/screens/personal_information_screen.dart';
+import 'package:hirafi/services/show_image_view_dialog.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/utils/dummy_data.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class ArtisanProfileScreen extends StatelessWidget {
@@ -13,107 +19,153 @@ class ArtisanProfileScreen extends StatelessWidget {
       decoration: AppThemes.scaffoldBackgroundDecoration,
       height: size.height,
       width: size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            // APP BAR
-            Container(
-              height: 80,
-              width: size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
+      child: Column(
+        children: [
+          // APP BAR
+          Container(
+            height: 60,
+            width: size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'My Profile',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: AppColors.blackColor,
+                      ),
+                ),
+
+                //UPGRATE PACKAGE BUTTON
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8,
+                    children: [
+                      Icon(
+                        LucideIcons.crown,
+                        color: AppColors.primaryColor,
+                        size: 16,
+                      ),
+                      Text(
+                        'Upgrade',
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Divider(
+            color: AppColors.greyColor.withOpacity(0.5),
+            height: 1,
+          ),
+          // PROFILE INFOS
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Text(
-                    'My Profile',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: AppColors.blackColor,
-                        ),
-                  ),
-                  Icon(
-                    Icons.notifications,
-                    color: AppColors.primaryColor,
-                  ),
+                  _buildProfileInfo(context),
+
+                  SizedBox(height: 16),
+
+                  // WORK GALLERY
+                  _buildWorkGallery(context, 'Painter'),
+
+                  SizedBox(height: 16),
+
+                  // PROFILE SETTINGS
+                  _buildProfileSettingsAndLogoutButton(context),
                 ],
               ),
             ),
-            Divider(
-              color: AppColors.greyColor.withOpacity(0.5),
-              height: 1,
-            ),
-            // PROFILE INFOS
-            _buildProfileInfo(context),
-
-            SizedBox(height: 16),
-
-            // WORK GALLERY
-            _buildWorkGallery(context),
-
-            SizedBox(height: 16),
-
-            // PROFILE SETTINGS
-            _buildProfileSettingsAndLogoutButton(context)
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
 
-  Container _buildWorkGallery(BuildContext context) {
+  Container _buildWorkGallery(BuildContext context, artisanCategory) {
     return Container(
-      width: size.width,
+      width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
+        color: Colors.white,
       ),
-      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'My Work Gallery',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: AppColors.blackColor,
-                    ),
-              ),
-              Text(
-                '+ Add',
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          // GALLERY IMAGES
-          Container(
-            height: 200,
-            width: size.width,
-            decoration: BoxDecoration(
-              color: AppColors.greyColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 16,
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 8,
-                children: [
-                  Text(
-                    'No images yet',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: AppColors.greyColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Work Gallery',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.blackColor,
+                      ),
+                ),
+
+                // add button
+                Text(
+                  '+ Add',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.primaryColor,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                    imagesByCategories[artisanCategory]!.length, (index) {
+                  final image = imagesByCategories[artisanCategory]![index];
+                  return GestureDetector(
+                    onTap: () => showImageViewerDialog(context, image),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                  ),
-                  Icon(
-                    Icons.add_a_photo,
-                  )
-                ],
+                        child: Image.asset(
+                          image,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
             ),
           ),
@@ -138,11 +190,12 @@ class ArtisanProfileScreen extends StatelessWidget {
                   color: AppColors.blackColor,
                 ),
           ),
+          SizedBox(height: 16),
           // SETTINGS LIST
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 4,
+            itemCount: 3,
             separatorBuilder: (context, index) {
               return SizedBox(height: 8);
             },
@@ -152,21 +205,40 @@ class ArtisanProfileScreen extends StatelessWidget {
                   'title': 'Personal Information',
                   'prefixIcon': Icons.person,
                   'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PersonalInformationScreen(),
+                      ),
+                    );
+                  },
                 },
                 {
                   'title': 'Notifications',
                   'prefixIcon': Icons.notifications,
                   'trailing': Icons.arrow_forward_ios,
-                },
-                {
-                  'title': 'Payment Methods',
-                  'prefixIcon': Icons.payment,
-                  'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NotificationsScreen()),
+                    );
+                  },
                 },
                 {
                   'title': 'Help Center',
                   'prefixIcon': Icons.help_center,
                   'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HelpCenterScreen(
+                          isArtisan: false,
+                        ),
+                      ),
+                    );
+                  },
                 },
               ];
 
@@ -197,11 +269,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                     color: AppColors.greyColor.withOpacity(0.5),
                     size: 16,
                   ),
-                  onTap: () {
-                    // Handle tap event here
-                    // For example, navigate to another screen or show a dialog
-                    print('Tapped on ${option['title']}');
-                  },
+                  onTap: () => option['onTap'](),
                 ),
               );
             },

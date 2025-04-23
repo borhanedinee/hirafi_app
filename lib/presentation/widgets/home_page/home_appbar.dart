@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onMenuPressed;
@@ -25,28 +26,23 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 2,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
             'assets/images/logos/logo1.png',
             height: 35,
-            width: 60,
+            width: 50,
             fit: BoxFit.fill,
           ),
           const SizedBox(width: 16),
           isArtisan
-              ? Text(
-                  'Herrafi',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: AppColors.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                )
+              ? SizedBox()
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Borhanedine B',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
@@ -55,11 +51,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       'Annaba, Algeria',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
-                            fontSize: 12,
+                            fontSize: 10,
                           ),
                     ),
                   ],
                 ),
+          Spacer(),
+          isArtisan ? _buildUpgradeButton(context) : SizedBox(),
         ],
       ),
       actions: [
@@ -67,10 +65,42 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(
             Icons.notifications,
             color: AppColors.primaryColor,
+            size: 20,
           ),
           onPressed: onNotificationsPressed,
         ),
       ],
+    );
+  }
+
+  Container _buildUpgradeButton(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 8,
+        children: [
+          Icon(
+            LucideIcons.crown,
+            color: AppColors.primaryColor,
+            size: 16,
+          ),
+          Text(
+            'Upgrade',
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+        ],
+      ),
     );
   }
 

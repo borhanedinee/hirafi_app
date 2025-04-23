@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/email_verification_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
 import 'package:hirafi/presentation/widgets/artisan_signup/upload_document.dart';
 import 'package:hirafi/presentation/widgets/my_field_header.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class ArtisanSignupTwoScreen extends StatefulWidget {
   const ArtisanSignupTwoScreen({super.key});
@@ -87,10 +90,10 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Complete your Registration',
+                              'Complete your Registration as an Artisan',
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleMedium!
+                                  .titleSmall!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -113,91 +116,38 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
 
                           SizedBox(height: 16),
 
-                          MyFieldHeader(headingText: 'Working Days'),
+                          MyFieldHeader(headingText: 'Working Days *'),
                           SizedBox(height: 8),
                           _buildWorkingDaysDrowDownField(),
 
                           SizedBox(height: 16),
 
                           // WORKING HOURS
-                          Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: AppColors.greyColor.withValues(alpha: .1),
-                              borderRadius: BorderRadius.circular(16),
+                          ...List.generate(
+                            _selectedDays.length,
+                            (index) => WorkingHoursItem(
+                              dayItem: _selectedDays[index],
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Working Hours',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        color: AppColors.blackColor,
-                                      ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        MyFieldHeader(
-                                          headingText: 'Start Time',
-                                          color: AppColors.greyColor
-                                              .withValues(alpha: .8),
-                                        ),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        SizedBox(
-                                          width: ((size.width - 32) / 2) - 40,
-                                          child: MyTextField(
-                                            hintText: 'eg. 9:00',
-                                            fillColor: AppColors.whiteColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        MyFieldHeader(
-                                          headingText: 'End Time',
-                                          color: AppColors.greyColor
-                                              .withValues(alpha: .8),
-                                        ),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        SizedBox(
-                                          width: ((size.width - 32) / 2) - 40,
-                                          child: MyTextField(
-                                            hintText: 'eg. 16:00',
-                                            fillColor: AppColors.whiteColor,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-
+                          ).toList(),
                           SizedBox(
                             height: 16,
                           ),
 
-                          _buildUploadIDCard(context),
+                          _buildUploadIDCard(
+                            context,
+                            headingText: 'Front of your ID Card *',
+                            uploadGuideText:
+                                'Please upload a clear image of the front of your ID card.',
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          _buildUploadIDCard(
+                            context,
+                            headingText: 'Back of your ID Card *',
+                            uploadGuideText:
+                                'Please upload a clear image of the back of your ID card.',
+                          ),
                           SizedBox(
                             height: 16,
                           ),
@@ -265,6 +215,10 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          _buildCreateNowButton(),
 
                           SizedBox(height: 24),
                         ],
@@ -272,7 +226,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                     ),
 
                     SizedBox(
-                      height: 150,
+                      height: 50,
                     )
                   ],
                 ),
@@ -290,19 +244,6 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 16,
-                left: 16,
-                right: 16,
-                child: Column(
-                  children: [
-                    _buildCreateNowButton(),
-                    SizedBox(
-                      height: 16,
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),
@@ -310,20 +251,39 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
     );
   }
 
-  Container _buildUploadIDCard(BuildContext context) {
+  Container _buildUploadIDCard(BuildContext context,
+      {required String headingText, required String uploadGuideText}) {
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 0),
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppColors.greyColor.withValues(alpha: .05),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: DottedUploadDocument(
-        descriptionText: 'Upload your ID card or Driving Licence',
-        uploadButtonText: 'Upload Documment',
-        infoText:
-            'You can add this later, but it will appear as a notification in your profile',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            headingText,
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: AppColors.blackColor,
+                ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          DottedUploadDocument(
+            descriptionText: uploadGuideText,
+            documentTypeIcon: Icon(
+              Icons.badge,
+              color: AppColors.greyColor.withValues(alpha: .6),
+            ),
+            uploadButtonText: 'Upload Documment',
+            infoText:
+                'You can add this later, but it will appear as a notification in your profile',
+          ),
+        ],
       ),
     );
   }
@@ -337,19 +297,9 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
             // Navigate to the client screen
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => PostedSuccessfully(
-                  actionButtonText: 'Login Now',
-                  description:
-                      '“You\'re all set! Start connecting with clients and discover amazing opportunities.”',
-                  title: 'Signed Up Successfully',
-                  onActionPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
-                      (route) => route.isFirst,
-                    );
-                  },
+                builder: (context) => EmailVerificationScreen(
+                  email: 'boussahaborhanedine@gmail.com',
+                  isArtisan: true,
                 ),
               ),
             );
@@ -359,19 +309,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
             backgroundColor: AppColors.primaryColor,
             elevation: 2,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Create Profile Now'),
-              SizedBox(
-                width: 8,
-              ),
-              Icon(
-                Icons.done,
-                color: AppColors.whiteColor,
-              ),
-            ],
-          ),
+          child: Text('Create Profile Now'),
         ),
       ),
     );
@@ -447,7 +385,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
               Text(
                 _selectedDays.isEmpty
                     ? 'Select working days'
-                    : '${_selectedDays.length} service${_selectedDays.length == 1 ? '' : 's'} selected',
+                    : '${_selectedDays.length} days${_selectedDays.length == 1 ? '' : 's'} selected',
                 style: TextStyle(
                   color: _selectedDays.isEmpty
                       ? AppColors.greyColor
@@ -461,6 +399,110 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class WorkingHoursItem extends StatefulWidget {
+  final String dayItem;
+
+  const WorkingHoursItem({required this.dayItem, Key? key}) : super(key: key);
+
+  @override
+  _WorkingHoursItemState createState() => _WorkingHoursItemState();
+}
+
+class _WorkingHoursItemState extends State<WorkingHoursItem>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize animation controller
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
+    );
+    // Start animation when widget is built
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // Clean up controller
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size; // Get screen size dynamically
+
+    return FadeTransition(
+      opacity: _opacityAnimation,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.greyColor.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.dayItem,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: AppColors.blackColor,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MyFieldHeader(
+                      headingText: 'Start Time',
+                      color: AppColors.greyColor.withOpacity(0.8),
+                    ),
+                    const SizedBox(height: 4),
+                    SizedBox(
+                      width: ((size.width - 32) / 2) - 40,
+                      child: MyTextField(
+                        hintText: 'eg. 9:00',
+                        fillColor: AppColors.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    MyFieldHeader(
+                      headingText: 'End Time',
+                      color: AppColors.greyColor.withOpacity(0.8),
+                    ),
+                    const SizedBox(height: 4),
+                    SizedBox(
+                      width: ((size.width - 32) / 2) - 40,
+                      child: MyTextField(
+                        hintText: 'eg. 16:00',
+                        fillColor: AppColors.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

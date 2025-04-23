@@ -8,17 +8,23 @@ class MyTextField extends StatelessWidget {
       this.suffixIcon,
       this.maxLines,
       required this.hintText,
-      this.fillColor});
+      this.fillColor,
+      this.initialValue});
 
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final int? maxLines;
   final String hintText;
+  final String? initialValue;
   final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppColors.blackColor,
+          ),
       maxLines: maxLines,
       decoration: InputDecoration(
         fillColor: fillColor ?? AppColors.greyColor.withValues(alpha: .05),

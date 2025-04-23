@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/presentation/widgets/my_field_header.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class PersonalInformationScreen extends StatelessWidget {
   const PersonalInformationScreen({Key? key}) : super(key: key);
@@ -34,7 +36,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 ),
                 // HEADER
                 SizedBox(
-                  width: MediaQuery.of(context).size.width - 50,
+                  width: MediaQuery.of(context).size.width - 40,
                   child: Text(
                     'Manage your personal information here.',
                     style: TextStyle(
@@ -62,8 +64,8 @@ class PersonalInformationScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           child: Image.asset(
                             'assets/images/avatars/client_avatar.jpg',
-                            width: 150,
-                            height: 150,
+                            width: 140,
+                            height: 140,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -75,6 +77,7 @@ class PersonalInformationScreen extends StatelessWidget {
                           icon: Icon(
                             Icons.camera_alt,
                             color: AppColors.whiteColor,
+                            size: 18,
                           ),
                           onPressed: () {},
                         ),
@@ -87,14 +90,29 @@ class PersonalInformationScreen extends StatelessWidget {
                   height: 32,
                 ),
 
-                // INFORMATION FIELDS
-                MyFieldHeader(headingText: 'Full name'),
+                // First name
+                MyFieldHeader(headingText: 'First name'),
                 SizedBox(height: 8),
                 MyTextField(
-                  hintText: 'Boussaha Borhanedine',
+                  hintText: '',
+                  initialValue: 'Borhanedine',
                   prefixIcon: Icon(
                     Icons.person,
-                    color: AppColors.primaryColor,
+                    color: AppColors.greyColor,
+                  ),
+                ),
+
+                SizedBox(height: 16),
+
+                // Second Name
+                MyFieldHeader(headingText: 'Second name'),
+                SizedBox(height: 8),
+                MyTextField(
+                  hintText: '',
+                  initialValue: 'Boussaha',
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: AppColors.greyColor,
                   ),
                 ),
 
@@ -104,10 +122,11 @@ class PersonalInformationScreen extends StatelessWidget {
                 MyFieldHeader(headingText: 'Email address'),
                 SizedBox(height: 8),
                 MyTextField(
-                  hintText: 'borhanedine@gmail.com',
+                  hintText: '',
+                  initialValue: 'borhanedine@gmail.com',
                   prefixIcon: Icon(
                     Icons.email,
-                    color: AppColors.primaryColor,
+                    color: AppColors.greyColor,
                   ),
                 ),
 
@@ -119,50 +138,77 @@ class PersonalInformationScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 8),
                 MyTextField(
-                  hintText: '+213 664656525',
+                  hintText: '',
+                  initialValue: '+213 664656525',
                   prefixIcon: Icon(
                     Icons.phone,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-
-                SizedBox(height: 16),
-
-                // INFORMATION FIELDS
-                MyFieldHeader(headingText: 'Password'),
-                SizedBox(height: 8),
-                MyTextField(
-                  hintText: '*********',
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: AppColors.primaryColor,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_off),
-                    onPressed: () {},
+                    color: AppColors.greyColor,
                   ),
                 ),
 
                 SizedBox(height: 32),
 
                 // SAVE BUTTON
-                Container(
-                  width: MediaQuery.of(context).size.width - 50,
-                  margin: const EdgeInsets.symmetric(horizontal: 0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 16,
+                Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 32,
+                    margin: const EdgeInsets.symmetric(horizontal: 0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryColor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 16,
+                        ),
+                      ),
+                      child: const Text(
+                        'Save Changes',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: AppColors.whiteColor,
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.whiteColor,
+                  ),
+                ),
+
+                SizedBox(height: 16),
+                Divider(
+                  color: AppColors.greyColor,
+                  thickness: 1,
+                ),
+                SizedBox(height: 16),
+
+                // change password button
+
+                Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 32,
+                    margin: const EdgeInsets.symmetric(horizontal: 0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(color: AppColors.blackColor),
+                        ),
+                        backgroundColor: AppColors.whiteColor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 16,
+                        ),
+                      ),
+                      icon: Icon(
+                        FontAwesomeIcons.lock,
+                        color: AppColors.blackColor,
+                        size: 14,
+                      ),
+                      label: Text(
+                        'Change Password',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: AppColors.blackColor,
+                            ),
                       ),
                     ),
                   ),
@@ -171,26 +217,31 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 16),
 
                 // DELETE ACCOUNT BUTTON
-                Container(
-                  width: MediaQuery.of(context).size.width - 50,
-                  margin: const EdgeInsets.symmetric(horizontal: 0),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(color: Colors.red),
+                Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width - 32,
+                    margin: const EdgeInsets.symmetric(horizontal: 0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(color: Colors.red),
+                        ),
+                        backgroundColor: AppColors.whiteColor,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 32,
+                          vertical: 16,
+                        ),
                       ),
-                      backgroundColor: AppColors.whiteColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 16,
+                      label: Text(
+                        'Delete Account',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Colors.red,
+                            ),
                       ),
-                    ),
-                    child: const Text(
-                      'Delete Account',
-                      style: TextStyle(
-                        fontSize: 16,
+                      icon: Icon(
+                        Icons.delete,
                         color: Colors.red,
                       ),
                     ),

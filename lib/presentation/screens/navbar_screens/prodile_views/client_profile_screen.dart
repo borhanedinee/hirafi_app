@@ -17,52 +17,58 @@ class ClientProfileScreen extends StatelessWidget {
       decoration: AppThemes.scaffoldBackgroundDecoration,
       height: size.height,
       width: size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            // APP BAR
-            Container(
-              height: 80,
-              width: size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
+      child: Column(
+        children: [
+          // APP BAR
+          Container(
+            height: 60,
+            width: size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'My Profile',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: AppColors.blackColor,
+                      ),
+                ),
+                Icon(
+                  Icons.settings,
+                  size: 20,
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            color: AppColors.greyColor.withOpacity(0.5),
+            height: 1,
+          ),
+          // PROFILE INFOS
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Text(
-                    'My Profile',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: AppColors.blackColor,
-                        ),
-                  ),
-                  Icon(
-                    Icons.notifications,
-                    color: AppColors.primaryColor,
-                  ),
+                  _buildProfileInfo(context),
+
+                  SizedBox(height: 16),
+
+                  // PROFILE LEVEL
+                  _buildProfileLevel(context),
+
+                  SizedBox(height: 16),
+
+                  // PROFILE SETTINGS
+                  _buildProfileSettingsAndLogoutButton(context),
                 ],
               ),
             ),
-            Divider(
-              color: AppColors.greyColor.withOpacity(0.5),
-              height: 1,
-            ),
-            // PROFILE INFOS
-            _buildProfileInfo(context),
-
-            SizedBox(height: 16),
-
-            // PROFILE LEVEL
-            _buildProfileLevel(context),
-
-            SizedBox(height: 16),
-
-            // PROFILE SETTINGS
-            _buildProfileSettingsAndLogoutButton(context)
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -140,7 +146,9 @@ class ClientProfileScreen extends StatelessWidget {
                   'onTap': () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => HelpCenterScreen(),
+                        builder: (context) => HelpCenterScreen(
+                          isArtisan: false,
+                        ),
                       ),
                     );
                   },

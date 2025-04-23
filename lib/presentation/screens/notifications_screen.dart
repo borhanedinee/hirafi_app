@@ -115,7 +115,9 @@ class NotificationsScreen extends StatelessWidget {
                             // Add divider except for the last item in the group
                             if (index < group.value.length - 1)
                               Divider(
-                                color: AppColors.greyColor.withOpacity(0.3),
+                                height: 4,
+                                color:
+                                    AppColors.greyColor.withValues(alpha: .3),
                                 thickness: 1,
                               ),
                           ],
@@ -136,49 +138,56 @@ class NotificationsScreen extends StatelessWidget {
     required String timestamp,
     required Color color,
   }) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: color.withOpacity(0.1),
-        child: Icon(
-          icon,
-          color: color,
-          size: 24,
-        ),
-      ),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.black87,
-        ),
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 4),
-          Text(
-            message,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[600],
-            ),
+    return Container(
+      color: AppColors.greyColor.withValues(alpha: .05),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: color.withOpacity(0.1),
+          child: Icon(
+            icon,
+            color: color,
+            size: 24,
           ),
-          const SizedBox(height: 4),
-          Text(
-            timestamp,
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.grey[500],
-              fontStyle: FontStyle.italic,
-            ),
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            color: Colors.black87,
           ),
-        ],
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 4),
+            Text(
+              message,
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              timestamp,
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey[500],
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+        ),
+        trailing: Icon(
+          Icons.navigate_next,
+          size: 18,
+        ),
+        onTap: () {
+          // TODO: Navigate to relevant screen or show more details
+          print('Tapped on: $title');
+        },
       ),
-      onTap: () {
-        // TODO: Navigate to relevant screen or show more details
-        print('Tapped on: $title');
-      },
     );
   }
 }
