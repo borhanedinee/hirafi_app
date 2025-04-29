@@ -1,17 +1,17 @@
-// lib/presentation/pages/post_offer_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PostedSuccessfully extends StatelessWidget {
-  const PostedSuccessfully(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.actionButtonText,
-      required this.onActionPressed});
+  const PostedSuccessfully({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.actionButtonText,
+    required this.onActionPressed,
+  });
 
   final String title;
   final String description;
@@ -20,13 +20,20 @@ class PostedSuccessfully extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Offer Posted'),
-        //   backgroundColor: AppColors.primaryColor,
-        //   foregroundColor: Colors.white,
-        // ),
+        appBar: AppBar(
+          title: Text(
+            loc.postedSuccessfullyScreen_appBarTitle,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
+        ),
         body: Container(
           decoration: AppThemes.scaffoldBackgroundDecoration,
           height: size.height,
@@ -73,7 +80,7 @@ class PostedSuccessfully extends StatelessWidget {
                 ),
                 child: Text(
                   actionButtonText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

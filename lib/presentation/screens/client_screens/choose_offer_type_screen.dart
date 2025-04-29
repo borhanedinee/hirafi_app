@@ -1,23 +1,24 @@
-// lib/presentation/pages/choose_offer_type_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/screens/client_screens/fill_offer_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChooseOfferTypeScreen extends StatelessWidget {
   const ChooseOfferTypeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Add New Order',
-            style: TextStyle(
+          title: Text(
+            loc.chooseOfferTypeScreen_appBarTitle,
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -34,7 +35,7 @@ class ChooseOfferTypeScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 20),
               Text(
-                'Choose how you want to create your offer:',
+                loc.chooseOfferTypeScreen_instruction,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: AppColors.blackColor,
                       fontSize: 14,
@@ -44,9 +45,8 @@ class ChooseOfferTypeScreen extends StatelessWidget {
               _buildOfferTypeCard(
                 context,
                 icon: Icons.handshake,
-                title: 'Direct Offer (عرض مباشر)',
-                description:
-                    'Send personnalized offer directly to artisans that match your offer.',
+                title: loc.chooseOfferTypeScreen_directOfferTitle,
+                description: loc.chooseOfferTypeScreen_directOfferDescription,
                 onTypeTapped: () {
                   Navigator.push(
                     context,
@@ -63,9 +63,8 @@ class ChooseOfferTypeScreen extends StatelessWidget {
               _buildOfferTypeCard(
                 icon: Icons.gavel,
                 context,
-                title: 'Offer By Tender (بالمناقصة)',
-                description:
-                    'Set your budget and receive propsals from multiple artisans.',
+                title: loc.chooseOfferTypeScreen_tenderOfferTitle,
+                description: loc.chooseOfferTypeScreen_tenderOfferDescription,
                 onTypeTapped: () {
                   Navigator.push(
                     context,
@@ -102,7 +101,7 @@ class ChooseOfferTypeScreen extends StatelessWidget {
                     SizedBox(
                       width: size.width - 100,
                       child: Text(
-                        'Choose "Direct Offer" if you want to send a personalized offer to a specific artisan that matches your offer details, or "Offer by Tender" to receive proposals from multiple artisan.',
+                        loc.chooseOfferTypeScreen_infoText,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.blackColor.withValues(alpha: .8),
                               fontSize: 14,
@@ -135,7 +134,6 @@ class ChooseOfferTypeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  spacing: 8,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
@@ -152,6 +150,7 @@ class ChooseOfferTypeScreen extends StatelessWidget {
                         size: 20,
                       ),
                     ),
+                    const SizedBox(width: 8),
                     Text(
                       title,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -159,7 +158,7 @@ class ChooseOfferTypeScreen extends StatelessWidget {
                             color: AppColors.blackColor.withValues(alpha: .8),
                           ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     const Icon(
                       Icons.arrow_forward_ios,
                       color: AppColors.blackColor,

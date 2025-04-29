@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
-class ClientDirectOfferItem extends StatelessWidget {
-  const ClientDirectOfferItem({
+class OfferByTenderItem extends StatelessWidget {
+  const OfferByTenderItem({
     super.key,
-    required this.onAccept,
-    required this.onReject,
+    required this.onSendProposal,
+    required this.onBookmark,
   });
 
-  final VoidCallback? onAccept;
-  final VoidCallback? onReject;
+  final VoidCallback? onSendProposal;
+  final GestureTapCallback? onBookmark;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class ClientDirectOfferItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(52),
                   child: Image.asset(
-                    'assets/images/avatars/client_avatar.jpg',
+                    'assets/images/avatars/client2_avatar.jpg',
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
@@ -61,7 +62,7 @@ class ClientDirectOfferItem extends StatelessWidget {
                 children: [
                   // NAME
                   Text(
-                    'John Doe',
+                    'Salim Boukari',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -77,7 +78,7 @@ class ClientDirectOfferItem extends StatelessWidget {
                         size: 12,
                       ),
                       Text(
-                        'Annaba, Annaba',
+                        'Annaba, Annaba  ●',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.greyColor,
@@ -88,6 +89,7 @@ class ClientDirectOfferItem extends StatelessWidget {
                 ],
               ),
               Spacer(),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 4,
@@ -112,7 +114,7 @@ class ClientDirectOfferItem extends StatelessWidget {
                     ],
                   ),
 
-                  // ARTIAN CATEGORY
+                  // ARTISAN CATEGORY
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -152,16 +154,22 @@ class ClientDirectOfferItem extends StatelessWidget {
           ),
 
           // OFFER TITLE
-          Padding(
+          Container(
+            width: size.width - 32,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'I need a plumber to fix my sink ...',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: AppColors.greyColor,
-                      ),
+                SizedBox(
+                  width: size.width - 120,
+                  child: Text(
+                    'I need a plumber to fix my sink as soon as possible. If you\'re available today, please send me your offers and estimated time.',
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: AppColors.greyColor,
+                        ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Icon(
                   Icons.navigate_next,
@@ -174,7 +182,7 @@ class ClientDirectOfferItem extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          // STATUS URGENT ECT
+          // STATUS URGENT ETC
           Container(
             margin: const EdgeInsets.only(left: 8),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -265,57 +273,70 @@ class ClientDirectOfferItem extends StatelessWidget {
             height: 16,
           ),
 
-          // ACTIONS ACCEPT OR REJECT
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: onAccept,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 52,
-                    vertical: 8,
-                  ),
-                  shadowColor: AppColors.primaryColor,
-                  backgroundColor: AppColors.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: Text(
-                  'Accept',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: onReject,
-                style: ButtonStyle(
-                  elevation: WidgetStatePropertyAll(0),
-                  padding: WidgetStatePropertyAll(
-                    const EdgeInsets.symmetric(
-                      horizontal: 52,
-                      vertical: 8,
+          // ACTIONS SEND PROPOSAL OR BOOKMARK
+          SizedBox(
+            width: size.width - 32,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              spacing: 8,
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: ElevatedButton(
+                    onPressed: onSendProposal,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                      ),
+                      shadowColor: AppColors.primaryColor,
+                      backgroundColor: AppColors.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 12,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.paperPlane,
+                          color: AppColors.whiteColor,
+                          size: 16,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!
+                              .offerByTenderItem_sendProposal,
+                          style: TextStyle(
+                            color:
+                                AppColors.whiteColor, // Ensure text is visible
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  shadowColor: WidgetStatePropertyAll(AppColors.primaryColor),
-                  backgroundColor: WidgetStatePropertyAll(AppColors.whiteColor),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: AppColors.greyColor,
-                        width: 1,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: onBookmark,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppColors.greyColor.withValues(alpha: .05),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.greyColor.withValues(alpha: .2),
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.bookmark_add_outlined,
+                        color: AppColors.blackColor,
                       ),
                     ),
                   ),
-                ),
-                child: Text(
-                  'Refuse',
-                  style: TextStyle(
-                    color: AppColors.blackColor,
-                  ),
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           )
         ],
       ),

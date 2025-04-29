@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.8
   get: ^4.7.2
   ionicons: ^0.2.2
@@ -19,6 +21,8 @@ dependencies:
   dotted_border: ^2.1.0
   lucide_icons: ^0.257.0
   flutter_otp_text_field: ^1.5.1+1
+  flutter_datetime_picker_plus: ^2.2.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.3
@@ -34,6 +38,7 @@ flutter_icons:
     adaptive_icon_foreground: "assets/images/logos/app_icon_back.png"
 
 flutter:
+  generate: true
 
   uses-material-design: true
 

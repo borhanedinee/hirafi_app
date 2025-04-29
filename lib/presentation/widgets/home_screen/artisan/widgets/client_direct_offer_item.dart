@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
-class OfferByTenderItem extends StatelessWidget {
-  const OfferByTenderItem({
+class ClientDirectOfferItem extends StatelessWidget {
+  const ClientDirectOfferItem({
     super.key,
-    required this.onSendProposal,
-    required this.onBookmark,
+    required this.onAccept,
+    required this.onReject,
   });
 
-  final VoidCallback? onSendProposal;
-  final GestureTapCallback? onBookmark;
+  final VoidCallback? onAccept;
+  final VoidCallback? onReject;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class OfferByTenderItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(52),
                   child: Image.asset(
-                    'assets/images/avatars/client2_avatar.jpg',
+                    'assets/images/avatars/client_avatar.jpg',
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
@@ -61,7 +62,7 @@ class OfferByTenderItem extends StatelessWidget {
                 children: [
                   // NAME
                   Text(
-                    'Salim Boukari',
+                    'John Doe',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -77,7 +78,7 @@ class OfferByTenderItem extends StatelessWidget {
                         size: 12,
                       ),
                       Text(
-                        'Annaba, Annaba  ●',
+                        'Annaba, Annaba',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.greyColor,
@@ -88,7 +89,6 @@ class OfferByTenderItem extends StatelessWidget {
                 ],
               ),
               Spacer(),
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 spacing: 4,
@@ -113,7 +113,7 @@ class OfferByTenderItem extends StatelessWidget {
                     ],
                   ),
 
-                  // ARTIAN CATEGORY
+                  // ARTISAN CATEGORY
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -153,22 +153,16 @@ class OfferByTenderItem extends StatelessWidget {
           ),
 
           // OFFER TITLE
-          Container(
-            width: size.width - 32,
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: size.width - 120,
-                  child: Text(
-                    'I need a plumber to fix my sink as soon as possible. If you\'re available today, please send me your offers and estimated time.',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: AppColors.greyColor,
-                        ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  'I need a plumber to fix my sink ...',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: AppColors.greyColor,
+                      ),
                 ),
                 Icon(
                   Icons.navigate_next,
@@ -181,7 +175,7 @@ class OfferByTenderItem extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          // STATUS URGENT ECT
+          // STATUS URGENT ETC
           Container(
             margin: const EdgeInsets.only(left: 8),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -273,64 +267,60 @@ class OfferByTenderItem extends StatelessWidget {
           ),
 
           // ACTIONS ACCEPT OR REJECT
-          SizedBox(
-            width: size.width - 32,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              spacing: 8,
-              children: [
-                Expanded(
-                  flex: 6,
-                  child: ElevatedButton(
-                    onPressed: onSendProposal,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8,
-                      ),
-                      shadowColor: AppColors.primaryColor,
-                      backgroundColor: AppColors.primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                onPressed: onAccept,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 52,
+                    vertical: 8,
+                  ),
+                  shadowColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.primaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.clientDirectOfferItem_accept,
+                  style: TextStyle(
+                    color:
+                        Colors.white, // Ensure text is visible on primary color
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: onReject,
+                style: ButtonStyle(
+                  elevation: WidgetStatePropertyAll(0),
+                  padding: WidgetStatePropertyAll(
+                    const EdgeInsets.symmetric(
+                      horizontal: 52,
+                      vertical: 8,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 12,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.paperPlane,
-                          color: AppColors.whiteColor,
-                          size: 16,
-                        ),
-                        Text(
-                          'Send Proposal',
-                        ),
-                      ],
+                  ),
+                  shadowColor: WidgetStatePropertyAll(AppColors.primaryColor),
+                  backgroundColor: WidgetStatePropertyAll(AppColors.whiteColor),
+                  shape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: AppColors.greyColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: onBookmark,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: AppColors.greyColor.withValues(alpha: .05),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: AppColors.greyColor.withValues(alpha: .2),
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.bookmark_add_outlined,
-                        color: AppColors.blackColor,
-                      ),
-                    ),
+                child: Text(
+                  AppLocalizations.of(context)!.clientDirectOfferItem_refuse,
+                  style: TextStyle(
+                    color: AppColors.blackColor,
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
           )
         ],
       ),

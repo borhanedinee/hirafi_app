@@ -5,17 +5,19 @@ import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalInformationScreen extends StatelessWidget {
   const PersonalInformationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Personal Information',
-          style: TextStyle(
+        title: Text(
+          l10n.personalInfoScreen_title,
+          style: const TextStyle(
             fontSize: 20,
             color: AppColors.whiteColor,
           ),
@@ -38,7 +40,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 40,
                   child: Text(
-                    'Manage your personal information here.',
+                    l10n.personalInfoScreen_manageInfo,
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.grey[600],
@@ -91,7 +93,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 ),
 
                 // First name
-                MyFieldHeader(headingText: 'First name'),
+                MyFieldHeader(headingText: l10n.personalInfoScreen_firstName),
                 SizedBox(height: 8),
                 MyTextField(
                   hintText: '',
@@ -105,7 +107,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 16),
 
                 // Second Name
-                MyFieldHeader(headingText: 'Second name'),
+                MyFieldHeader(headingText: l10n.personalInfoScreen_secondName),
                 SizedBox(height: 8),
                 MyTextField(
                   hintText: '',
@@ -119,7 +121,8 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 16),
 
                 // INFORMATION FIELDS
-                MyFieldHeader(headingText: 'Email address'),
+                MyFieldHeader(
+                    headingText: l10n.personalInfoScreen_emailAddress),
                 SizedBox(height: 8),
                 MyTextField(
                   hintText: '',
@@ -134,7 +137,7 @@ class PersonalInformationScreen extends StatelessWidget {
 
                 // INFORMATION FIELDS
                 MyFieldHeader(
-                  headingText: 'Phone number',
+                  headingText: l10n.personalInfoScreen_phoneNumber,
                 ),
                 SizedBox(height: 8),
                 MyTextField(
@@ -162,9 +165,9 @@ class PersonalInformationScreen extends StatelessWidget {
                           vertical: 16,
                         ),
                       ),
-                      child: const Text(
-                        'Save Changes',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.personalInfoScreen_saveChanges,
+                        style: const TextStyle(
                           fontSize: 16,
                           color: AppColors.whiteColor,
                         ),
@@ -181,7 +184,6 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 16),
 
                 // change password button
-
                 Center(
                   child: Container(
                     width: MediaQuery.of(context).size.width - 32,
@@ -205,7 +207,7 @@ class PersonalInformationScreen extends StatelessWidget {
                         size: 14,
                       ),
                       label: Text(
-                        'Change Password',
+                        l10n.personalInfoScreen_changePassword,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: AppColors.blackColor,
                             ),
@@ -235,7 +237,7 @@ class PersonalInformationScreen extends StatelessWidget {
                         ),
                       ),
                       label: Text(
-                        'Delete Account',
+                        l10n.personalInfoScreen_deleteAccount,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Colors.red,
                             ),

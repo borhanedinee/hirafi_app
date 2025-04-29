@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
-import 'package:hirafi/presentation/widgets/conversations_page/conversation_card.dart';
+import 'package:hirafi/presentation/widgets/conversations_screen/conversation_card.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConversationsScreen extends StatelessWidget {
   const ConversationsScreen({Key? key}) : super(key: key);
@@ -38,16 +39,18 @@ class ConversationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Container(
         width: size.width,
         height: size.height,
         decoration: AppThemes.scaffoldBackgroundDecoration,
         child: conversations.isEmpty
-            ? const Center(
+            ? Center(
                 child: Text(
-                  'No conversations yet',
-                  style: TextStyle(
+                  loc.conversationsScreen_emptyState,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: AppColors.greyColor,
                   ),
@@ -70,7 +73,7 @@ class ConversationsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Conversations',
+                          loc.conversationsScreen_title,
                           style:
                               Theme.of(context).textTheme.titleMedium!.copyWith(
                                     color: AppColors.blackColor,
@@ -88,14 +91,9 @@ class ConversationsScreen extends StatelessWidget {
                     height: 1,
                   ),
                   // SEARCH BAR
-
-                  SizedBox(
-                    height: 16,
-                  ),
-
-                  // text for conversations screen
+                  const SizedBox(height: 16),
                   Container(
-                    margin: EdgeInsets.all(16),
+                    margin: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
@@ -108,30 +106,28 @@ class ConversationsScreen extends StatelessWidget {
                       ],
                     ),
                     child: MyTextField(
-                      hintText: 'Search for conversations',
+                      hintText: loc.conversationsScreen_searchHint,
                       fillColor: AppColors.whiteColor.withValues(alpha: .6),
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         LucideIcons.search,
                         size: 18,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     width: size.width - 24,
                     child: Text(
-                      'Stay connected with your favorite artisans and clients. View, reply, and manage all your chats in one place for smooth, direct communication.',
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      loc.conversationsScreen_description,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: AppColors.greyColor,
                           ),
                     ),
                   ),
                   const SizedBox(height: 16),
                   ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     itemCount: conversations.length,

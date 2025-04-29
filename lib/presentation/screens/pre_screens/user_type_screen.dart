@@ -7,6 +7,8 @@ import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class UserTypeScreen extends StatelessWidget {
   const UserTypeScreen({Key? key}) : super(key: key);
 
@@ -50,7 +52,7 @@ class UserTypeScreen extends StatelessWidget {
 
                 // Welcoming Text with Improved Hierarchy
                 Text(
-                  'Welcome to Herrafi',
+                  AppLocalizations.of(context)!.userTypeWelcomeTitle,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.primaryColor,
@@ -59,7 +61,7 @@ class UserTypeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Connecting Artisans & Clients Seamlessly',
+                  AppLocalizations.of(context)!.userTypeSubtitle,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppColors.greyColor.withOpacity(0.8),
                         fontSize: 16,
@@ -90,7 +92,7 @@ class UserTypeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Have an Account? ',
+                      AppLocalizations.of(context)!.haveAccount,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
                             fontSize: 14,
@@ -105,7 +107,7 @@ class UserTypeScreen extends StatelessWidget {
                         );
                       },
                       child: Text(
-                        'Log In',
+                        AppLocalizations.of(context)!.logIn,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.primaryColor,
                               fontWeight: FontWeight.bold,
@@ -155,7 +157,7 @@ class UserTypeScreen extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              'Register as a Client',
+              AppLocalizations.of(context)!.registerAsArtisan,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.white,
                     fontSize: 16,
@@ -204,7 +206,7 @@ class UserTypeScreen extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              'Register as an Artisan',
+              AppLocalizations.of(context)!.registerAsClient,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: AppColors.primaryColor,
                     fontSize: 16,

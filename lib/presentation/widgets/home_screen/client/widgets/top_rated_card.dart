@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/screens/client_screens/artisan_profile_details_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TopRatedArtisanCard extends StatelessWidget {
   final ArtisanModel artisan;
@@ -101,9 +102,10 @@ class TopRatedArtisanCard extends StatelessWidget {
                         color: AppColors.greyColor.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Professional',
+                          AppLocalizations.of(context)!
+                              .topRatedArtisansCard_proffesional,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: Colors.white,
@@ -121,10 +123,12 @@ class TopRatedArtisanCard extends StatelessWidget {
                         color: AppColors.greyColor.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          'Available Now',
+                          AppLocalizations.of(context)!
+                              .topRatedArtisansCard_availableNow,
                           overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,

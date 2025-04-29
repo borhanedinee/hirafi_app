@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/presentation/screens/pre_screens/splash_screen.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/user_type_screen.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +33,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return GetMaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: null, // Default locale
       debugShowCheckedModeBanner: false,
       darkTheme: AppThemes.darkTheme,
       theme: AppThemes.lightTheme,

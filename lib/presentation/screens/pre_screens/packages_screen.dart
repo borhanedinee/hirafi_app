@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
-import 'package:hirafi/presentation/widgets/packages_page/package_card.dart';
+import 'package:hirafi/presentation/widgets/packages_screen/package_card.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PackagesScreen extends StatelessWidget {
   const PackagesScreen({Key? key, required this.isArtisan}) : super(key: key);
@@ -11,6 +12,7 @@ class PackagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -40,7 +42,7 @@ class PackagesScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   width: size.width - 100,
                   child: Text(
-                    'Choose your package',
+                    l10n.packagesScreen_choosePackage,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: AppColors.blackColor,
                         ),
@@ -48,69 +50,51 @@ class PackagesScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 PackageCard(
-                  planName: 'Free Package',
-                  price: 'Free',
-                  features: isArtisan
-                      ? [
-                          'Create and publish offers',
-                          'Receive limited client requests',
-                          'Basic profile visibility'
-                        ]
-                      : [
-                          '4 requests per month',
-                          'Basic support',
-                          'Limited features'
-                        ],
+                  planName: l10n.packagesScreen_freePackage_name,
+                  price: l10n.packagesScreen_freePackage_price,
+                  features: [
+                    l10n.packagesScreen_freePackage_feature1,
+                    l10n.packagesScreen_freePackage_feature2,
+                    l10n.packagesScreen_freePackage_feature3,
+                  ],
                   isArtisan: isArtisan,
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
                   isArtisan: isArtisan,
-                  planName: 'Silver Package',
-                  price: '500 DA',
-                  features: isArtisan
-                      ? [
-                          'Higher profile ranking in search results',
-                          'Receive more client requests per month',
-                          'Access to work gallery uploads'
-                        ]
-                      : [
-                          '15 requests per month',
-                          'Bidding Access',
-                          'All free features + Certified upload'
-                        ],
+                  planName: l10n.packagesScreen_silverPackage_name,
+                  price: l10n.packagesScreen_silverPackage_price,
+                  features: [
+                    l10n.packagesScreen_silverPackage_feature1,
+                    l10n.packagesScreen_silverPackage_feature2,
+                    l10n.packagesScreen_silverPackage_feature3,
+                  ],
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
-                  planName: 'Gold Package',
-                  price: '1500 DA',
-                  features: isArtisan
-                      ? [
-                          'Priority profile visibility',
-                          'Unlimited client requests',
-                          'Direct messaging with clients'
-                        ]
-                      : [
-                          'Unlimited requests',
-                          'Top search priority',
-                          'Advanced features',
-                        ],
+                  planName: l10n.packagesScreen_goldPackage_name,
+                  price: l10n.packagesScreen_goldPackage_price,
+                  features: [
+                    l10n.packagesScreen_goldPackage_feature1,
+                    l10n.packagesScreen_goldPackage_feature2,
+                    l10n.packagesScreen_goldPackage_feature3,
+                  ],
                   isArtisan: isArtisan,
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
-                  planName: 'Premium Package',
-                  price: '2500 DA',
+                  planName: l10n.packagesScreen_premiumPackage_name,
+                  price: l10n.packagesScreen_premiumPackage_price,
                   features: isArtisan
                       ? [
-                          'Top placement in artisan listings',
-                          'Advanced analytics and insights',
-                          'Featured in promotional campaigns'
+                          l10n.packagesScreen_premiumPackage_artisan_feature1,
+                          l10n.packagesScreen_premiumPackage_artisan_feature2,
+                          l10n.packagesScreen_premiumPackage_artisan_feature3,
                         ]
                       : [
-                          'Top search spot',
-                          'Home page promotions',
-                          'Instant support',
+                          l10n.packagesScreen_premiumPackage_client_feature1,
+                          l10n.packagesScreen_premiumPackage_client_feature2,
+                          l10n.packagesScreen_premiumPackage_client_feature3,
                         ],
                   isArtisan: isArtisan,
                 ),

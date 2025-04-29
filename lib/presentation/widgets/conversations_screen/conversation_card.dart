@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/screens/messages_screen.dart';
 import 'package:hirafi/utils/app_colors.dart'; // Assuming AppColors is defined
 
 class ConversationCard extends StatelessWidget {
@@ -25,7 +26,19 @@ class ConversationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MessagesScreen(
+              userName: userName,
+              timestamp: timestamp,
+              messagePreview: messagePreview,
+              category: category,
+              avatar: avatar,
+            ),
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(

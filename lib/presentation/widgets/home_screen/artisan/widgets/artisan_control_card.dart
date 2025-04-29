@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class ArtisanControlCard extends StatefulWidget {
   const ArtisanControlCard({
@@ -114,7 +115,8 @@ class _ArtisanControlCardState extends State<ArtisanControlCard> {
               children: [
                 // AVAILABILITY TEXT
                 Text(
-                  'Available for work',
+                  AppLocalizations.of(context)!
+                      .artisanControlCard_availableForWork,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 // TOGGLE BUTTON
@@ -167,7 +169,8 @@ class _ArtisanControlCardState extends State<ArtisanControlCard> {
                       ],
                     ),
                     Text(
-                      'New Requests',
+                      AppLocalizations.of(context)!
+                          .artisanControlCard_newRequests,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.greyColor,
                           ),
@@ -209,7 +212,8 @@ class _ArtisanControlCardState extends State<ArtisanControlCard> {
                       ],
                     ),
                     Text(
-                      'Pending Requests',
+                      AppLocalizations.of(context)!
+                          .artisanControlCard_pendingRequests,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.greyColor,
                           ),

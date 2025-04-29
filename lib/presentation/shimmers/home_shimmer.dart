@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/utils/app_theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmers extends StatelessWidget {
@@ -15,251 +16,254 @@ class HomeShimmers extends StatelessWidget {
   // Combined shimmer effect for both sections
   Widget _buildArtisanBodyShimmer() {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 24),
+      child: Container(
+        decoration: AppThemes.scaffoldBackgroundDecoration,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 24),
 
-          // Shimmer for Search Bar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey[200]!,
-              highlightColor: Colors.grey[50]!,
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+            // Shimmer for Search Bar
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[200]!,
+                highlightColor: Colors.grey[50]!,
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 24),
-          // Artisan Control Card Shimmer
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            padding: const EdgeInsets.all(16),
-            width: size.width,
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.shadowColor,
-                  blurRadius: 3,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                // Avatar, Name, and Rating Section
-                Row(
-                  children: [
-                    // Avatar Placeholder
-                    Shimmer.fromColors(
-                      baseColor: Colors.grey[200]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey[200],
-                        radius: 25,
+            const SizedBox(height: 24),
+            // Artisan Control Card Shimmer
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.all(16),
+              width: size.width,
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.shadowColor,
+                    blurRadius: 3,
+                    spreadRadius: 2,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // Avatar, Name, and Rating Section
+                  Row(
+                    children: [
+                      // Avatar Placeholder
+                      Shimmer.fromColors(
+                        baseColor: Colors.grey[200]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey[200],
+                          radius: 25,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    // Name and Rating Placeholder
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Name Placeholder
-                        Shimmer.fromColors(
-                          baseColor: Colors.grey[200]!,
-                          highlightColor: Colors.grey[100]!,
-                          child: Container(
+                      const SizedBox(width: 8),
+                      // Name and Rating Placeholder
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Name Placeholder
+                          Shimmer.fromColors(
+                            baseColor: Colors.grey[200]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              width: 120,
+                              height: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          // Rating Placeholder
+                          Shimmer.fromColors(
+                            baseColor: Colors.grey[200]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 24,
+                                  height: 24,
+                                  color: Colors.white,
+                                ),
+                                const SizedBox(width: 4),
+                                Container(
+                                  width: 80,
+                                  height: 12,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  // Availability Toggle Placeholder
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[200]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.grey[200]!,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
                             width: 120,
                             height: 16,
                             color: Colors.white,
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        // Rating Placeholder
-                        Shimmer.fromColors(
-                          baseColor: Colors.grey[200]!,
-                          highlightColor: Colors.grey[100]!,
-                          child: Row(
+                          Container(
+                            width: 50,
+                            height: 24,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // New Requests and Pending Requests Placeholder
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Shimmer.fromColors(
+                        baseColor: Colors.grey[200]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          width: (size.width - 52) / 2.3,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Colors.grey[200]!,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 24,
-                                height: 24,
-                                color: Colors.white,
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 30,
+                                    height: 20,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 50),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 4),
+                              const SizedBox(height: 8),
                               Container(
                                 width: 80,
-                                height: 12,
+                                height: 14,
                                 color: Colors.white,
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                // Availability Toggle Placeholder
-                Shimmer.fromColors(
-                  baseColor: Colors.grey[200]!,
-                  highlightColor: Colors.grey[100]!,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: Colors.grey[200]!,
                       ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 120,
-                          height: 16,
-                          color: Colors.white,
+                      Shimmer.fromColors(
+                        baseColor: Colors.grey[200]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          width: (size.width - 52) / 2.3,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Colors.grey[200]!,
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 30,
+                                    height: 20,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(width: 50),
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Container(
+                                width: 80,
+                                height: 14,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
                         ),
-                        Container(
-                          width: 50,
-                          height: 24,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 20),
-                // New Requests and Pending Requests Placeholder
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Shimmer.fromColors(
-                      baseColor: Colors.grey[200]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        width: (size.width - 52) / 2.3,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Colors.grey[200]!,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 30,
-                                  height: 20,
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(width: 50),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              width: 80,
-                              height: 14,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Shimmer.fromColors(
-                      baseColor: Colors.grey[200]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        width: (size.width - 52) / 2.3,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Colors.grey[200]!,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 30,
-                                  height: 20,
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(width: 50),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              width: 80,
-                              height: 14,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          // Direct Offers Heading Placeholder
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey[200]!,
-              highlightColor: Colors.grey[100]!,
-              child: Container(
-                width: 120,
-                height: 20,
-                color: Colors.white,
+                ],
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          // Client Direct Offer Item Shimmer (repeated for two items)
-          _buildOfferShimmer(),
-          const SizedBox(height: 16),
-          _buildOfferShimmer(),
-          const SizedBox(height: 16),
-        ],
+            const SizedBox(height: 24),
+            // Direct Offers Heading Placeholder
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[200]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  width: 120,
+                  height: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Client Direct Offer Item Shimmer (repeated for two items)
+            _buildOfferShimmer(),
+            const SizedBox(height: 16),
+            _buildOfferShimmer(),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
@@ -509,7 +513,8 @@ class HomeShimmers extends StatelessWidget {
 
   SingleChildScrollView _buildCliendBodyShimmer() {
     return SingleChildScrollView(
-      child: SizedBox(
+      child: Container(
+        decoration: AppThemes.scaffoldBackgroundDecoration,
         width: size.width,
         child: Column(
           spacing: 15,

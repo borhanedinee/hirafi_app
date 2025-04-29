@@ -1,5 +1,3 @@
-// lib/presentation/pages/fill_offer_details_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
@@ -8,10 +6,14 @@ import 'package:hirafi/presentation/screens/client_screens/artisans_matching_scr
 import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FillOfferDetailsScreen extends StatefulWidget {
-  const FillOfferDetailsScreen(
-      {super.key, required this.isDirectOffer, required this.isSendDirectly});
+  const FillOfferDetailsScreen({
+    super.key,
+    required this.isDirectOffer,
+    required this.isSendDirectly,
+  });
 
   final bool isDirectOffer;
   final bool isSendDirectly;
@@ -22,18 +24,20 @@ class FillOfferDetailsScreen extends StatefulWidget {
 
 class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
   final _budgetController = TextEditingController();
-  final List<String> _categories = [
-    'Plumbing',
-    'Electrical',
-    'Carpentry',
-    'Painting',
-    'Masonry',
-  ];
-
   final _descriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String? _selectedCategory;
   final _titleController = TextEditingController();
+
+  List<String> _getCategories(AppLocalizations loc) {
+    return [
+      loc.fillOfferDetailsScreen_category_plumbing,
+      loc.fillOfferDetailsScreen_category_electrical,
+      loc.fillOfferDetailsScreen_category_carpentry,
+      loc.fillOfferDetailsScreen_category_painting,
+      loc.fillOfferDetailsScreen_category_masonry,
+    ];
+  }
 
   @override
   void dispose() {
@@ -44,46 +48,48 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
   }
 
   void _submitForm() {
-    // if (_formKey.currentState!.validate()) {}
-    // Navigate based on offer type
-    if (widget.isDirectOffer && !widget.isSendDirectly) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ArtisansMatchingScreen(),
-        ),
-      );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PostedSuccessfully(
-            actionButtonText: 'Go to Home',
-            description:
-                'Your offer has been posted to the app. Artisans will contact you soon.',
-            title: 'Offer Posted Successfully',
-            onActionPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => NavBarRootScreen(
-                    isArtisan: false,
-                  ),
-                ),
-                (route) => route.isFirst,
-              );
-            },
+    if (_formKey.currentState!.validate()) {
+      // Navigate based on offer type
+      if (widget.isDirectOffer && !widget.isSendDirectly) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ArtisansMatchingScreen(),
           ),
-        ),
-      );
+        );
+      } else {
+        final loc = AppLocalizations.of(context)!;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PostedSuccessfully(
+              actionButtonText: loc.fillOfferDetailsScreen_postedActionButton,
+              description: loc.fillOfferDetailsScreen_postedDescription,
+              title: loc.fillOfferDetailsScreen_postedTitle,
+              onActionPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => NavBarRootScreen(
+                      isArtisan: false,
+                    ),
+                  ),
+                  (route) => route.isFirst,
+                );
+              },
+            ),
+          ),
+        );
+      }
     }
   }
 
   Widget _buildTextField({
     required TextEditingController controller,
     required String label,
+    required String validationMessage,
     int maxLines = 1,
     TextInputType keyboardType = TextInputType.text,
-    String? Function(String?)? validator,
+    String? additionalValidationMessage,
   }) {
     return TextFormField(
       controller: controller,
@@ -95,8 +101,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
           vertical: 12,
           horizontal: 15,
         ),
-        hintText:
-            label, // Use hintText instead of labelText since we have a heading
+        hintText: label,
         hintStyle: const TextStyle(
           color: AppColors.greyColor,
           fontSize: 12,
@@ -104,8 +109,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: AppColors.greyColor
-                .withOpacity(0.1), // Light grey for unfocused border
+            color: AppColors.greyColor.withOpacity(0.1),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -113,28 +117,37 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
           borderSide: const BorderSide(color: AppColors.primaryColor),
         ),
       ),
-      validator: validator,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return validationMessage;
+        }
+        if (additionalValidationMessage != null &&
+            keyboardType == TextInputType.number &&
+            double.tryParse(value) == null) {
+          return additionalValidationMessage;
+        }
+        return null;
+      },
     );
   }
 
-  Widget _buildDropdownField() {
+  Widget _buildDropdownField(AppLocalizations loc) {
     return DropdownButtonFormField<String>(
       value: _selectedCategory,
-      hint: const Text(
-        'Select Category',
-        style: TextStyle(
+      hint: Text(
+        loc.fillOfferDetailsScreen_categoryHint,
+        style: const TextStyle(
           color: AppColors.greyColor,
           fontSize: 14,
         ),
       ),
       decoration: InputDecoration(
-        labelText: 'Category',
+        labelText: loc.fillOfferDetailsScreen_category,
         labelStyle: const TextStyle(color: AppColors.greyColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: AppColors.greyColor
-                .withOpacity(0.5), // Light grey for unfocused border
+            color: AppColors.greyColor.withOpacity(0.5),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -142,7 +155,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
           borderSide: const BorderSide(color: AppColors.primaryColor),
         ),
       ),
-      items: _categories.map((category) {
+      items: _getCategories(loc).map((category) {
         return DropdownMenuItem<String>(
           value: category,
           child: Text(category),
@@ -155,7 +168,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
       },
       validator: (value) {
         if (value == null) {
-          return 'Please select a category';
+          return loc.fillOfferDetailsScreen_categoryValidation;
         }
         return null;
       },
@@ -164,12 +177,14 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Fill Offer Details',
-            style: TextStyle(
+          title: Text(
+            loc.fillOfferDetailsScreen_appBarTitle,
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
@@ -192,8 +207,8 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 20),
                       Text(
                         widget.isDirectOffer
-                            ? 'Direct Offer Details.'
-                            : 'Tender Offer Details.',
+                            ? loc.fillOfferDetailsScreen_directOfferHeading
+                            : loc.fillOfferDetailsScreen_tenderOfferHeading,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: AppColors.blackColor,
                               fontSize: 16,
@@ -202,7 +217,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 20),
                       // Problem Title
                       Text(
-                        'Problem Title',
+                        loc.fillOfferDetailsScreen_problemTitle,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -210,18 +225,14 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 5),
                       _buildTextField(
                         controller: _titleController,
-                        label: 'e.g., Leaking Pipe',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a problem title';
-                          }
-                          return null;
-                        },
+                        label: loc.fillOfferDetailsScreen_problemTitleHint,
+                        validationMessage:
+                            loc.fillOfferDetailsScreen_problemTitleValidation,
                       ),
                       const SizedBox(height: 15),
                       // Problem Description
                       Text(
-                        'Problem Description',
+                        loc.fillOfferDetailsScreen_problemDescription,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -229,19 +240,16 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 5),
                       _buildTextField(
                         controller: _descriptionController,
-                        label: 'Describe the issue in detail...',
+                        label:
+                            loc.fillOfferDetailsScreen_problemDescriptionHint,
+                        validationMessage: loc
+                            .fillOfferDetailsScreen_problemDescriptionValidation,
                         maxLines: 4,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a description';
-                          }
-                          return null;
-                        },
                       ),
                       const SizedBox(height: 15),
                       // Budget
                       Text(
-                        'Budget',
+                        loc.fillOfferDetailsScreen_budget,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -249,21 +257,17 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 5),
                       _buildTextField(
                         controller: _budgetController,
-                        label: 'e.g., 3500 DZ',
+                        label: loc.fillOfferDetailsScreen_budgetHint,
+                        validationMessage:
+                            loc.fillOfferDetailsScreen_budgetValidationEmpty,
                         keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a budget';
-                          }
-                          if (double.tryParse(value) == null) {
-                            return 'Please enter a valid number';
-                          }
-                          return null;
-                        },
+                        additionalValidationMessage:
+                            loc.fillOfferDetailsScreen_budgetValidationInvalid,
                       ),
                       const SizedBox(height: 15),
+                      // Working Hours
                       Text(
-                        'Working Hours',
+                        loc.fillOfferDetailsScreen_workingHours,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -271,22 +275,17 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 5),
                       _buildTextField(
                         controller: _budgetController,
-                        label: 'e.g., from 9:00 to 12:00',
-                        keyboardType: TextInputType.number,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a budget';
-                          }
-                          return null;
-                        },
+                        label: loc.fillOfferDetailsScreen_workingHoursHint,
+                        validationMessage:
+                            loc.fillOfferDetailsScreen_workingHoursValidation,
                       ),
                       const SizedBox(height: 20),
-                      // Category (no heading as per request)
-                      _buildDropdownField(),
+                      // Category
+                      _buildDropdownField(loc),
                       const SizedBox(height: 15),
                       // Pictures
                       Text(
-                        'Upload Pictures',
+                        loc.fillOfferDetailsScreen_uploadPictures,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -312,7 +311,6 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                                 width: double.infinity,
                               ),
                             ),
-                            // add icon
                             Positioned(
                               top: 20,
                               left: (size.width - 40 - 50) / 2,
@@ -329,7 +327,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 15),
                       // Upload Video
                       Text(
-                        'Upload Videos',
+                        loc.fillOfferDetailsScreen_uploadVideos,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -371,7 +369,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       const SizedBox(height: 15),
                       // Location
                       Text(
-                        'Your Location',
+                        loc.fillOfferDetailsScreen_location,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.greyColor,
                             ),
@@ -397,7 +395,6 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                                 width: double.infinity,
                               ),
                             ),
-                            // add icon
                             Positioned(
                               top: 20,
                               left: (size.width - 40 - 50) / 2,
@@ -417,7 +414,6 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                 ),
               ),
             ),
-
             // Next Button
             Positioned(
               bottom: 20,
@@ -439,17 +435,18 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 16,
                     children: [
-                      widget.isSendDirectly
-                          ? Icon(
-                              Icons.send,
-                              color: Colors.white,
-                            )
-                          : SizedBox(),
+                      if (widget.isSendDirectly)
+                        const Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ),
+                      if (widget.isSendDirectly) const SizedBox(width: 16),
                       Text(
-                        widget.isSendDirectly ? 'Send Now' : 'Next',
-                        style: TextStyle(
+                        !widget.isDirectOffer
+                            ? loc.fillOfferDetailsScreen_sendNowButton
+                            : loc.fillOfferDetailsScreen_nextButton,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

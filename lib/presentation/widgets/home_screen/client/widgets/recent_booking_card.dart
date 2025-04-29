@@ -4,6 +4,7 @@ import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/presentation/screens/client_screens/recent_order_details_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/enums/booking_status_enum.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class RecentBookingCard extends StatelessWidget {
   final ArtisanModel artisan;
@@ -29,15 +30,15 @@ class RecentBookingCard extends StatelessWidget {
                 artisan: artisan,
                 date: date,
                 status: status,
-                orderDescription:
-                    'Need to fix electrical socket in living room and check circuit breaker issues. Need to fix electrical socket in living room and check circuit breaker issues.',
-                orderPrice: '3400DA'),
+                orderDescription: AppLocalizations.of(context)!
+                    .recentBookingCard_orderDescription,
+                orderPrice:
+                    AppLocalizations.of(context)!.recentBookingCard_orderPrice),
           ),
         );
       },
       child: Container(
         width: size.width * 0.75, // Assuming size is defined in main.dart
-
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -147,9 +148,10 @@ class RecentBookingCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const Text(
-                      'View Details',
-                      style: TextStyle(
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .recentBookingCard_viewDetails,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,

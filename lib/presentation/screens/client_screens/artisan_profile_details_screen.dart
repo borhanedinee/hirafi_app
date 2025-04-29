@@ -6,7 +6,8 @@ import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/presentation/screens/client_screens/fill_offer_screen.dart';
-import 'package:hirafi/presentation/widgets/artisan_profile_page/profile_section.dart';
+import 'package:hirafi/presentation/widgets/artisan_profile_screen/profile_section.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArtisanProfileDetailsScreen extends StatelessWidget {
   const ArtisanProfileDetailsScreen({
@@ -19,9 +20,11 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(),
+        appBar: _buildAppBar(loc),
         body: Stack(
           children: [
             Container(
@@ -32,48 +35,36 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Profile Section
                     ProfileSection(artisan: artisan),
                     Container(
                       height: 8,
                     ),
-                    // Profile Actions
-                    _buildProfileActions(),
+                    _buildProfileActions(loc),
                     const SizedBox(height: 8),
-                    // Work Gallery
-                    _buildWorkGallery(context, artisan.category),
+                    _buildWorkGallery(context, artisan.category, loc),
                     const SizedBox(height: 8),
-                    // Working Fileds
-                    _buildWorkingFields(context, artisan.category),
+                    _buildWorkingFields(context, artisan.category, loc),
                     const SizedBox(height: 8),
-
-                    // Professional Certificates
-                    _buildProfessionalCertifs(context),
+                    _buildProfessionalCertifs(context, loc),
                     const SizedBox(height: 8),
-                    // Service Area
-                    _buildServiceArea(context),
+                    _buildServiceArea(context, loc),
                     const SizedBox(height: 8),
-                    // Working Hours
-                    _buildWorkingHours(context),
+                    _buildWorkingHours(context, loc),
                     const SizedBox(height: 8),
-                    // Reviews
-                    _buildReviews(context),
-
+                    _buildReviews(context, loc),
                     const SizedBox(height: 80),
                   ],
                 ),
               ),
             ),
-
-            // Contact Artisan Button
-            _buildContactButton(hasToNavigateToFillDirectOrder, context),
+            _buildContactButton(hasToNavigateToFillDirectOrder, context, loc),
           ],
         ),
       ),
     );
   }
 
-  AppBar _buildAppBar() {
+  AppBar _buildAppBar(AppLocalizations loc) {
     return AppBar(
       actions: [
         IconButton(
@@ -83,19 +74,20 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
           },
         ),
       ],
-      title: const Text(
-        'Artisan Profile',
-        style: TextStyle(fontSize: 18),
+      title: Text(
+        loc.artisanProfileDetailsScreen_appBarTitle,
+        style: const TextStyle(fontSize: 18),
       ),
       backgroundColor: AppColors.primaryColor,
       foregroundColor: Colors.white,
     );
   }
 
-  Widget _buildWorkingFields(context, artisanCategory) {
+  Widget _buildWorkingFields(
+      BuildContext context, String artisanCategory, AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       padding: const EdgeInsets.all(20.0),
@@ -103,12 +95,12 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Working Fields',
+            loc.artisanProfileDetailsScreen_workingFields,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColors.blackColor,
                 ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Column(
@@ -126,17 +118,17 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _workField(context, field) {
+  Widget _workField(BuildContext context, String field) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       child: Row(
-        spacing: 4,
         children: [
-          Icon(
+          const Icon(
             Icons.check,
             color: AppColors.greyColor,
             size: 16,
           ),
+          const SizedBox(width: 4),
           Text(
             field,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -148,8 +140,8 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Positioned _buildContactButton(
-      bool hasToNavigateToFillDirectOrder, BuildContext context) {
+  Positioned _buildContactButton(bool hasToNavigateToFillDirectOrder,
+      BuildContext context, AppLocalizations loc) {
     return Positioned(
       bottom: 20,
       left: 20,
@@ -159,7 +151,6 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             if (hasToNavigateToFillDirectOrder) {
-              // Navigate to Fill Direct Order screen
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const FillOfferDetailsScreen(
@@ -181,18 +172,18 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
             ),
           ),
           child: Row(
-            spacing: 16,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.send,
                 color: Colors.white,
               ),
+              const SizedBox(width: 16),
               Text(
                 hasToNavigateToFillDirectOrder
-                    ? 'Fill Offer and Send'
-                    : 'Send Offer',
-                style: TextStyle(
+                    ? loc.artisanProfileDetailsScreen_fillOfferAndSend
+                    : loc.artisanProfileDetailsScreen_sendOffer,
+                style: const TextStyle(
                   fontSize: 16,
                 ),
               ),
@@ -203,10 +194,10 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container _buildReviews(BuildContext context) {
+  Container _buildReviews(BuildContext context, AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -215,7 +206,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
-              'Reviews',
+              loc.artisanProfileDetailsScreen_reviews,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: AppColors.blackColor,
                   ),
@@ -224,7 +215,6 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
           const SizedBox(height: 10),
           Column(
             children: [
-              // Review 1
               _buildReview(
                 context,
                 'John Doe',
@@ -236,7 +226,6 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
                 height: 32,
                 color: AppColors.greyColor.withValues(alpha: .2),
               ),
-              // Review 2
               _buildReview(
                 context,
                 'Jane Smith',
@@ -252,10 +241,10 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container _buildWorkingHours(BuildContext context) {
+  Container _buildWorkingHours(BuildContext context, AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -264,7 +253,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
-              'Working Hours',
+              loc.artisanProfileDetailsScreen_workingHours,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: AppColors.blackColor,
                   ),
@@ -272,23 +261,38 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              _WorkingHoursRow(day: 'Monday', hours: '9:00 AM - 5:00 PM'),
+              _WorkingHoursRow(
+                day: loc.artisanProfileDetailsScreen_workingHours_monday,
+                hours: loc.artisanProfileDetailsScreen_workingHours_hours,
+              ),
               Divider(
                 color: AppColors.greyColor.withValues(alpha: .2),
               ),
-              _WorkingHoursRow(day: 'Tuesday', hours: '9:00 AM - 5:00 PM'),
+              _WorkingHoursRow(
+                day: loc.artisanProfileDetailsScreen_workingHours_tuesday,
+                hours: loc.artisanProfileDetailsScreen_workingHours_hours,
+              ),
               Divider(
                 color: AppColors.greyColor.withValues(alpha: .2),
               ),
-              _WorkingHoursRow(day: 'Wednesday', hours: '9:00 AM - 5:00 PM'),
+              _WorkingHoursRow(
+                day: loc.artisanProfileDetailsScreen_workingHours_wednesday,
+                hours: loc.artisanProfileDetailsScreen_workingHours_hours,
+              ),
               Divider(
                 color: AppColors.greyColor.withValues(alpha: .2),
               ),
-              _WorkingHoursRow(day: 'Thursday', hours: '9:00 AM - 5:00 PM'),
+              _WorkingHoursRow(
+                day: loc.artisanProfileDetailsScreen_workingHours_thursday,
+                hours: loc.artisanProfileDetailsScreen_workingHours_hours,
+              ),
               Divider(
                 color: AppColors.greyColor.withValues(alpha: .2),
               ),
-              _WorkingHoursRow(day: 'Friday', hours: '9:00 AM - 5:00 PM'),
+              _WorkingHoursRow(
+                day: loc.artisanProfileDetailsScreen_workingHours_friday,
+                hours: loc.artisanProfileDetailsScreen_workingHours_hours,
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -297,10 +301,10 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container _buildServiceArea(BuildContext context) {
+  Container _buildServiceArea(BuildContext context, AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       padding: const EdgeInsets.all(20.0),
@@ -308,7 +312,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Service Area',
+            loc.artisanProfileDetailsScreen_serviceArea,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColors.blackColor,
                 ),
@@ -334,10 +338,11 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container _buildProfessionalCertifs(BuildContext context) {
+  Container _buildProfessionalCertifs(
+      BuildContext context, AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       padding: const EdgeInsets.all(20.0),
@@ -345,14 +350,14 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Professional Certificates',
+            loc.artisanProfileDetailsScreen_professionalCertificates,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColors.blackColor,
                 ),
           ),
           const SizedBox(height: 10),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
             decoration: BoxDecoration(
               color: AppColors.greyColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
@@ -362,7 +367,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
             ),
             child: ListTile(
               title: Text(
-                'Master Plumber License',
+                loc.artisanProfileDetailsScreen_certificate_title,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -370,7 +375,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
                     ),
               ),
               subtitle: Text(
-                'Certified by USTHB - Expires 2025',
+                loc.artisanProfileDetailsScreen_certificate_subtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.greyColor,
                       fontSize: 14,
@@ -388,10 +393,11 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container _buildWorkGallery(BuildContext context, artisanCategory) {
+  Container _buildWorkGallery(
+      BuildContext context, String artisanCategory, AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -404,7 +410,7 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
               top: 16,
             ),
             child: Text(
-              'Work Gallery',
+              loc.artisanProfileDetailsScreen_workGallery,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: AppColors.blackColor,
                   ),
@@ -448,10 +454,10 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
     );
   }
 
-  Container _buildProfileActions() {
+  Container _buildProfileActions(AppLocalizations loc) {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       padding: const EdgeInsets.symmetric(
@@ -487,9 +493,9 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
                   size: 16,
                 ),
                 const SizedBox(width: 16),
-                const Text(
-                  'Share Profile',
-                  style: TextStyle(
+                Text(
+                  loc.artisanProfileDetailsScreen_shareProfile,
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -522,9 +528,9 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
                   size: 16,
                 ),
                 const SizedBox(width: 16),
-                const Text(
-                  'QR Code',
-                  style: TextStyle(
+                Text(
+                  loc.artisanProfileDetailsScreen_qrCode,
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
@@ -606,7 +612,6 @@ class ArtisanProfileDetailsScreen extends StatelessWidget {
   }
 }
 
-// Helper widget for Working Hours rows
 class _WorkingHoursRow extends StatelessWidget {
   const _WorkingHoursRow({
     required this.day,

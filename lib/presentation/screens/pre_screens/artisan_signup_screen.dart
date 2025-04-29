@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,11 +7,13 @@ import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/artisan_sinup2_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
-import 'package:hirafi/presentation/widgets/artisan_signup/upload_document.dart';
+import 'package:hirafi/presentation/widgets/artisan_signup_screen/upload_document.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/constants/wilayas_to_daira.dart';
 import 'package:hirafi/utils/dummy_data.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArtisanSignupScreen extends StatefulWidget {
   const ArtisanSignupScreen({super.key});
@@ -48,6 +52,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -101,7 +106,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Complete your Registration as an Artisan',
+                              l10n.artisanSignUp1Screen_completeRegistration,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -131,19 +136,20 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           //UPLOAD PICTURE
                           _buildFieldHeading(
                             context,
-                            headingText: 'Profile Picture *',
+                            headingText:
+                                l10n.artisanSignUp1Screen_profilePicture,
                           ),
                           SizedBox(height: 8),
                           _buildUploadProfilePicture(context),
                           SizedBox(height: 16),
                           _buildFieldHeading(
-                            headingText: 'First name *',
+                            headingText: l10n.artisanSignUp1Screen_firstName,
                             context,
                           ),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'eg. Borhanedine',
+                            hintText: l10n.artisanSignUp1Screen_firstNameHint,
                             prefixIcon: Icon(
                               Icons.person_2_rounded,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -153,13 +159,13 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           SizedBox(height: 16),
                           _buildFieldHeading(
-                            headingText: 'Second name *',
+                            headingText: l10n.artisanSignUp1Screen_secondName,
                             context,
                           ),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'eg. Boussaha',
+                            hintText: l10n.artisanSignUp1Screen_secondNameHint,
                             prefixIcon: Icon(
                               Icons.person_2_rounded,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -170,18 +176,20 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           SizedBox(height: 16),
 
                           // Gender
-                          _buildFieldHeading(context, headingText: 'Sex'),
+                          _buildFieldHeading(context,
+                              headingText: l10n.artisanSignUp1Screen_sex),
                           SizedBox(height: 8),
                           _buildSexDrowDownField(),
                           SizedBox(height: 16),
 
                           // Phone Number
                           _buildFieldHeading(context,
-                              headingText: 'Phone Number *'),
+                              headingText:
+                                  l10n.artisanSignUp1Screen_phoneNumber),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: '+213',
+                            hintText: l10n.artisanSignUp1Screen_phoneNumberHint,
                             prefixIcon: Icon(
                               FontAwesomeIcons.phone,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -191,11 +199,12 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           SizedBox(height: 16),
 
                           // Phone Number
-                          _buildFieldHeading(context, headingText: 'Email *'),
+                          _buildFieldHeading(context,
+                              headingText: l10n.artisanSignUp1Screen_email),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'eg. exemple@gmail.com',
+                            hintText: l10n.artisanSignUp1Screen_emailHint,
                             prefixIcon: Icon(
                               FontAwesomeIcons.mailBulk,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -208,12 +217,12 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           // DATE OF BIRTH
                           _buildFieldHeading(
                             context,
-                            headingText: 'Date of birth *',
+                            headingText: l10n.artisanSignUp1Screen_dateOfBirth,
                           ),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'DD/MM/YYY',
+                            hintText: l10n.artisanSignUp1Screen_dateOfBirthHint,
                             prefixIcon: Icon(
                               Icons.calendar_today,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -229,7 +238,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                           SizedBox(height: 16),
 
                           // DATE OF BIRTH
-                          _buildFieldHeading(context, headingText: 'Password'),
+                          _buildFieldHeading(context,
+                              headingText: l10n.artisanSignUp1Screen_password),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
@@ -250,7 +260,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // DATE OF BIRTH
                           _buildFieldHeading(context,
-                              headingText: 'Confirm password'),
+                              headingText:
+                                  l10n.artisanSignUp1Screen_confirmPassword),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
@@ -277,7 +288,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // SELECT CATEGORY
                           _buildFieldHeading(context,
-                              headingText: 'Select Category *'),
+                              headingText:
+                                  l10n.artisanSignUp1Screen_selectCategory),
                           SizedBox(height: 16),
                           _buildCategoryDrowDownField(),
 
@@ -289,7 +301,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildFieldHeading(context,
-                                        headingText: 'Select Sub Category *'),
+                                        headingText: l10n
+                                            .artisanSignUp1Screen_selectSubCategory),
                                     SizedBox(height: 8),
                                     _buildCategoryServicesDrowDownField(
                                         selectedCategory:
@@ -302,7 +315,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // SELECT WILAYA
                           _buildFieldHeading(context,
-                              headingText: 'Select Wilaya *'),
+                              headingText:
+                                  l10n.artisanSignUp1Screen_selectWilaya),
                           SizedBox(height: 16),
                           _buildWilayaDrowDownField(),
 
@@ -314,7 +328,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     _buildFieldHeading(context,
-                                        headingText: 'Select Commune *'),
+                                        headingText: l10n
+                                            .artisanSignUp1Screen_selectCommune),
                                     SizedBox(height: 16),
                                     _buildCommuneDrowDownField(
                                         selectedWilaya: _selectedWilaya!),
@@ -326,7 +341,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
 
                           // UPLOAD RESUME
                           _buildFieldHeading(context,
-                              headingText: 'Work License/Certificate'),
+                              headingText: l10n
+                                  .artisanSignUp1Screen_workLicenseCertificate),
                           SizedBox(height: 8),
                           _buildUploadCertificate(context),
                           SizedBox(height: 16),
@@ -349,7 +365,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'I agree to the ',
+                                        text: l10n
+                                            .clientSignupPage_agreementPrefix,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -359,7 +376,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'Terms of Service ',
+                                        text: l10n
+                                            .artisanSignUp1Screen_termsOfService,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -369,7 +387,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'and ',
+                                        text: l10n.clientSignupPage_and,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -379,7 +397,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'Privacy Policy.',
+                                        text: l10n
+                                            .artisanSignUp1Screen_privacyPolicy,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -441,13 +460,15 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Already have an account?'),
+        Text(
+          AppLocalizations.of(context)!.clientSignupPage_alreadyHaveAccount,
+        ),
         GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
           },
           child: Text(
-            '  Sign in',
+            AppLocalizations.of(context)!.logIn,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: AppColors.primaryColor,
                 ),
@@ -506,7 +527,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
                       width: 8,
                     ),
                     Text(
-                      'Upload Picture',
+                      AppLocalizations.of(context)!
+                          .artisanSignUp1Screen_uploadPicture,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.blackColor,
                           ),
@@ -535,10 +557,12 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
           Icons.upload_file,
           color: AppColors.greyColor.withValues(alpha: .7),
         ),
-        descriptionText: 'Upload your professional Licence or Certificate',
-        infoText:
-            'You can add this later, but it will appear as a notification in your profile',
-        uploadButtonText: 'Upload Document',
+        descriptionText: AppLocalizations.of(context)!
+            .artisanSignUp1Screen_uploadCertificateDescription,
+        infoText: AppLocalizations.of(context)!
+            .artisanSignUp1Screen_uploadCertificateInfo,
+        uploadButtonText:
+            AppLocalizations.of(context)!.artisanSignUp1Screen_uploadDocument,
       ),
     );
   }
@@ -565,7 +589,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Next'),
+              Text(AppLocalizations.of(context)!.artisanSignUp1Screen_next),
               SizedBox(
                 width: 8,
               ),
@@ -584,7 +608,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
     return DropdownButtonFormField<String>(
       value: _selectedSex,
       hint: Text(
-        'Sex',
+        AppLocalizations.of(context)!.artisanSignUp1Screen_sexHint,
         style: TextStyle(
           color: AppColors.greyColor,
           fontSize: 14,
@@ -593,7 +617,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
       decoration: InputDecoration(
         fillColor: AppColors.greyColor.withValues(alpha: .05),
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        labelText: 'Select your gender',
+        labelText: AppLocalizations.of(context)!.clientSignupPage_sexHint,
         labelStyle: const TextStyle(color: AppColors.greyColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -626,7 +650,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
     return DropdownButtonFormField<String>(
       value: _selectedArtisanCategory,
       hint: Text(
-        'Category',
+        AppLocalizations.of(context)!.artisanSignUp1Screen_categoryHint,
         style: TextStyle(
           color: AppColors.greyColor,
           fontSize: 14,
@@ -635,7 +659,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
       decoration: InputDecoration(
         fillColor: AppColors.greyColor.withValues(alpha: .05),
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        labelText: 'Select your craft',
+        labelText:
+            AppLocalizations.of(context)!.artisanSignUp1Screen_categoryHint,
         labelStyle: const TextStyle(color: AppColors.greyColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -739,7 +764,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
             children: [
               Text(
                 _selectedServices.isEmpty
-                    ? 'Services'
+                    ? AppLocalizations.of(context)!
+                        .artisanSignUp1Screen_services
                     : '${_selectedServices.length} service${_selectedServices.length == 1 ? '' : 's'} selected',
                 style: TextStyle(
                   color: _selectedServices.isEmpty
@@ -763,7 +789,7 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
     return DropdownButtonFormField<String>(
       value: _selectedWilaya,
       hint: Text(
-        'Wilaya',
+        AppLocalizations.of(context)!.artisanSignUp1Screen_wilayaHint,
         style: TextStyle(
           color: AppColors.greyColor,
           fontSize: 14,
@@ -772,7 +798,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
       decoration: InputDecoration(
         fillColor: AppColors.greyColor.withValues(alpha: .05),
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        labelText: 'Select your wilaya',
+        labelText:
+            AppLocalizations.of(context)!.artisanSignUp1Screen_wilayaHint,
         labelStyle: const TextStyle(color: AppColors.greyColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -807,12 +834,10 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
       orElse: () => {'daira_names': []}, // Return an empty list if no match
     )['daira_names'] as List<String>;
 
-    print('borhaaan + $_dayras');
-    print('borhaaan + $selectedWilaya');
     return DropdownButtonFormField<String>(
       value: _selectedCommune,
       hint: Text(
-        'Commune',
+        AppLocalizations.of(context)!.artisanSignUp1Screen_communeHint,
         style: TextStyle(
           color: AppColors.greyColor,
           fontSize: 14,
@@ -821,7 +846,8 @@ class _ArtisanSignupScreenState extends State<ArtisanSignupScreen> {
       decoration: InputDecoration(
         fillColor: AppColors.greyColor.withValues(alpha: .05),
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        labelText: 'Select your commune',
+        labelText:
+            AppLocalizations.of(context)!.artisanSignUp1Screen_communeHint,
         labelStyle: const TextStyle(color: AppColors.greyColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

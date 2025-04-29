@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class MyHeader extends StatelessWidget {
   const MyHeader({
     super.key,
@@ -31,14 +33,17 @@ class MyHeader extends StatelessWidget {
             ),
           ),
           viewAll
-              ? TextButton(
-                  onPressed: onViewAll,
-                  child: const Text(
-                    'View All',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor,
+              ? GestureDetector(
+                  onTap: onViewAll,
+                  child: TextButton(
+                    onPressed: onViewAll,
+                    child: Text(
+                      AppLocalizations.of(context)!.viewAll,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ),
                 )

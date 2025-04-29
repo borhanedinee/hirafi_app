@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onMenuPressed;
@@ -13,8 +14,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.isArtisan,
   });
   final bool isArtisan;
+
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return AppBar(
       leading: IconButton(
         icon: const Icon(
@@ -36,7 +40,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           const SizedBox(width: 16),
           isArtisan
-              ? SizedBox()
+              ? const SizedBox()
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,7 +52,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                     ),
                     Text(
-                      'Annaba, Algeria',
+                      loc.homeAppBar_location,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.greyColor,
                             fontSize: 10,
@@ -56,8 +60,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ],
                 ),
-          Spacer(),
-          isArtisan ? _buildUpgradeButton(context) : SizedBox(),
+          const Spacer(),
+          isArtisan ? _buildUpgradeButton(context, loc) : const SizedBox(),
         ],
       ),
       actions: [
@@ -73,7 +77,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Container _buildUpgradeButton(BuildContext context) {
+  Container _buildUpgradeButton(BuildContext context, AppLocalizations loc) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 8,
@@ -85,15 +89,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 8,
         children: [
           Icon(
             LucideIcons.crown,
             color: AppColors.primaryColor,
             size: 16,
           ),
+          const SizedBox(width: 8),
           Text(
-            'Upgrade',
+            loc.homeAppBar_upgrade,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.w600,

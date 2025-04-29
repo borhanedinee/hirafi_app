@@ -5,6 +5,7 @@ import 'package:hirafi/presentation/screens/pre_screens/artisan_signup_screen.da
 import 'package:hirafi/presentation/screens/pre_screens/client_signup_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Log in',
+                              l10n.loginScreen_logIn,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -82,13 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           SizedBox(height: 16),
 
-                          // EMAIL ADDRESS
+                          // PHONE NUMBER
                           _buildFieldHeading(context,
-                              headingText: 'Phone Number'),
+                              headingText: l10n.loginScreen_phoneNumber),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: 'email@exemple.com',
+                            hintText: l10n.loginScreen_emailHint,
                             prefixIcon: Icon(
                               Icons.email,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -98,12 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           SizedBox(height: 16),
 
-                          // DATE OF BIRTH
-                          _buildFieldHeading(context, headingText: 'Password'),
+                          // PASSWORD
+                          _buildFieldHeading(context,
+                              headingText: l10n.loginScreen_password),
                           SizedBox(height: 8),
                           _buildTextField(
                             context,
-                            hintText: '*********',
+                            hintText: l10n.loginScreen_passwordHint,
                             prefixIcon: Icon(
                               Icons.lock,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -124,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: GestureDetector(
                               onTap: () {},
                               child: Text(
-                                'Forgot password?',
+                                l10n.loginScreen_forgotPassword,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
@@ -147,17 +150,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 32,
                     ),
 
-                    // LOGIN BUTTON
+                    // SIGN UP LINK
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Don\'t have an account?'),
+                        Text(l10n.loginScreen_noAccount),
                         GestureDetector(
                           onTap: () {
                             _showRegistrationDialog(context);
                           },
                           child: Text(
-                            '  Sign up',
+                            l10n.loginScreen_signUp,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
@@ -196,12 +199,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Function to show the registration dialog
   void _showRegistrationDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(
-            'Register',
+          title: Text(
+            l10n.loginScreen_register,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           content: Column(
@@ -212,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Icons.person,
                   color: AppColors.primaryColor,
                 ),
-                title: const Text('Register as Client'),
+                title: Text(l10n.loginScreen_registerAsClient),
                 onTap: () {
                   // Navigate to Client Registration Screen
                   Navigator.pop(context); // Close the dialog
@@ -229,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Icons.work,
                   color: AppColors.primaryColor,
                 ),
-                title: const Text('Register as Artisan'),
+                title: Text(l10n.loginScreen_registerAsArtisan),
                 onTap: () {
                   // Navigate to Artisan Registration Screen
                   Navigator.pop(context); // Close the dialog
@@ -252,6 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Center _buildLoginButton() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: SizedBox(
         width: double.infinity,
@@ -285,7 +290,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: AppColors.whiteColor,
                   ),
                 )
-              : Text('Log in'),
+              : Text(l10n.loginScreen_logIn),
         ),
       ),
     );
@@ -322,8 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-              color: AppColors.greyColor
-                  .withOpacity(0.2), // Light grey for unfocused border
+              color: AppColors.greyColor.withOpacity(0.2),
             ),
           ),
           focusedBorder: OutlineInputBorder(

@@ -3,7 +3,8 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart'; // Assuming AppColors is defined
+import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   final String email;
@@ -26,6 +27,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -49,9 +51,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         color: AppColors.primaryColor,
                       ),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Check Your Email!',
-                        style: TextStyle(
+                      Text(
+                        l10n.emailVerificationScreen_checkEmail,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: AppColors.primaryColor,
@@ -59,7 +61,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'We’ve sent a 6-digit code to ${widget.email}',
+                        l10n
+                            .emailVerificationScreen_sentCode(widget.email)
+                            .replaceAll('{email}', widget.email),
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[700],
@@ -68,7 +72,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Enter the code below to verify your email.',
+                        l10n.emailVerificationScreen_enterCode,
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[600],
@@ -113,9 +117,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Didn’t receive the code? ",
-                            style: TextStyle(
+                          Text(
+                            l10n.emailVerificationScreen_noCode,
+                            style: const TextStyle(
                               fontSize: 14,
                               color: AppColors.greyColor,
                             ),
@@ -125,9 +129,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                               // TODO: Resend verification code
                               print('Resend code tapped');
                             },
-                            child: const Text(
-                              'Resend',
-                              style: TextStyle(
+                            child: Text(
+                              l10n.emailVerificationScreen_resend,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: AppColors.primaryColor,
                                 fontWeight: FontWeight.bold,
@@ -142,9 +146,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   // Action Button
                   Column(
                     children: [
-                      const Text(
-                        'Let’s get you verified and crafting!',
-                        style: TextStyle(
+                      Text(
+                        l10n.emailVerificationScreen_getVerified,
+                        style: const TextStyle(
                           fontSize: 14,
                           color: AppColors.greyColor,
                           fontStyle: FontStyle.italic,
@@ -188,9 +192,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                             disabledBackgroundColor:
                                 AppColors.greyColor.withOpacity(0.5),
                           ),
-                          child: const Text(
-                            'Verify Email',
-                            style: TextStyle(
+                          child: Text(
+                            l10n.emailVerificationScreen_verifyEmail,
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.white,
                               fontWeight: FontWeight.w600,

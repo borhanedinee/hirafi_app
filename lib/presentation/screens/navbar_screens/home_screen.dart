@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/presentation/widgets/home_page/artisan/artisan_home_body.dart';
-import 'package:hirafi/presentation/widgets/home_page/client/client_home_content.dart';
-import 'package:hirafi/presentation/widgets/home_page/home_appbar.dart';
+import 'package:hirafi/presentation/widgets/home_screen/artisan/artisan_home_body.dart';
+import 'package:hirafi/presentation/widgets/home_screen/client/client_home_content.dart';
+import 'package:hirafi/presentation/widgets/home_screen/home_appbar.dart';
 import 'package:hirafi/presentation/shimmers/home_shimmer.dart';
 
 class HomeScreen extends StatefulWidget {

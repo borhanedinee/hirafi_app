@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/help__center_screen.dart';
 import 'package:hirafi/presentation/screens/notifications_screen.dart';
@@ -13,6 +14,7 @@ class ClientProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Container(
       decoration: AppThemes.scaffoldBackgroundDecoration,
       height: size.height,
@@ -32,7 +34,7 @@ class ClientProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'My Profile',
+                  localizations.clientProfileScreen_myProfile,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.blackColor,
                       ),
@@ -74,6 +76,7 @@ class ClientProfileScreen extends StatelessWidget {
   }
 
   Container _buildProfileSettingsAndLogoutButton(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Container(
       width: size.width,
       padding: const EdgeInsets.all(16),
@@ -84,7 +87,7 @@ class ClientProfileScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Account Settings',
+            localizations.clientProfileScreen_accountSettings,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: AppColors.blackColor,
                 ),
@@ -103,7 +106,8 @@ class ClientProfileScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final List<Map<String, dynamic>> profileOptions = [
                 {
-                  'title': 'Personal Information',
+                  'title':
+                      localizations.clientProfileScreen_personalInformation,
                   'prefixIcon': Icons.person,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
@@ -116,7 +120,7 @@ class ClientProfileScreen extends StatelessWidget {
                   },
                 },
                 {
-                  'title': 'Notifications',
+                  'title': localizations.clientProfileScreen_notifications,
                   'prefixIcon': Icons.notifications,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
@@ -128,7 +132,7 @@ class ClientProfileScreen extends StatelessWidget {
                   },
                 },
                 {
-                  'title': 'Payment Methods',
+                  'title': localizations.clientProfileScreen_paymentMethods,
                   'prefixIcon': Icons.payment,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
@@ -140,7 +144,7 @@ class ClientProfileScreen extends StatelessWidget {
                   },
                 },
                 {
-                  'title': 'Help Center',
+                  'title': localizations.clientProfileScreen_helpCenter,
                   'prefixIcon': Icons.help_center,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
@@ -168,7 +172,7 @@ class ClientProfileScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   leading: Icon(
                     option['prefixIcon'],
-                    color: AppColors.greyColor, // or any color you like
+                    color: AppColors.greyColor,
                   ),
                   title: Text(
                     option['title'],
@@ -195,7 +199,6 @@ class ClientProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(),
             child: ElevatedButton.icon(
               onPressed: () {
-                // Handle logout action here
                 print('Logout button pressed');
               },
               icon: Icon(
@@ -203,7 +206,7 @@ class ClientProfileScreen extends StatelessWidget {
                 color: AppColors.whiteColor,
               ),
               label: Text(
-                'Logout',
+                localizations.clientProfileScreen_logout,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.whiteColor,
                       fontWeight: FontWeight.w600,
@@ -228,6 +231,7 @@ class ClientProfileScreen extends StatelessWidget {
   }
 
   Container _buildProfileLevel(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Container(
       width: size.width,
       padding: const EdgeInsets.all(16),
@@ -241,13 +245,13 @@ class ClientProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Client Level',
+                localizations.clientProfileScreen_clientLevel,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: AppColors.blackColor,
                     ),
               ),
               Text(
-                'Silver',
+                localizations.clientProfileScreen_silver,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: AppColors.greyColor,
                     ),
@@ -269,14 +273,14 @@ class ClientProfileScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '12 Orders',
+                localizations.clientProfileScreen_ordersCount('12'),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: AppColors.greyColor,
                       fontWeight: FontWeight.w600,
                     ),
               ),
               Text(
-                '20 for Gold',
+                localizations.clientProfileScreen_ordersForGold('20'),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: AppColors.greyColor,
                       fontWeight: FontWeight.w600,
@@ -304,7 +308,8 @@ class ClientProfileScreen extends StatelessWidget {
                 SizedBox(
                   width: size.width - 100,
                   child: Text(
-                    'Complete 8 more orders to reach Gold level.',
+                    localizations
+                        .clientProfileScreen_completeOrdersForGold('8'),
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                         ),
@@ -319,6 +324,7 @@ class ClientProfileScreen extends StatelessWidget {
   }
 
   Container _buildProfileInfo(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Container(
       width: size.width,
       padding: const EdgeInsets.all(16),
@@ -350,15 +356,15 @@ class ClientProfileScreen extends StatelessWidget {
 
           // USER NAME
           Text(
-            'John Doe',
+            'Boussaha Borhanedine', // Note: User name is typically dynamic, not localized
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,
                 ),
           ),
-          // USER MEMEBER SINCE
+          // USER MEMBER SINCE
           Text(
-            'Member since February 2024',
+            localizations.clientProfileScreen_memberSince('February 2024'),
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: AppColors.greyColor,
                   fontWeight: FontWeight.w600,
@@ -386,7 +392,7 @@ class ClientProfileScreen extends StatelessWidget {
                   size: 16,
                 ),
                 Text(
-                  'Silver Member',
+                  localizations.clientProfileScreen_silverMember,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w600,
@@ -398,21 +404,21 @@ class ClientProfileScreen extends StatelessWidget {
 
           SizedBox(height: 24),
 
-          // USER ORDERS RATIG ECT
+          // USER ORDERS RATING ETC
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
                 children: [
                   Text(
-                    '12',
+                    '12', // Dynamic data, not localized
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: AppColors.blackColor,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
                   Text(
-                    'Orders',
+                    localizations.clientProfileScreen_orders,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                           fontWeight: FontWeight.w600,
@@ -428,14 +434,14 @@ class ClientProfileScreen extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '0',
+                    '0', // Dynamic data, not localized
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: AppColors.blackColor,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
                   Text(
-                    'Favorite Artisans',
+                    localizations.clientProfileScreen_favoriteArtisans,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                           fontWeight: FontWeight.w600,
@@ -451,14 +457,14 @@ class ClientProfileScreen extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '4.8',
+                    '4.8', // Dynamic data, not localized
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: AppColors.blackColor,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
                   Text(
-                    'Rating',
+                    localizations.clientProfileScreen_rating,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                           fontWeight: FontWeight.w600,

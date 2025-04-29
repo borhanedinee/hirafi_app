@@ -12,6 +12,8 @@ import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ClientSignupScreen extends StatefulWidget {
   ClientSignupScreen({Key? key}) : super(key: key);
 
@@ -85,7 +87,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Complete your Registration as a Client',
+                              AppLocalizations.of(context)!
+                                  .clientSignupPage_completeRegistration,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -96,11 +99,13 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           ),
                           SizedBox(height: 16),
                           MyFieldHeader(
-                            headingText: 'First name',
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_firstName,
                           ),
                           SizedBox(height: 8),
                           MyTextField(
-                            hintText: 'eg. Borhanedine',
+                            hintText: AppLocalizations.of(context)!
+                                .clientSignupPage_firstNameHint,
                             prefixIcon: Icon(
                               Icons.person_2_rounded,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -110,11 +115,13 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
 
                           SizedBox(height: 16),
                           MyFieldHeader(
-                            headingText: 'Second name',
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_secondName,
                           ),
                           SizedBox(height: 8),
                           MyTextField(
-                            hintText: 'eg. Boussaha',
+                            hintText: AppLocalizations.of(context)!
+                                .clientSignupPage_secondNameHint,
                             prefixIcon: Icon(
                               Icons.person_2_rounded,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -125,16 +132,22 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           SizedBox(height: 16),
 
                           // Gender
-                          MyFieldHeader(headingText: 'Sex'),
+                          MyFieldHeader(
+                              headingText: AppLocalizations.of(context)!
+                                  .clientSignupPage_sex),
                           SizedBox(height: 8),
                           _buildSexDropdownField(),
                           SizedBox(height: 16),
 
                           // Phone Number
-                          MyFieldHeader(headingText: 'Phone Number'),
+                          MyFieldHeader(
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_phoneNumber,
+                          ),
                           SizedBox(height: 8),
                           MyTextField(
-                            hintText: '+213',
+                            hintText: AppLocalizations.of(context)!
+                                .clientSignupPage_phoneNumberHint,
                             prefixIcon: Icon(
                               FontAwesomeIcons.phone,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -145,10 +158,14 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           SizedBox(height: 16),
 
                           // EMAIL ADDRESS
-                          MyFieldHeader(headingText: 'Email address'),
+                          MyFieldHeader(
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_email,
+                          ),
                           SizedBox(height: 8),
                           MyTextField(
-                            hintText: 'email@exemple.com',
+                            hintText: AppLocalizations.of(context)!
+                                .clientSignupPage_emailHint,
                             prefixIcon: Icon(
                               Icons.email,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -160,11 +177,13 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
 
                           // DATE OF BIRTH
                           MyFieldHeader(
-                            headingText: 'Date of birth',
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_dateOfBirth,
                           ),
                           SizedBox(height: 8),
                           MyTextField(
-                            hintText: 'DD/MM/YYY',
+                            hintText: AppLocalizations.of(context)!
+                                .clientSignupPage_dateOfBirthHint,
                             prefixIcon: Icon(
                               Icons.calendar_today,
                               color: AppColors.greyColor.withValues(alpha: .5),
@@ -180,7 +199,10 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           SizedBox(height: 16),
 
                           // DATE OF BIRTH
-                          MyFieldHeader(headingText: 'Password'),
+                          MyFieldHeader(
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_password,
+                          ),
                           SizedBox(height: 8),
                           MyTextField(
                             hintText: '*********',
@@ -199,7 +221,10 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                           SizedBox(height: 16),
 
                           // DATE OF BIRTH
-                          MyFieldHeader(headingText: 'Confirm password'),
+                          MyFieldHeader(
+                            headingText: AppLocalizations.of(context)!
+                                .clientSignupPage_confirmPassword,
+                          ),
                           SizedBox(height: 8),
                           MyTextField(
                             hintText: '*********',
@@ -235,7 +260,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'I agree to the ',
+                                        text: AppLocalizations.of(context)!
+                                            .clientSignupPage_agreementPrefix,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -245,7 +271,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'Terms of Service ',
+                                        text: AppLocalizations.of(context)!
+                                            .clientSignupPage_termsOfService,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -255,7 +282,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'and ',
+                                        text: AppLocalizations.of(context)!
+                                            .clientSignupPage_and,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -265,7 +293,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'Privacy Policy.',
+                                        text: AppLocalizations.of(context)!
+                                            .clientSignupPage_privacyPolicy,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -326,13 +355,15 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Already have an account?'),
+        Text(
+          AppLocalizations.of(context)!.clientSignupPage_alreadyHaveAccount,
+        ),
         GestureDetector(
           onTap: () {
             Navigator.of(context).pop();
           },
           child: Text(
-            '  Sign in',
+            AppLocalizations.of(context)!.logIn,
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: AppColors.primaryColor,
                 ),
@@ -362,7 +393,9 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
             backgroundColor: AppColors.primaryColor,
             elevation: 2,
           ),
-          child: Text('Register as Client'),
+          child: Text(
+            AppLocalizations.of(context)!.clientSignupPage_registerBtn,
+          ),
         ),
       ),
     );
@@ -371,8 +404,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
   Widget _buildSexDropdownField() {
     return DropdownButtonFormField<String>(
       value: _selectedSex,
-      hint: const Text(
-        'Select Category',
+      hint: Text(
+        AppLocalizations.of(context)!.clientSignupPage_selectGenderLabel,
         style: TextStyle(
           color: AppColors.greyColor,
           fontSize: 14,
@@ -381,7 +414,8 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
       decoration: InputDecoration(
         fillColor: AppColors.greyColor.withValues(alpha: .05),
         contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        labelText: 'Choose your gender',
+        labelText:
+            AppLocalizations.of(context)!.clientSignupPage_selectGenderError,
         labelStyle: const TextStyle(color: AppColors.greyColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

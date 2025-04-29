@@ -1,4 +1,3 @@
-// lib/presentation/pages/artisanDummyData_matching_screen.dart
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
@@ -8,6 +7,7 @@ import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/presentation/screens/client_screens/artisan_profile_details_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class ProfilesScreen extends StatefulWidget {
   const ProfilesScreen({super.key, required this.clickedSubCategory});
@@ -48,8 +48,8 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
               onPressed: () {},
             ),
           ],
-          title: const Text(
-            'Profiles',
+          title: Text(
+            AppLocalizations.of(context)!.profilesScreen_profiles,
             style: TextStyle(
               fontSize: 18,
             ),
@@ -70,10 +70,6 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${widget.clickedSubCategory} artisanDummyData.',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
-            ),
             const SizedBox(height: 20),
             GridView.builder(
               shrinkWrap: true,
@@ -290,7 +286,7 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                 const SizedBox(height: 5),
                 // Joined App Period
                 Text(
-                  'Joined 1 year ago', // Replace with actual join date
+                  AppLocalizations.of(context)!.profilesScreen_joinedOneYearAgo,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.greyColor,
                         fontSize: 12,
@@ -307,7 +303,8 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      '2.5 km away', // Replace with actual distance
+                      AppLocalizations.of(context)!
+                          .profilesScreen_twoPointFiveKmAway,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppColors.greyColor,
                             fontSize: 12,
@@ -356,7 +353,7 @@ class _ProfilesScreenState extends State<ProfilesScreen> {
                       ),
                     ),
                     child: Text(
-                      'View Details',
+                      AppLocalizations.of(context)!.profilesScreen_viewDetails,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,

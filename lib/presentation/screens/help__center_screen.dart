@@ -3,83 +3,81 @@ import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
-import 'package:lucide_icons/lucide_icons.dart'; // Assuming you have AppColors defined
+import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HelpCenterScreen extends StatelessWidget {
   const HelpCenterScreen({super.key, required this.isArtisan});
 
   final bool isArtisan;
 
-  // Sample FAQ data (you can replace this with data from an API or database)
-  final List<Map<String, String>> artisanFAQs = const [
-    {
-      'question': 'What is Herrafi?',
-      'answer':
-          'Herrafi is a mobile app that connects artisans with clients for unique creations. It allows clients to find skilled artisans for custom projects and enables artisans to showcase their work, receive direct offers, and manage their profiles. Features include user registration as either a client or artisan, a help center with FAQs, and a user-friendly interface to facilitate seamless interactions between artisans and clients.'
-    },
-    {
-      'question': 'How do I register as an artisan?',
-      'answer':
-          'To register as an artisan, go to the user type screen and select "Join as an Artisan." Fill in your details, including your skills and work experience, and submit the form. Once approved, you can start receiving client requests.',
-    },
-    {
-      'question': 'How can I contact a client?',
-      'answer':
-          'After accepting a direct offer from a client, you’ll be able to view their contact details in the offer details screen. You can then reach out via phone or email to discuss the project further.',
-    },
-    {
-      'question': 'What happens if I reject an offer?',
-      'answer':
-          'If you reject an offer, it will be removed from your list of direct offers. The client will be notified, and they can choose to send the offer to another artisan.',
-    },
-    {
-      'question': 'How do I update my profile?',
-      'answer':
-          'To update your profile, go to the profile section in the app. Tap on "Edit Profile," make the necessary changes (e.g., update your skills, contact info, or work samples), and save your changes.',
-    },
-  ];
-
-  final List<Map<String, String>> clientFaqs = const [
-    {
-      'question': 'What is Herrafi?',
-      'answer':
-          'Herrafi is a mobile app that connects clients with skilled artisans for custom services and projects. Clients can browse artisan profiles, send direct offers, and track their order history through a simple and intuitive app experience.'
-    },
-    {
-      'question': 'How do I register as a client?',
-      'answer':
-          'To register as a client, go to the user type screen and select "Join as a Client." Fill in your personal details, and you’ll instantly be able to browse artisan profiles, favorite artisans, and send offers for your projects.'
-    },
-    {
-      'question': 'How can I find artisans?',
-      'answer':
-          'You can explore available artisans by browsing the artisans list, filtering by categories, or viewing recommended profiles. You can also favorite artisans you like for easy access in the future.'
-    },
-    {
-      'question': 'How do I send an offer to an artisan?',
-      'answer':
-          'Once you find an artisan you’re interested in, open their profile and tap "Send Offer." Enter the project details, proposed budget, and your contact information, then submit your offer. The artisan will review and respond directly.'
-    },
-    {
-      'question': 'How do I track my past orders?',
-      'answer':
-          'You can view your order history by going to your profile and selecting "Order History." Here you’ll find a list of all your past orders, including service details, dates, statuses, and total prices.'
-    },
-    {
-      'question': 'How do I update my personal information?',
-      'answer':
-          'To update your information, go to your profile, tap "Personal Information," and edit your details such as your name, email, phone number, or address. Don’t forget to save your changes.'
-    },
-  ];
+  // FAQ data sourced from AppLocalizations
+  List<Map<String, String>> _getFAQs(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    if (isArtisan) {
+      return [
+        {
+          'question': loc.helpCenterScreen_artisanFaq1Question,
+          'answer': loc.helpCenterScreen_artisanFaq1Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_artisanFaq2Question,
+          'answer': loc.helpCenterScreen_artisanFaq2Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_artisanFaq3Question,
+          'answer': loc.helpCenterScreen_artisanFaq3Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_artisanFaq4Question,
+          'answer': loc.helpCenterScreen_artisanFaq4Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_artisanFaq5Question,
+          'answer': loc.helpCenterScreen_artisanFaq5Answer,
+        },
+      ];
+    } else {
+      return [
+        {
+          'question': loc.helpCenterScreen_clientFaq1Question,
+          'answer': loc.helpCenterScreen_clientFaq1Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_clientFaq2Question,
+          'answer': loc.helpCenterScreen_clientFaq2Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_clientFaq3Question,
+          'answer': loc.helpCenterScreen_clientFaq3Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_clientFaq4Question,
+          'answer': loc.helpCenterScreen_clientFaq4Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_clientFaq5Question,
+          'answer': loc.helpCenterScreen_clientFaq5Answer,
+        },
+        {
+          'question': loc.helpCenterScreen_clientFaq6Question,
+          'answer': loc.helpCenterScreen_clientFaq6Answer,
+        },
+      ];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+    final faqs = _getFAQs(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Help Center',
-            style: TextStyle(
+          title: Text(
+            loc.helpCenterScreen_helpCenterTitle,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: AppColors.whiteColor,
@@ -95,52 +93,41 @@ class HelpCenterScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 32,
-                ),
+                const SizedBox(height: 32),
                 // HELP CENTER WELCOMING TEXT
                 SizedBox(
                   width: size.width - 30,
                   child: Text(
-                    'We\'re here to help you with anything and everything on Herrafi',
+                    loc.helpCenterScreen_welcomeText,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: AppColors.blackColor,
                         ),
                   ),
                 ),
-                SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 SizedBox(
                   width: size.width - 30,
                   child: Text(
-                    'If you have any questions, concerns, or need assistance while using Herrafi, our team is ready to support you. Whether it’s about finding the right artisan, managing your orders, or understanding our services, we’ve got you covered. Browse our FAQs, reach out directly, or send us a message anytime — your satisfaction and comfort are our top priority.',
+                    loc.helpCenterScreen_supportText,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                         ),
                   ),
                 ),
-
-                SizedBox(
-                  height: 16,
-                ),
-
+                const SizedBox(height: 16),
                 MyTextField(
-                  hintText: 'Search help',
-                  prefixIcon: Icon(
+                  hintText: loc.helpCenterScreen_searchHint,
+                  prefixIcon: const Icon(
                     LucideIcons.search,
                     color: AppColors.greyColor,
                   ),
                 ),
-
-                SizedBox(
-                  height: 32,
-                ),
+                const SizedBox(height: 32),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'FAQ',
+                      loc.helpCenterScreen_faqTitle,
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium!
@@ -148,30 +135,22 @@ class HelpCenterScreen extends StatelessWidget {
                     ),
                     ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount:
-                          isArtisan ? artisanFAQs.length : clientFaqs.length,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: faqs.length,
                       separatorBuilder: (context, index) => Divider(
                         color: AppColors.greyColor.withOpacity(0.5),
                       ),
                       itemBuilder: (context, index) {
                         return _buildFaqTile(
                           context,
-                          question: isArtisan
-                              ? artisanFAQs[index]['question']!
-                              : clientFaqs[index]['question']!,
-                          answer: isArtisan
-                              ? artisanFAQs[index]['answer']!
-                              : clientFaqs[index]['answer']!,
+                          question: faqs[index]['question']!,
+                          answer: faqs[index]['answer']!,
                         );
                       },
                     ),
                   ],
                 ),
-
-                SizedBox(
-                  height: 32,
-                ),
+                const SizedBox(height: 32),
                 // CONTACT US BUTTON
                 SizedBox(
                   width: size.width - 30,
@@ -186,21 +165,19 @@ class HelpCenterScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    icon: Icon(
+                    icon: const Icon(
                       LucideIcons.mail,
                       color: AppColors.whiteColor,
                     ),
                     label: Text(
-                      'Contact Us',
+                      loc.helpCenterScreen_contactUsButton,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             color: AppColors.whiteColor,
                           ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 32,
-                ),
+                const SizedBox(height: 32),
               ],
             ),
           ),

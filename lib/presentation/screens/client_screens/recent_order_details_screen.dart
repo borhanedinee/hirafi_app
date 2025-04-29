@@ -3,6 +3,7 @@ import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/enums/booking_status_enum.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecentOrderDetailsScreen extends StatelessWidget {
   final ArtisanModel artisan;
@@ -22,6 +23,8 @@ class RecentOrderDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     // Determine button actions based on status
     Widget primaryButton;
     Widget secondaryButton;
@@ -29,7 +32,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
     switch (status) {
       case BookingStatus.waitingReply:
         primaryButton = _buildButton(
-          text: 'Accept Offer',
+          text: loc.recentOrderDetailsScreen_acceptOffer,
           icon: Icons.check,
           color: AppColors.primaryColor,
           onPressed: () {
@@ -38,7 +41,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
           },
         );
         secondaryButton = _buildButton(
-          text: 'Reject Offer',
+          text: loc.recentOrderDetailsScreen_rejectOffer,
           icon: Icons.close,
           color: Colors.grey.withValues(alpha: .4),
           onPressed: () {
@@ -49,7 +52,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
         break;
       case BookingStatus.pending:
         primaryButton = _buildButton(
-          text: 'View Artisan Profile',
+          text: loc.recentOrderDetailsScreen_viewArtisanProfile,
           icon: Icons.person,
           color: AppColors.primaryColor,
           onPressed: () {
@@ -58,7 +61,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
           },
         );
         secondaryButton = _buildButton(
-          text: 'Cancel Order',
+          text: loc.recentOrderDetailsScreen_cancelOrder,
           icon: Icons.cancel,
           color: Colors.grey.withValues(alpha: .7),
           onPressed: () {
@@ -69,7 +72,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
         break;
       case BookingStatus.accepted:
         primaryButton = _buildButton(
-          text: 'View Artisan Profile',
+          text: loc.recentOrderDetailsScreen_viewArtisanProfile,
           icon: Icons.person,
           color: AppColors.primaryColor,
           onPressed: () {
@@ -78,7 +81,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
           },
         );
         secondaryButton = _buildButton(
-          text: 'Cancel Order',
+          text: loc.recentOrderDetailsScreen_cancelOrder,
           icon: Icons.cancel,
           color: Colors.grey.withValues(alpha: .7),
           onPressed: () {
@@ -89,7 +92,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
         break;
       case BookingStatus.inProgress:
         primaryButton = _buildButton(
-          text: 'View Artisan Profile',
+          text: loc.recentOrderDetailsScreen_viewArtisanProfile,
           icon: Icons.person,
           color: AppColors.primaryColor,
           onPressed: () {
@@ -98,7 +101,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
           },
         );
         secondaryButton = _buildButton(
-          text: 'Contact Support',
+          text: loc.recentOrderDetailsScreen_contactSupport,
           icon: Icons.support_agent,
           color: Colors.grey.withValues(alpha: .7),
           onPressed: () {
@@ -109,7 +112,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
         break;
       case BookingStatus.completed:
         primaryButton = _buildButton(
-          text: 'Rate Artisan',
+          text: loc.recentOrderDetailsScreen_rateArtisan,
           icon: Icons.star,
           color: AppColors.primaryColor,
           onPressed: () {
@@ -118,7 +121,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
           },
         );
         secondaryButton = _buildButton(
-          text: 'Reorder',
+          text: loc.recentOrderDetailsScreen_reorder,
           icon: Icons.refresh,
           color: Colors.grey.withValues(alpha: .7),
           onPressed: () {
@@ -133,7 +136,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Recent Order Details',
+            loc.recentOrderDetailsScreen_title,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: AppColors.whiteColor,
                 ),
@@ -142,8 +145,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
         body: Container(
-          decoration:
-              AppThemes.scaffoldBackgroundDecoration, // Gradient background
+          decoration: AppThemes.scaffoldBackgroundDecoration,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -176,7 +178,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                padding: EdgeInsets.all(2),
+                                padding: const EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryColor,
                                   shape: BoxShape.circle,
@@ -250,13 +252,11 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-
                           const SizedBox(height: 32),
-
                           // Order Date
                           _buildDetailRow(
                             context: context,
-                            label: 'Order Date',
+                            label: loc.recentOrderDetailsScreen_orderDate,
                             value: date,
                             labelStyle:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -272,17 +272,13 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                                   color: AppColors.blackColor,
                                 ),
                           ),
-
                           const SizedBox(height: 6),
-                          Divider(
-                            color: AppColors.greyColor,
-                          ),
+                          Divider(color: AppColors.greyColor),
                           const SizedBox(height: 6),
-
                           // Service Category
                           _buildDetailRow(
                             context: context,
-                            label: 'Service Category',
+                            label: loc.recentOrderDetailsScreen_serviceCategory,
                             value: artisan.category,
                             labelStyle:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -299,18 +295,15 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                                       Theme.of(context).colorScheme.onSurface,
                                 ),
                           ),
-
                           const SizedBox(height: 6),
-                          Divider(
-                            color: AppColors.greyColor,
-                          ),
+                          Divider(color: AppColors.greyColor),
                           const SizedBox(height: 6),
                           // Order Description
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Order description',
+                                loc.recentOrderDetailsScreen_orderDescription,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
@@ -318,9 +311,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                                       color: AppColors.greyColor,
                                     ),
                               ),
-                              SizedBox(
-                                height: 8,
-                              ),
+                              const SizedBox(height: 8),
                               Text(
                                 orderDescription,
                                 style: Theme.of(context)
@@ -329,19 +320,16 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                                     .copyWith(
                                       color: AppColors.blackColor,
                                     ),
-                              )
+                              ),
                             ],
                           ),
-
                           const SizedBox(height: 6),
-                          Divider(
-                            color: AppColors.greyColor,
-                          ),
+                          Divider(color: AppColors.greyColor),
                           const SizedBox(height: 6),
                           // Service Price
                           _buildDetailRow(
                             context: context,
-                            label: 'Service Price',
+                            label: loc.recentOrderDetailsScreen_servicePrice,
                             value: orderPrice,
                             labelStyle:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -357,13 +345,9 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                                   color: AppColors.blackColor,
                                 ),
                           ),
-
                           const SizedBox(height: 6),
-                          Divider(
-                            color: AppColors.greyColor,
-                          ),
+                          Divider(color: AppColors.greyColor),
                           const SizedBox(height: 32),
-
                           // Action Buttons (Call, Chat, Message)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -371,7 +355,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                               _buildActionButton(
                                 context: context,
                                 icon: Icons.phone,
-                                label: 'Call',
+                                label: loc.recentOrderDetailsScreen_call,
                                 onTap: () {
                                   // TODO: Initiate a call
                                   print('Initiating call');
@@ -380,7 +364,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                               _buildActionButton(
                                 context: context,
                                 icon: Icons.chat,
-                                label: 'Chat',
+                                label: loc.recentOrderDetailsScreen_chat,
                                 onTap: () {
                                   // TODO: Navigate to chat screen
                                   print('Opening chat');
@@ -389,7 +373,7 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                               _buildActionButton(
                                 context: context,
                                 icon: Icons.email,
-                                label: 'Message',
+                                label: loc.recentOrderDetailsScreen_message,
                                 onTap: () {
                                   // TODO: Send a message
                                   print('Sending message');
@@ -402,7 +386,6 @@ class RecentOrderDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 // Primary and Secondary Buttons
                 Column(
                   children: [

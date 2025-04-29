@@ -7,6 +7,7 @@ import 'package:hirafi/presentation/screens/navbar_screens/prodile_views/client_
 import 'package:hirafi/presentation/screens/navbar_screens/profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/search_screen.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavBarRootScreen extends StatefulWidget {
   NavBarRootScreen({super.key, required this.isArtisan});
@@ -28,6 +29,7 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final List<Widget> pages = [
       HomeScreen(
         isArtisan: widget.isArtisan,
@@ -46,7 +48,7 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
         body: pages[_currentIndex],
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: _buildFAB(context),
-        bottomNavigationBar: _buildBottomNavBar(),
+        bottomNavigationBar: _buildBottomNavBar(l10n),
       ),
     );
   }
@@ -71,16 +73,20 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
     );
   }
 
-  BottomNavigationBar _buildBottomNavBar() {
+  BottomNavigationBar _buildBottomNavBar(AppLocalizations l10n) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: _currentIndex,
       onTap: _onItemTapped,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Ionicons.home_sharp), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Ionicons.search), label: 'Search'),
-        BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Chats'),
-        BottomNavigationBarItem(icon: Icon(Ionicons.person), label: 'Profile'),
+      items: [
+        BottomNavigationBarItem(
+            icon: Icon(Ionicons.home_sharp), label: l10n.navBarRootScreen_home),
+        BottomNavigationBarItem(
+            icon: Icon(Ionicons.search), label: l10n.navBarRootScreen_search),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.message), label: l10n.navBarRootScreen_chats),
+        BottomNavigationBarItem(
+            icon: Icon(Ionicons.person), label: l10n.navBarRootScreen_profile),
       ],
     );
   }

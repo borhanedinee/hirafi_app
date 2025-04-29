@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:intl/intl.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/email_verification_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
-import 'package:hirafi/presentation/widgets/artisan_signup/upload_document.dart';
+import 'package:hirafi/presentation/widgets/artisan_signup_screen/upload_document.dart';
 import 'package:hirafi/presentation/widgets/my_field_header.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArtisanSignupTwoScreen extends StatefulWidget {
   const ArtisanSignupTwoScreen({super.key});
@@ -20,23 +23,41 @@ class ArtisanSignupTwoScreen extends StatefulWidget {
 }
 
 class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
-  // SAERVICES OF THE SELECTED CATEGORY
-  final List<String> _weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
+  // SERVICES OF THE SELECTED CATEGORY
+  late final List<String> _weekDays;
   final List<String> _selectedDays = [];
+  bool _isWeekDaysInitialized = false;
 
   // ACCEPT TERMS CHECK BOX
   bool _checked = true;
 
   @override
+  void initState() {
+    super.initState();
+    // Initialize _weekDays in didChangeDependencies instead
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isWeekDaysInitialized) {
+      final l10n = AppLocalizations.of(context)!;
+      _weekDays = [
+        l10n.artisanSignUp2Screen_sunday,
+        l10n.artisanSignUp2Screen_monday,
+        l10n.artisanSignUp2Screen_tuesday,
+        l10n.artisanSignUp2Screen_wednesday,
+        l10n.artisanSignUp2Screen_thursday,
+        l10n.artisanSignUp2Screen_friday,
+        l10n.artisanSignUp2Screen_saturday,
+      ];
+      _isWeekDaysInitialized = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -90,7 +111,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                         children: [
                           Center(
                             child: Text(
-                              'Complete your Registration as an Artisan',
+                              l10n.artisanSignUp2Screen_completeRegistration,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -116,7 +137,9 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
 
                           SizedBox(height: 16),
 
-                          MyFieldHeader(headingText: 'Working Days *'),
+                          MyFieldHeader(
+                              headingText:
+                                  l10n.artisanSignUp2Screen_workingDays),
                           SizedBox(height: 8),
                           _buildWorkingDaysDrowDownField(),
 
@@ -135,24 +158,24 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
 
                           _buildUploadIDCard(
                             context,
-                            headingText: 'Front of your ID Card *',
+                            headingText: l10n.artisanSignUp2Screen_frontIdCard,
                             uploadGuideText:
-                                'Please upload a clear image of the front of your ID card.',
+                                l10n.artisanSignUp2Screen_frontIdCardGuide,
                           ),
                           SizedBox(
                             height: 16,
                           ),
                           _buildUploadIDCard(
                             context,
-                            headingText: 'Back of your ID Card *',
+                            headingText: l10n.artisanSignUp2Screen_backIdCard,
                             uploadGuideText:
-                                'Please upload a clear image of the back of your ID card.',
+                                l10n.artisanSignUp2Screen_backIdCardGuide,
                           ),
                           SizedBox(
                             height: 16,
                           ),
 
-                          // AGREEMENETTO TERMS AND CONDITIONS
+                          // AGREEMENT TO TERMS AND CONDITIONS
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -170,7 +193,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'I agree to the ',
+                                        text: l10n.artisanSignUp2Screen_agreeTo,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -180,7 +203,8 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'Terms of Service ',
+                                        text: l10n
+                                            .artisanSignUp2Screen_termsOfService,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -190,7 +214,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'and ',
+                                        text: l10n.artisanSignUp2Screen_and,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -200,7 +224,8 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                                             ),
                                       ),
                                       TextSpan(
-                                        text: 'Privacy Policy.',
+                                        text: l10n
+                                            .artisanSignUp2Screen_privacyPolicy,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
@@ -253,6 +278,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
 
   Container _buildUploadIDCard(BuildContext context,
       {required String headingText, required String uploadGuideText}) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 0),
@@ -279,9 +305,8 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
               Icons.badge,
               color: AppColors.greyColor.withValues(alpha: .6),
             ),
-            uploadButtonText: 'Upload Documment',
-            infoText:
-                'You can add this later, but it will appear as a notification in your profile',
+            uploadButtonText: l10n.artisanSignUp2Screen_uploadDocument,
+            infoText: l10n.artisanSignUp2Screen_uploadInfo,
           ),
         ],
       ),
@@ -289,6 +314,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
   }
 
   Center _buildCreateNowButton() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: SizedBox(
         width: double.infinity,
@@ -309,15 +335,15 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
             backgroundColor: AppColors.primaryColor,
             elevation: 2,
           ),
-          child: Text('Create Profile Now'),
+          child: Text(l10n.artisanSignUp2Screen_createProfileNow),
         ),
       ),
     );
   }
 
   Widget _buildWorkingDaysDrowDownField() {
-    return // Custom Dropdown with Checkboxes
-        GestureDetector(
+    final l10n = AppLocalizations.of(context)!;
+    return GestureDetector(
       onTap: () {},
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -329,23 +355,20 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
           ),
         ),
         child: PopupMenuButton<String>(
-          offset: const Offset(0, 50), // Position the popup below the field
+          offset: const Offset(0, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          onSelected: (value) {
-            // This is handled by the checkbox onTap, so we don't need onSelected
-          },
+          onSelected: (value) {},
           itemBuilder: (BuildContext context) {
             return [
               PopupMenuItem<String>(
-                enabled:
-                    false, // Disable default tap behavior for the entire menu
+                enabled: false,
                 child: StatefulBuilder(
                   builder: (BuildContext context, StateSetter setMenuState) {
                     return Container(
                       constraints: const BoxConstraints(
-                        maxHeight: 200, // Limit height for scrollable list
+                        maxHeight: 200,
                       ),
                       child: SingleChildScrollView(
                         child: Column(
@@ -364,7 +387,7 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
                                     _selectedDays.remove(service);
                                   }
                                 });
-                                setMenuState(() {}); // Update the menu UI
+                                setMenuState(() {});
                               },
                               activeColor: AppColors.primaryColor,
                               contentPadding:
@@ -384,8 +407,8 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
             children: [
               Text(
                 _selectedDays.isEmpty
-                    ? 'Select working days'
-                    : '${_selectedDays.length} days${_selectedDays.length == 1 ? '' : 's'} selected',
+                    ? l10n.artisanSignUp2Screen_selectWorkingDays
+                    : '${_selectedDays.length} ${l10n.artisanSignUp2Screen_day}${_selectedDays.length == 1 ? '' : 's'} selected',
                 style: TextStyle(
                   color: _selectedDays.isEmpty
                       ? AppColors.greyColor
@@ -419,6 +442,9 @@ class _WorkingHoursItemState extends State<WorkingHoursItem>
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
 
+  late TextEditingController startTimeController;
+  late TextEditingController endTimeController;
+
   @override
   void initState() {
     super.initState();
@@ -432,17 +458,24 @@ class _WorkingHoursItemState extends State<WorkingHoursItem>
     );
     // Start animation when widget is built
     _controller.forward();
+
+    // Initialize text editing controllers
+    startTimeController = TextEditingController();
+    endTimeController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _controller.dispose(); // Clean up controller
+    _controller.dispose();
+    startTimeController.dispose();
+    endTimeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size; // Get screen size dynamically
+    final l10n = AppLocalizations.of(context)!;
+    final size = MediaQuery.of(context).size;
 
     return FadeTransition(
       opacity: _opacityAnimation,
@@ -470,14 +503,37 @@ class _WorkingHoursItemState extends State<WorkingHoursItem>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MyFieldHeader(
-                      headingText: 'Start Time',
+                      headingText: l10n.artisanSignUp2Screen_startTime,
                       color: AppColors.greyColor.withOpacity(0.8),
                     ),
                     const SizedBox(height: 4),
                     SizedBox(
                       width: ((size.width - 32) / 2) - 40,
                       child: MyTextField(
-                        hintText: 'eg. 9:00',
+                        hintText: l10n.artisanSignUp2Screen_startTimeHint,
+                        controller: startTimeController,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            DatePicker.showTimePicker(
+                              context,
+                              showTitleActions: true,
+                              onConfirm: (time) {
+                                final formattedTime =
+                                    DateFormat('HH:mm').format(time);
+                                setState(() {
+                                  startTimeController.text = formattedTime;
+                                });
+                              },
+                              currentTime: DateTime.now(),
+                              locale: LocaleType.en,
+                            );
+                          },
+                          icon: Icon(
+                            LucideIcons.clock,
+                            color: AppColors.greyColor.withOpacity(0.6),
+                            size: 20,
+                          ),
+                        ),
                         fillColor: AppColors.whiteColor,
                       ),
                     ),
@@ -487,14 +543,37 @@ class _WorkingHoursItemState extends State<WorkingHoursItem>
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     MyFieldHeader(
-                      headingText: 'End Time',
+                      headingText: l10n.artisanSignUp2Screen_endTime,
                       color: AppColors.greyColor.withOpacity(0.8),
                     ),
                     const SizedBox(height: 4),
                     SizedBox(
                       width: ((size.width - 32) / 2) - 40,
                       child: MyTextField(
-                        hintText: 'eg. 16:00',
+                        controller: endTimeController,
+                        hintText: l10n.artisanSignUp2Screen_endTimeHint,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            DatePicker.showTimePicker(
+                              context,
+                              showTitleActions: true,
+                              onConfirm: (time) {
+                                final formattedTime =
+                                    DateFormat('HH:mm').format(time);
+                                setState(() {
+                                  endTimeController.text = formattedTime;
+                                });
+                              },
+                              currentTime: DateTime.now(),
+                              locale: LocaleType.en,
+                            );
+                          },
+                          icon: Icon(
+                            LucideIcons.clock,
+                            color: AppColors.greyColor.withOpacity(0.6),
+                            size: 20,
+                          ),
+                        ),
                         fillColor: AppColors.whiteColor,
                       ),
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -17,6 +18,7 @@ class CustomSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
@@ -43,8 +45,9 @@ class CustomSearchBar extends StatelessWidget {
               decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-                hintText:
-                    'Search Services, Offers, ${isArtisan ? 'Artisans' : 'Clients'}...',
+                hintText: localizations.customSearchBar_searchHint(!isArtisan
+                    ? localizations.customSearchBar_artisans
+                    : localizations.customSearchBar_clients),
                 hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.greyColor,
                     ),

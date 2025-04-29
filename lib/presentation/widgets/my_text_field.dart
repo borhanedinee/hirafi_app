@@ -9,7 +9,9 @@ class MyTextField extends StatelessWidget {
       this.maxLines,
       required this.hintText,
       this.fillColor,
-      this.initialValue});
+      this.initialValue,
+      this.controller,
+      this.onSubmitted});
 
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -17,10 +19,14 @@ class MyTextField extends StatelessWidget {
   final String hintText;
   final String? initialValue;
   final Color? fillColor;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      onFieldSubmitted: onSubmitted,
       initialValue: initialValue,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: AppColors.blackColor,

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/screens/home_sub_screens/profiles_screen.dart';
+import 'package:hirafi/utils/dummy_data.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SubCategoriesScreen extends StatefulWidget {
   const SubCategoriesScreen({
     super.key,
     required this.clickedCategory,
+    required this.index,
   });
 
+  final int index;
   final String clickedCategory;
 
   @override
@@ -29,18 +32,36 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
     });
   }
 
+  // Function to get the list of services by key index
+  List<String>? getServicesByKeyIndex(int index) {
+    // Convert keys to a list
+    List<String> keys = artisanServices.keys.toList();
+
+    // Check if index is valid
+    if (index >= 0 && index < keys.length) {
+      String key = keys[index]; // Get the key at the specified index
+      return artisanServices[key]; // Return the corresponding list
+    } else {
+      print(
+          "Error: Index $index is out of range. Valid range: 0 to ${keys.length - 1}");
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Mock data for subcategories (replace with actual data from your backend)
-    final subCategories =
-        _getSubCategories(widget.clickedCategory.toLowerCase());
+    // Convert map values to a list and access by index
+    var entries = artisanServices.entries.toList();
+
+    List<String> subCategories = getServicesByKeyIndex(widget.index) ?? [];
+    String category = entries[widget.index].key;
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white.withValues(alpha: .96),
         appBar: AppBar(
           title: Text(
-            widget.clickedCategory,
+            category,
             style: const TextStyle(
               fontSize: 18,
             ),
@@ -48,13 +69,15 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
           backgroundColor: AppColors.primaryColor,
           foregroundColor: Colors.white,
         ),
-        body: isLoading ? _buildShimmer() : _buildContent(subCategories),
+        body: isLoading
+            ? _buildShimmer()
+            : _buildContent(subCategories, category),
       ),
     );
   }
 
   // Actual content when data is loaded
-  Widget _buildContent(List<Map<String, dynamic>> subCategories) {
+  Widget _buildContent(List<String> subCategories, String category) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
       child: ListView.builder(
@@ -68,15 +91,15 @@ class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
             final subCategory = subCategories[index - 1];
             return _buildSubCategoryTile(
               context,
-              title: subCategory['title'],
-              profileCount: subCategory['profileCount'],
+              title: subCategory,
+              profileCount: 8,
               onTap: () {
                 // Handle subcategory tap
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ProfilesScreen(
-                      clickedSubCategory: subCategory['title'],
+                      clickedSubCategory: category,
                     ),
                   ),
                 );

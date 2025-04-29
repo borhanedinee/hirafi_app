@@ -9,24 +9,26 @@ import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/utils/dummy_data.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArtisanProfileScreen extends StatelessWidget {
   const ArtisanProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Container(
       decoration: AppThemes.scaffoldBackgroundDecoration,
       height: size.height,
       width: size.width,
       child: Column(
         children: [
-          // APP BAR
           Container(
             height: 60,
             width: size.width,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.whiteColor,
             ),
             child: Row(
@@ -34,13 +36,11 @@ class ArtisanProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'My Profile',
+                  loc.artisanProfileScreen_myProfile,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         color: AppColors.blackColor,
                       ),
                 ),
-
-                //UPGRATE PACKAGE BUTTON
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -52,15 +52,15 @@ class ArtisanProfileScreen extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 8,
                     children: [
                       Icon(
                         LucideIcons.crown,
                         color: AppColors.primaryColor,
                         size: 16,
                       ),
+                      const SizedBox(width: 8),
                       Text(
-                        'Upgrade',
+                        loc.artisanProfileScreen_upgrade,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: AppColors.primaryColor,
                               fontWeight: FontWeight.w600,
@@ -68,7 +68,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -76,35 +76,29 @@ class ArtisanProfileScreen extends StatelessWidget {
             color: AppColors.greyColor.withOpacity(0.5),
             height: 1,
           ),
-          // PROFILE INFOS
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  _buildProfileInfo(context),
-
-                  SizedBox(height: 16),
-
-                  // WORK GALLERY
-                  _buildWorkGallery(context, 'Painter'),
-
-                  SizedBox(height: 16),
-
-                  // PROFILE SETTINGS
-                  _buildProfileSettingsAndLogoutButton(context),
+                  _buildProfileInfo(context, loc),
+                  const SizedBox(height: 16),
+                  _buildWorkGallery(context, loc),
+                  const SizedBox(height: 16),
+                  _buildProfileSettingsAndLogoutButton(context, loc),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Container _buildWorkGallery(BuildContext context, artisanCategory) {
+  Container _buildWorkGallery(BuildContext context, AppLocalizations loc) {
+    const artisanCategory = 'Painter'; // Hardcoded as sample data
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -120,15 +114,13 @@ class ArtisanProfileScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Work Gallery',
+                  loc.artisanProfileScreen_workGallery,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: AppColors.blackColor,
                       ),
                 ),
-
-                // add button
                 Text(
-                  '+ Add',
+                  loc.artisanProfileScreen_add,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: AppColors.primaryColor,
                       ),
@@ -174,48 +166,48 @@ class ArtisanProfileScreen extends StatelessWidget {
     );
   }
 
-  Container _buildProfileSettingsAndLogoutButton(BuildContext context) {
+  Container _buildProfileSettingsAndLogoutButton(
+      BuildContext context, AppLocalizations loc) {
     return Container(
       width: size.width,
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.whiteColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Account Settings',
+            loc.artisanProfileScreen_accountSettings,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: AppColors.blackColor,
                 ),
           ),
-          SizedBox(height: 16),
-          // SETTINGS LIST
+          const SizedBox(height: 16),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 3,
             separatorBuilder: (context, index) {
-              return SizedBox(height: 8);
+              return const SizedBox(height: 8);
             },
             itemBuilder: (context, index) {
               final List<Map<String, dynamic>> profileOptions = [
                 {
-                  'title': 'Personal Information',
+                  'title': loc.artisanProfileScreen_personalInformation,
                   'prefixIcon': Icons.person,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PersonalInformationScreen(),
+                        builder: (context) => const PersonalInformationScreen(),
                       ),
                     );
                   },
                 },
                 {
-                  'title': 'Notifications',
+                  'title': loc.artisanProfileScreen_notifications,
                   'prefixIcon': Icons.notifications,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
@@ -227,13 +219,13 @@ class ArtisanProfileScreen extends StatelessWidget {
                   },
                 },
                 {
-                  'title': 'Help Center',
+                  'title': loc.artisanProfileScreen_helpCenter,
                   'prefixIcon': Icons.help_center,
                   'trailing': Icons.arrow_forward_ios,
                   'onTap': () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => HelpCenterScreen(
+                        builder: (context) => const HelpCenterScreen(
                           isArtisan: false,
                         ),
                       ),
@@ -255,7 +247,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   leading: Icon(
                     option['prefixIcon'],
-                    color: AppColors.greyColor, // or any color you like
+                    color: AppColors.greyColor,
                   ),
                   title: Text(
                     option['title'],
@@ -274,9 +266,7 @@ class ArtisanProfileScreen extends StatelessWidget {
               );
             },
           ),
-          SizedBox(height: 32),
-
-          // LOGOUT BUTTON
+          const SizedBox(height: 32),
           Container(
             width: size.width,
             padding: const EdgeInsets.symmetric(),
@@ -285,12 +275,12 @@ class ArtisanProfileScreen extends StatelessWidget {
                 // Handle logout action here
                 print('Logout button pressed');
               },
-              icon: Icon(
+              icon: const Icon(
                 LucideIcons.logOut,
                 color: AppColors.whiteColor,
               ),
               label: Text(
-                'Logout',
+                loc.artisanProfileScreen_logout,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.whiteColor,
                       fontWeight: FontWeight.w600,
@@ -308,23 +298,22 @@ class ArtisanProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 60),
+          const SizedBox(height: 60),
         ],
       ),
     );
   }
 
-  Container _buildProfileInfo(BuildContext context) {
+  Container _buildProfileInfo(BuildContext context, AppLocalizations loc) {
     return Container(
       width: size.width,
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.whiteColor,
       ),
       child: Column(
         children: [
-          SizedBox(height: 16),
-          // PROFILE PICTURE
+          const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(1),
             decoration: BoxDecoration(
@@ -341,18 +330,14 @@ class ArtisanProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          SizedBox(height: 16),
-
-          // USER NAME
+          const SizedBox(height: 16),
           Text(
-            'John Doe',
+            loc.artisanProfileScreen_userName,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,
                 ),
           ),
-          // CATEGORY
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 24,
@@ -363,24 +348,22 @@ class ArtisanProfileScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
-              'Painter',
+              loc.artisanProfileScreen_category,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: AppColors.primaryColor,
                     fontWeight: FontWeight.w600,
                   ),
             ),
           ),
-          SizedBox(height: 8),
-          // USER MEMEBER SINCE
+          const SizedBox(height: 8),
           Text(
-            'Member since February 2024',
+            loc.artisanProfileScreen_memberSince('February 2024'),
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: AppColors.greyColor,
                   fontWeight: FontWeight.w600,
                 ),
           ),
-          SizedBox(height: 16),
-          // USER MEMBERSHIP
+          const SizedBox(height: 16),
           Container(
             width: 180,
             padding: const EdgeInsets.symmetric(
@@ -393,15 +376,15 @@ class ArtisanProfileScreen extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 8,
               children: [
                 Icon(
                   LucideIcons.trophy,
                   color: AppColors.primaryColor,
                   size: 16,
                 ),
+                const SizedBox(width: 8),
                 Text(
-                  'Silver Member',
+                  loc.artisanProfileScreen_membership,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: AppColors.primaryColor,
                         fontWeight: FontWeight.w600,
@@ -410,10 +393,7 @@ class ArtisanProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-
-          SizedBox(height: 24),
-
-          // USER ORDERS RATIG ECT
+          const SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -427,7 +407,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                         ),
                   ),
                   Text(
-                    'Completed Orders',
+                    loc.artisanProfileScreen_completedOrders,
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                           fontWeight: FontWeight.w600,
@@ -450,7 +430,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                         ),
                   ),
                   Text(
-                    'Rating ( +12 reviews )',
+                    loc.artisanProfileScreen_ratingReviews('12'),
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: AppColors.greyColor,
                           fontWeight: FontWeight.w600,
@@ -459,7 +439,7 @@ class ArtisanProfileScreen extends StatelessWidget {
                 ],
               ),
             ],
-          )
+          ),
         ],
       ),
     );

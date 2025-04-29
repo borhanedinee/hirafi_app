@@ -4,6 +4,8 @@ import 'package:hirafi/presentation/screens/pre_screens/user_type_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -123,7 +125,7 @@ class _SplashScreenState extends State<SplashScreen>
                     Opacity(
                       opacity: _textFadeAnimation.value,
                       child: Text(
-                        'Herrafi',
+                        AppLocalizations.of(context)!.appTitle,
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium
@@ -140,7 +142,7 @@ class _SplashScreenState extends State<SplashScreen>
                     Opacity(
                       opacity: _textFadeAnimation.value,
                       child: Text(
-                        'Crafting Connections',
+                        AppLocalizations.of(context)!.splashScreenWelcomingText,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: AppColors.greyColor.withOpacity(0.8),
                               fontSize: 16,

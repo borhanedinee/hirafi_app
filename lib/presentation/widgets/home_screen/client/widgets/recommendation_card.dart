@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class RecommendationCard extends StatelessWidget {
   final ArtisanModel artisan;
@@ -157,9 +158,9 @@ class RecommendationCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Text(
-                    'Book Now',
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.recommendationCard_bookNow,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),

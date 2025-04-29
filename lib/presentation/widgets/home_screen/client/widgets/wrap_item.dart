@@ -7,11 +7,14 @@ class WrapItem extends StatelessWidget {
   final String icon;
   final VoidCallback? onTap;
 
+  final int index;
+
   const WrapItem({
     super.key,
     required this.title,
     required this.icon,
     this.onTap,
+    required this.index,
   });
 
   @override
@@ -23,6 +26,7 @@ class WrapItem extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => SubCategoriesScreen(
                   clickedCategory: title,
+                  index: index,
                 ),
               ),
             );

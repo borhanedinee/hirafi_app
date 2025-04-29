@@ -1,67 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart'; // Assuming AppColors is defined
+import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({Key? key}) : super(key: key);
 
-  // Sample notifications data, grouped by time
-  final Map<String, List<Map<String, dynamic>>> groupedNotifications = {
-    'Today': [
-      {
-        'icon': Icons.local_offer,
-        'title': 'New Direct Offer',
-        'message':
-            'You have received a new offer from Ahmed for a custom furniture project.',
-        'timestamp': '2 hours ago',
-        'color': AppColors.primaryColor,
-      },
-      {
-        'icon': Icons.warning,
-        'title': 'Offer Expiring Soon',
-        'message':
-            'The offer from Sara for a carpentry project expires in 24 hours.',
-        'timestamp': '5 hours ago',
-        'color': Colors.red,
-      },
-    ],
-    'This Week': [
-      {
-        'icon': Icons.person,
-        'title': 'Profile Update Reminder',
-        'message':
-            'Please upload your work license to complete your artisan profile.',
-        'timestamp': '1 day ago',
-        'color': Colors.orange,
-      },
-      {
-        'icon': Icons.star,
-        'title': 'New Review',
-        'message':
-            'You received a 5-star review from Khaled for your recent project.',
-        'timestamp': '2 days ago',
-        'color': Colors.yellow[700],
-      },
-    ],
-    'Older': [
-      {
-        'icon': Icons.check_circle,
-        'title': 'Offer Accepted',
-        'message':
-            'Your offer for a painting project has been accepted by Laila.',
-        'timestamp': '3 days ago',
-        'color': Colors.green,
-      },
-    ],
-  };
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    // Sample notifications data, grouped by time
+    final Map<String, List<Map<String, dynamic>>> groupedNotifications = {
+      l10n.notificationsScreen_group_today: [
+        {
+          'icon': Icons.local_offer,
+          'title': l10n.notificationsScreen_newOffer_title,
+          'message': l10n.notificationsScreen_newOffer_message,
+          'timestamp': l10n.notificationsScreen_newOffer_timestamp,
+          'color': AppColors.primaryColor,
+        },
+        {
+          'icon': Icons.warning,
+          'title': l10n.notificationsScreen_offerExpiring_title,
+          'message': l10n.notificationsScreen_offerExpiring_message,
+          'timestamp': l10n.notificationsScreen_offerExpiring_timestamp,
+          'color': Colors.red,
+        },
+      ],
+      l10n.notificationsScreen_group_thisWeek: [
+        {
+          'icon': Icons.person,
+          'title': l10n.notificationsScreen_profileUpdate_title,
+          'message': l10n.notificationsScreen_profileUpdate_message,
+          'timestamp': l10n.notificationsScreen_profileUpdate_timestamp,
+          'color': Colors.orange,
+        },
+        {
+          'icon': Icons.star,
+          'title': l10n.notificationsScreen_newReview_title,
+          'message': l10n.notificationsScreen_newReview_message,
+          'timestamp': l10n.notificationsScreen_newReview_timestamp,
+          'color': Colors.yellow[700],
+        },
+      ],
+      l10n.notificationsScreen_group_older: [
+        {
+          'icon': Icons.check_circle,
+          'title': l10n.notificationsScreen_offerAccepted_title,
+          'message': l10n.notificationsScreen_offerAccepted_message,
+          'timestamp': l10n.notificationsScreen_offerAccepted_timestamp,
+          'color': Colors.green,
+        },
+      ],
+    };
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Notifications',
-          style: TextStyle(
+        title: Text(
+          l10n.notificationsScreen_title,
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.white,
           ),
@@ -72,10 +69,10 @@ class NotificationsScreen extends StatelessWidget {
       body: Container(
         decoration: AppThemes.scaffoldBackgroundDecoration,
         child: groupedNotifications.isEmpty
-            ? const Center(
+            ? Center(
                 child: Text(
-                  'No notifications yet',
-                  style: TextStyle(
+                  l10n.notificationsScreen_noNotifications,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: AppColors.greyColor,
                   ),

@@ -2,40 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart'; // Assuming AppColors is defined
+import 'package:hirafi/utils/app_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PaymentMethodsScreen extends StatelessWidget {
   const PaymentMethodsScreen({Key? key}) : super(key: key);
 
-  // Sample payment methods data (relevant for Algeria)
-  final List<Map<String, dynamic>> paymentMethods = const [
-    {
-      'icon': FontAwesomeIcons.creditCard,
-      'name': 'CIB Card',
-      'description': 'Pay with your Carte Interbancaire (CIB) securely.',
-      'color': Colors.blue,
-    },
-    {
-      'icon': FontAwesomeIcons.wallet,
-      'name': 'Edahabia',
-      'description': 'Use your Algeria Post Edahabia card for payments.',
-      'color': Colors.green,
-    },
-    {
-      'icon': FontAwesomeIcons.moneyBill,
-      'name': 'Cash on Delivery',
-      'description': 'Pay in cash when the artisan delivers your order.',
-      'color': Colors.orange,
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    // Sample payment methods data (relevant for Algeria)
+    final List<Map<String, dynamic>> paymentMethods = [
+      {
+        'icon': FontAwesomeIcons.creditCard,
+        'name': l10n.paymentMethodsScreen_cibCard_name,
+        'description': l10n.paymentMethodsScreen_cibCard_description,
+        'color': Colors.blue,
+      },
+      {
+        'icon': FontAwesomeIcons.wallet,
+        'name': l10n.paymentMethodsScreen_edahabia_name,
+        'description': l10n.paymentMethodsScreen_edahabia_description,
+        'color': Colors.green,
+      },
+      {
+        'icon': FontAwesomeIcons.moneyBill,
+        'name': l10n.paymentMethodsScreen_cashOnDelivery_name,
+        'description': l10n.paymentMethodsScreen_cashOnDelivery_description,
+        'color': Colors.orange,
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Payment Methods',
-          style: TextStyle(
+        title: Text(
+          l10n.paymentMethodsScreen_title,
+          style: const TextStyle(
             fontSize: 20,
             color: Colors.white,
           ),
@@ -58,7 +60,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Manage and Secure Your Payment Options',
+                      l10n.paymentMethodsScreen_manageOptions,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
@@ -68,7 +70,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                       height: 16,
                     ),
                     Text(
-                      'Easily add, update, or remove your preferred payment methods for faster and safer transactions on Herrafi.',
+                      l10n.paymentMethodsScreen_description,
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
@@ -115,9 +117,9 @@ class PaymentMethodsScreen extends StatelessWidget {
                     color: Colors.white,
                     size: 20,
                   ),
-                  label: const Text(
-                    'Add Payment Method',
-                    style: TextStyle(
+                  label: Text(
+                    l10n.paymentMethodsScreen_addPaymentMethod,
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                     ),

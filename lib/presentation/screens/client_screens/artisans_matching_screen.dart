@@ -1,5 +1,3 @@
-// lib/presentation/pages/artisans_matching_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
@@ -10,6 +8,7 @@ import 'package:hirafi/utils/dummy_data.dart';
 import 'package:hirafi/presentation/screens/client_screens/artisan_profile_details_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArtisansMatchingScreen extends StatefulWidget {
   const ArtisansMatchingScreen({
@@ -21,21 +20,21 @@ class ArtisansMatchingScreen extends StatefulWidget {
 }
 
 class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
-  bool isLoading = true; // Add loading state
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // Simulate a data fetch (e.g., from an API)
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
-        isLoading = false; // Set loading to false after data is "fetched"
+        isLoading = false;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
     final List<ArtisanModel> artisanDummyModels =
         artisanDummyData.map((e) => ArtisanModel.fromMap(e)).toList();
 
@@ -44,29 +43,31 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
         appBar: AppBar(
           actions: [
             IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.favorite,
                 color: Colors.white,
               ),
               onPressed: () {},
             ),
           ],
-          title: const Text(
-            'Profiles',
-            style: TextStyle(
+          title: Text(
+            loc.artisansMatchingScreen_appBarTitle,
+            style: const TextStyle(
               fontSize: 18,
             ),
           ),
           backgroundColor: AppColors.primaryColor,
           foregroundColor: Colors.white,
         ),
-        body: isLoading ? _buildShimmer() : _buildContent(artisanDummyModels),
+        body: isLoading
+            ? _buildShimmer()
+            : _buildContent(artisanDummyModels, loc),
       ),
     );
   }
 
-  // Actual content when data is loaded
-  Widget _buildContent(List<ArtisanModel> artisanDummyModels) {
+  Widget _buildContent(
+      List<ArtisanModel> artisanDummyModels, AppLocalizations loc) {
     return Container(
       decoration: AppThemes.scaffoldBackgroundDecoration,
       height: size.height,
@@ -78,7 +79,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Artisans matching your offer.',
+                loc.artisansMatchingScreen_header,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
               ),
               const SizedBox(height: 20),
@@ -89,7 +90,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
-                  childAspectRatio: 0.55, // Adjusted to prevent overflow
+                  childAspectRatio: 0.55,
                 ),
                 itemCount: artisanDummyModels.length,
                 itemBuilder: (context, index) {
@@ -97,6 +98,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                   return _buildArtisanCard(
                     context,
                     artisan: artisan,
+                    loc: loc,
                     onCardClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -117,7 +119,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
     );
   }
 
-  // Shimmer effect while loading
   Widget _buildShimmer() {
     return SingleChildScrollView(
       child: Padding(
@@ -125,9 +126,8 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Shimmer for Header
             Shimmer.fromColors(
-              baseColor: Colors.grey[200]!, // Use grey[200] as requested
+              baseColor: Colors.grey[200]!,
               highlightColor: Colors.grey[100]!,
               child: Container(
                 height: 16,
@@ -136,7 +136,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            // Shimmer for GridView
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -144,12 +143,12 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.55, // Match the actual GridView
+                childAspectRatio: 0.55,
               ),
-              itemCount: 4, // Show 4 shimmer placeholders
+              itemCount: 4,
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
-                  baseColor: Colors.grey[200]!, // Use grey[200] as requested
+                  baseColor: Colors.grey[200]!,
                   highlightColor: Colors.grey[100]!,
                   child: AppCard(
                     onCardTapped: () {},
@@ -157,7 +156,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Image placeholder
                         Container(
                           height: 120,
                           width: double.infinity,
@@ -174,21 +172,18 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Name placeholder
                               Container(
                                 height: 16,
                                 width: 80,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 5),
-                              // Category placeholder
                               Container(
                                 height: 12,
                                 width: 60,
                                 color: Colors.white,
                               ),
                               const SizedBox(height: 5),
-                              // Stars placeholder
                               Row(
                                 children: [
                                   Container(
@@ -205,7 +200,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                                 ],
                               ),
                               const SizedBox(height: 10),
-                              // Button placeholder
                               Container(
                                 height: 36,
                                 width: double.infinity,
@@ -232,6 +226,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
   Widget _buildArtisanCard(
     BuildContext context, {
     required ArtisanModel artisan,
+    required AppLocalizations loc,
     required VoidCallback onSendOffer,
     required VoidCallback onCardClicked,
   }) {
@@ -241,7 +236,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image with gradient overlay
           Stack(
             children: [
               ClipRRect(
@@ -251,7 +245,7 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                 ),
                 child: Image.asset(
                   artisan.avatar,
-                  height: 120, // Adjusted height to fit better
+                  height: 120,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -276,7 +270,6 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
               ),
             ],
           ),
-
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -294,16 +287,15 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 5),
-                // Joined App Period
                 Text(
-                  'Joined 1 year ago', // Replace with actual join date
+                  loc.artisansMatchingScreen_joined
+                      .replaceFirst('{years}', '1'),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.greyColor,
                         fontSize: 12,
                       ),
                 ),
                 const SizedBox(height: 5),
-                // Nearby Section
                 Row(
                   children: [
                     Icon(
@@ -313,7 +305,8 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      '2.5 km away', // Replace with actual distance
+                      loc.artisansMatchingScreen_distance
+                          .replaceFirst('{distance}', '2.5'),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppColors.greyColor,
                             fontSize: 12,
@@ -321,14 +314,13 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 5),
                 Row(
                   children: [
                     const Icon(
                       Icons.star,
                       color: Colors.amber,
-                      size: 16, // Reduced size
+                      size: 16,
                     ),
                     const SizedBox(width: 5),
                     Text(
@@ -352,18 +344,18 @@ class _ArtisansMatchingScreenState extends State<ArtisansMatchingScreen> {
                       ),
                       foregroundColor: AppColors.primaryColor,
                       padding: const EdgeInsets.symmetric(
-                        vertical: 8, // Reduced padding
+                        vertical: 8,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: Text(
-                      'Send Offer',
+                      loc.artisansMatchingScreen_sendOffer,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13, // Slightly smaller font
+                            fontSize: 13,
                           ),
                     ),
                   ),

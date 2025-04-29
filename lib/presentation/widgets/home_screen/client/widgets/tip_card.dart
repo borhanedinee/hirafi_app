@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/utils/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TipCard extends StatelessWidget {
   final String title;
@@ -60,7 +61,7 @@ class TipCard extends StatelessWidget {
           GestureDetector(
             onTap: onReadMore,
             child: Text(
-              'Read More',
+              AppLocalizations.of(context)!.tipCard_readMore,
               style: TextStyle(
                 color: AppColors.primaryColor,
                 fontWeight: FontWeight.bold,
