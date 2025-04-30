@@ -383,7 +383,6 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
               MaterialPageRoute(
                 builder: (context) => EmailVerificationScreen(
                   email: 'boussahaborhanedine@gmail.com',
-                  isArtisan: false,
                 ),
               ),
             );

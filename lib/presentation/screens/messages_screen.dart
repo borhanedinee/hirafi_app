@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/models/user_model.dart';
+import 'package:hirafi/presentation/screens/user_to_text_information_screen.dart';
 import 'package:hirafi/presentation/widgets/messages_screen/message_item.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
@@ -10,20 +12,20 @@ import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MessagesScreen extends StatefulWidget {
+  final bool isToTextArtisan;
   const MessagesScreen(
-      {Key? key,
-      required this.userName,
+      {super.key,
       required this.timestamp,
       required this.messagePreview,
       required this.category,
-      required this.avatar})
-      : super(key: key);
+      required this.userToText,
+      required this.isToTextArtisan});
 
-  final String userName;
+  final UserModel userToText;
+
   final String timestamp;
   final String messagePreview;
   final String category;
-  final String avatar;
 
   @override
   State<MessagesScreen> createState() => _MessagesScreenState();
@@ -135,7 +137,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context, widget.userToText, widget.isToTextArtisan),
       body: Container(
           width: size.width,
           height: size.height,
@@ -192,6 +194,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                           showAttachmentDialog(context, l10n);
                         },
                       ),
+
                       Expanded(
                         child: MyTextField(
                           controller: _messageController,
@@ -200,6 +203,14 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         ),
                       ),
                       const SizedBox(width: 10),
+                      IconButton(
+                        icon: const Icon(
+                          FontAwesomeIcons.microphone,
+                          color: AppColors.primaryColor,
+                          size: 20,
+                        ),
+                        onPressed: () {},
+                      ),
                       IconButton(
                         icon: const Icon(Icons.send,
                             color: AppColors.primaryColor),
@@ -278,18 +289,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
             ),
             ListTile(
               leading: const CircleAvatar(
-                backgroundColor: Colors.orange,
-                child: Icon(FontAwesomeIcons.microphone,
-                    color: Colors.white, size: 20),
-              ),
-              title: Text(l10n.messagesScreen_attachment_audio),
-              onTap: () {
-                Get.back();
-                // Handle audio
-              },
-            ),
-            ListTile(
-              leading: const CircleAvatar(
                 backgroundColor: Colors.teal,
                 child: Icon(FontAwesomeIcons.locationDot,
                     color: Colors.white, size: 20),
@@ -323,54 +322,74 @@ class _MessagesScreenState extends State<MessagesScreen> {
     );
   }
 
-  AppBar _buildAppBar(BuildContext context) {
+  AppBar _buildAppBar(
+      BuildContext context, UserModel userToText, bool isToTextArtisan) {
     return AppBar(
-      title: Row(
-        children: [
-          // User Avatar
-          Container(
-            padding: const EdgeInsets.all(1),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              shape: BoxShape.circle,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(60),
-              child: Image.asset(
-                widget.avatar,
-                width: 30,
-                height: 30,
-                fit: BoxFit.cover,
+      title: GestureDetector(
+        onTap: () {
+          // Navigate to UserToTextInformationScreen
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UserToTextInformationScreen(
+                user: userToText,
+                iToTextArtisan: isToTextArtisan,
               ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.userName,
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      color: AppColors.whiteColor,
-                    ),
+          );
+        },
+        child: Row(
+          children: [
+            // User Avatar
+            Container(
+              padding: const EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                shape: BoxShape.circle,
               ),
-              const SizedBox(height: 2),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: AppColors.whiteColor.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: Image.asset(
+                  widget.userToText.profileImage!,
+                  width: 30,
+                  height: 30,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Icon(
+                    Icons.person,
+                    color: AppColors.whiteColor,
+                  ),
                 ),
-                child: Text(
-                  widget.category,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: AppColors.whiteColor.withOpacity(0.7),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.userToText.name,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: AppColors.whiteColor,
                       ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                const SizedBox(height: 2),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.whiteColor.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    widget.category,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: AppColors.whiteColor,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       actions: [
         // video call

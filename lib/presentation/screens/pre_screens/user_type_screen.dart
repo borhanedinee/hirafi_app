@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/screens/pre_screens/artisan_signup_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/client_signup_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
@@ -131,6 +133,8 @@ class UserTypeScreen extends StatelessWidget {
       width: size.width * 0.85,
       child: ElevatedButton(
         onPressed: () {
+          Get.find<GlobalDataController>().isArtisan = false;
+
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -157,7 +161,7 @@ class UserTypeScreen extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              AppLocalizations.of(context)!.registerAsArtisan,
+              AppLocalizations.of(context)!.registerAsClient,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: Colors.white,
                     fontSize: 16,
@@ -175,6 +179,7 @@ class UserTypeScreen extends StatelessWidget {
       width: size.width * 0.85,
       child: ElevatedButton(
         onPressed: () {
+          Get.find<GlobalDataController>().isArtisan = true;
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -206,7 +211,7 @@ class UserTypeScreen extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              AppLocalizations.of(context)!.registerAsClient,
+              AppLocalizations.of(context)!.registerAsArtisan,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: AppColors.primaryColor,
                     fontSize: 16,

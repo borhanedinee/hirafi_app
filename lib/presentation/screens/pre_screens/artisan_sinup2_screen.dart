@@ -325,7 +325,6 @@ class _ArtisanSignupTwoScreenState extends State<ArtisanSignupTwoScreen> {
               MaterialPageRoute(
                 builder: (context) => EmailVerificationScreen(
                   email: 'boussahaborhanedine@gmail.com',
-                  isArtisan: true,
                 ),
               ),
             );

@@ -40,9 +40,7 @@ class _ClientHomeContentState extends State<ClientHomeContent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 15),
-            const CustomSearchBar(
-              isArtisan: false,
-            ),
+            const CustomSearchBar(),
             const SizedBox(height: 5),
             MyHeader(
               header: localizations.clientHomeContent_categories,

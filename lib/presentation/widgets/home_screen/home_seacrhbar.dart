@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
-  final bool isArtisan;
 
   const CustomSearchBar({
     super.key,
     this.controller,
     this.onChanged,
-    required this.isArtisan,
   });
 
   @override
@@ -45,9 +45,10 @@ class CustomSearchBar extends StatelessWidget {
               decoration: InputDecoration(
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-                hintText: localizations.customSearchBar_searchHint(!isArtisan
-                    ? localizations.customSearchBar_artisans
-                    : localizations.customSearchBar_clients),
+                hintText: localizations.customSearchBar_searchHint(
+                    !Get.find<GlobalDataController>().isArtisan!
+                        ? localizations.customSearchBar_artisans
+                        : localizations.customSearchBar_clients),
                 hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.greyColor,
                     ),

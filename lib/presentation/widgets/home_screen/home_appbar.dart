@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,9 +13,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.onMenuPressed,
     required this.onNotificationsPressed,
-    required this.isArtisan,
   });
-  final bool isArtisan;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             fit: BoxFit.fill,
           ),
           const SizedBox(width: 16),
-          isArtisan
+          Get.find<GlobalDataController>().isArtisan!
               ? const SizedBox()
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +61,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
           const Spacer(),
-          isArtisan ? _buildUpgradeButton(context, loc) : const SizedBox(),
+          Get.find<GlobalDataController>().isArtisan!
+              ? _buildUpgradeButton(context, loc)
+              : const SizedBox(),
         ],
       ),
       actions: [

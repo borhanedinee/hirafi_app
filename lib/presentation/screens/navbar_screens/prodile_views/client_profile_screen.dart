@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/locale_controller.dart';
 import 'package:hirafi/presentation/screens/help__center_screen.dart';
 import 'package:hirafi/presentation/screens/notifications_screen.dart';
 import 'package:hirafi/presentation/screens/payment_methods_screen.dart';
 import 'package:hirafi/presentation/screens/personal_information_screen.dart';
+import 'package:hirafi/services/show_language_dialog.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -99,7 +102,7 @@ class ClientProfileScreen extends StatelessWidget {
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 4,
+            itemCount: 5,
             separatorBuilder: (context, index) {
               return SizedBox(height: 8);
             },
@@ -150,10 +153,23 @@ class ClientProfileScreen extends StatelessWidget {
                   'onTap': () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => HelpCenterScreen(
-                          isArtisan: false,
-                        ),
+                        builder: (context) => HelpCenterScreen(),
                       ),
+                    );
+                  },
+                },
+                {
+                  'title': localizations.clientProfileScreen_language,
+                  'prefixIcon': Icons.language,
+                  'trailing': Icons.arrow_forward_ios,
+                  'onTap': () {
+                    showChangeLanguageDialog(
+                      context,
+                      (selectedLanguage) {
+                        Get.find<LocaleController>()
+                            .setLocale(selectedLanguage);
+                        print('done');
+                      },
                     );
                   },
                 },

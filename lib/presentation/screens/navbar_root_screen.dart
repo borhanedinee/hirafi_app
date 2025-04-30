@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/screens/artisan_screens/add_offer_by_artisan_screen.dart';
 import 'package:hirafi/presentation/screens/client_screens/choose_offer_type_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/conversations_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/home_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/prodile_views/client_profile_screen.dart';
 import 'package:hirafi/presentation/screens/navbar_screens/profile_screen.dart';
-import 'package:hirafi/presentation/screens/navbar_screens/search_screen.dart';
+import 'package:hirafi/presentation/screens/navbar_screens/community_screen.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavBarRootScreen extends StatefulWidget {
-  NavBarRootScreen({super.key, required this.isArtisan});
-
-  final bool isArtisan;
+  NavBarRootScreen({super.key});
 
   @override
   State<NavBarRootScreen> createState() => _NavBarRootScreenState();
@@ -31,17 +31,11 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final List<Widget> pages = [
-      HomeScreen(
-        isArtisan: widget.isArtisan,
-      ),
-      SearchScreen(),
+      HomeScreen(),
+      CommunityScreen(),
       ConversationsScreen(),
-      ProfileScreen(
-        isArtisan: widget.isArtisan,
-      ),
+      ProfileScreen(),
     ];
-
-    print(widget.isArtisan);
 
     return SafeArea(
       child: Scaffold(
@@ -62,7 +56,7 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => widget.isArtisan
+              builder: (context) => Get.find<GlobalDataController>().isArtisan!
                   ? AddOfferByArtisanScreen()
                   : ChooseOfferTypeScreen(),
             ),
@@ -82,7 +76,8 @@ class _NavBarRootScreenState extends State<NavBarRootScreen> {
         BottomNavigationBarItem(
             icon: Icon(Ionicons.home_sharp), label: l10n.navBarRootScreen_home),
         BottomNavigationBarItem(
-            icon: Icon(Ionicons.search), label: l10n.navBarRootScreen_search),
+            icon: Icon(Ionicons.people),
+            label: l10n.navBarRootScreen_community),
         BottomNavigationBarItem(
             icon: Icon(Icons.message), label: l10n.navBarRootScreen_chats),
         BottomNavigationBarItem(

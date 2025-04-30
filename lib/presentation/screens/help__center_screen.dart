@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
@@ -7,14 +9,12 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HelpCenterScreen extends StatelessWidget {
-  const HelpCenterScreen({super.key, required this.isArtisan});
-
-  final bool isArtisan;
+  const HelpCenterScreen({super.key});
 
   // FAQ data sourced from AppLocalizations
   List<Map<String, String>> _getFAQs(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
-    if (isArtisan) {
+    if (Get.find<GlobalDataController>().isArtisan!) {
       return [
         {
           'question': loc.helpCenterScreen_artisanFaq1Question,

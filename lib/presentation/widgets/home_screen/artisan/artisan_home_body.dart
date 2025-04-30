@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/artisan_control_card.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/client_direct_offer_item.dart';
@@ -11,8 +13,7 @@ import 'package:hirafi/presentation/widgets/my_header.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class ArtisanHomeContent extends StatelessWidget {
-  const ArtisanHomeContent({super.key, required this.isArtisan});
-  final bool isArtisan;
+  const ArtisanHomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,7 @@ class ArtisanHomeContent extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 15),
-          const CustomSearchBar(
-            isArtisan: true,
-          ),
+          CustomSearchBar(),
           const SizedBox(height: 20),
 
           // ARTISAN CONTROL CARD

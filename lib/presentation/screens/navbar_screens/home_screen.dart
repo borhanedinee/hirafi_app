@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/artisan_home_body.dart';
 import 'package:hirafi/presentation/widgets/home_screen/client/client_home_content.dart';
 import 'package:hirafi/presentation/widgets/home_screen/home_appbar.dart';
 import 'package:hirafi/presentation/shimmers/home_shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
-  final bool isArtisan;
-  const HomeScreen({super.key, required this.isArtisan});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -32,14 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white.withValues(alpha: .8),
         drawer: const Drawer(),
         appBar: HomeAppBar(
-          isArtisan: widget.isArtisan,
           onMenuPressed: () {},
           onNotificationsPressed: () {},
         ),
         body: isLoading
-            ? HomeShimmers(isArtisan: widget.isArtisan)
-            : widget.isArtisan
-                ? ArtisanHomeContent(isArtisan: widget.isArtisan)
+            ? HomeShimmers()
+            : Get.find<GlobalDataController>().isArtisan!
+                ? ArtisanHomeContent()
                 : ClientHomeContent(),
       ),
     );

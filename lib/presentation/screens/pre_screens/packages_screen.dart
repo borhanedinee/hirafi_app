@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/widgets/packages_screen/package_card.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PackagesScreen extends StatelessWidget {
-  const PackagesScreen({Key? key, required this.isArtisan}) : super(key: key);
-
-  final bool isArtisan;
+  const PackagesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final isArtisan = Get.find<GlobalDataController>().isArtisan!;
     final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Scaffold(
@@ -57,11 +58,9 @@ class PackagesScreen extends StatelessWidget {
                     l10n.packagesScreen_freePackage_feature2,
                     l10n.packagesScreen_freePackage_feature3,
                   ],
-                  isArtisan: isArtisan,
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
-                  isArtisan: isArtisan,
                   planName: l10n.packagesScreen_silverPackage_name,
                   price: l10n.packagesScreen_silverPackage_price,
                   features: [
@@ -79,7 +78,6 @@ class PackagesScreen extends StatelessWidget {
                     l10n.packagesScreen_goldPackage_feature2,
                     l10n.packagesScreen_goldPackage_feature3,
                   ],
-                  isArtisan: isArtisan,
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
@@ -96,7 +94,6 @@ class PackagesScreen extends StatelessWidget {
                           l10n.packagesScreen_premiumPackage_client_feature2,
                           l10n.packagesScreen_premiumPackage_client_feature3,
                         ],
-                  isArtisan: isArtisan,
                 ),
                 const SizedBox(height: 40),
               ],

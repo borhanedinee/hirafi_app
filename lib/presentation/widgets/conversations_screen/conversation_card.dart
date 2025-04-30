@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/models/user_model.dart';
 import 'package:hirafi/presentation/screens/messages_screen.dart';
 import 'package:hirafi/utils/app_colors.dart'; // Assuming AppColors is defined
 
 class ConversationCard extends StatelessWidget {
-  final String userName;
   final String timestamp;
   final String messagePreview;
   final String category;
-  final String avatar;
   final int unreadCount;
   final VoidCallback? onTap;
 
+  final UserModel userToText;
+
+  final bool isToTextArtisan;
+
   const ConversationCard({
-    Key? key,
-    required this.userName,
+    super.key,
     required this.timestamp,
     required this.messagePreview,
     required this.category,
     required this.unreadCount,
     this.onTap,
-    required this.avatar,
-  }) : super(key: key);
+    required this.userToText,
+    required this.isToTextArtisan,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +33,11 @@ class ConversationCard extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => MessagesScreen(
-              userName: userName,
+              isToTextArtisan: isToTextArtisan,
+              userToText: userToText,
               timestamp: timestamp,
               messagePreview: messagePreview,
               category: category,
-              avatar: avatar,
             ),
           ),
         );
@@ -58,10 +61,13 @@ class ConversationCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(60),
                 child: Image.asset(
-                  avatar,
+                  userToText.profileImage!,
                   width: 50,
                   height: 50,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Icon(
+                    Icons.person,
+                  ),
                 ),
               ),
             ),
@@ -76,7 +82,7 @@ class ConversationCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        userName,
+                        userToText.name,
                         style: Theme.of(context).textTheme.titleSmall!.copyWith(
                               color: AppColors.blackColor,
                               fontWeight: FontWeight.bold,

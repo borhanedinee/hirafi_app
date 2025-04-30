@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/utils/app_colors.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmers extends StatelessWidget {
-  const HomeShimmers({super.key, required this.isArtisan});
-  final bool isArtisan;
+  const HomeShimmers({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return isArtisan ? _buildArtisanBodyShimmer() : _buildCliendBodyShimmer();
+    return Get.find<GlobalDataController>().isArtisan!
+        ? _buildArtisanBodyShimmer()
+        : _buildCliendBodyShimmer();
   }
 
   // Combined shimmer effect for both sections

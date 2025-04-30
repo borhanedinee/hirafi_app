@@ -69,9 +69,7 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
               onActionPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                    builder: (context) => NavBarRootScreen(
-                      isArtisan: false,
-                    ),
+                    builder: (context) => NavBarRootScreen(),
                   ),
                   (route) => route.isFirst,
                 );

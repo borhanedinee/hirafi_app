@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
+import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
 import 'package:hirafi/utils/app_colors.dart';
@@ -8,12 +10,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   final String email;
-  final bool isArtisan;
 
   const EmailVerificationScreen({
     Key? key,
     required this.email,
-    required this.isArtisan,
   }) : super(key: key);
 
   @override
@@ -161,21 +161,17 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                         child: ElevatedButton(
                           onPressed: _isCodeValid
                               ? () {
-                                  widget.isArtisan
+                                  Get.find<GlobalDataController>().isArtisan!
                                       ? Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                PackagesScreen(
-                                              isArtisan: widget.isArtisan,
-                                            ),
+                                                PackagesScreen(),
                                           ),
                                         )
                                       : Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                NavBarRootScreen(
-                                              isArtisan: widget.isArtisan,
-                                            ),
+                                                NavBarRootScreen(),
                                           ),
                                         );
                                 }

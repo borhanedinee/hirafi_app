@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:hirafi/app_bindings.dart';
+import 'package:hirafi/presentation/controller/locale_controller.dart';
 import 'package:hirafi/presentation/screens/pre_screens/splash_screen.dart';
 import 'package:hirafi/utils/app_theme.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
@@ -31,6 +33,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<LocaleController>(
+      () => LocaleController(),
+      fenix: true,
+    );
     size = MediaQuery.of(context).size;
     return GetMaterialApp(
       localizationsDelegates: const [
@@ -39,13 +45,16 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      initialBinding: AppBindings(),
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: null, // Default locale
+      locale: Get.find<LocaleController>().locale, // Default locale
       debugShowCheckedModeBanner: false,
       darkTheme: AppThemes.darkTheme,
       theme: AppThemes.lightTheme,
       themeMode: ThemeMode.system,
-      home: SplashScreen(),
+      home: GetBuilder<LocaleController>(
+        builder: (controller) => SplashScreen(),
+      ),
     );
   }
 }

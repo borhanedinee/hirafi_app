@@ -9,15 +9,12 @@ class PackageCard extends StatelessWidget {
   final List<String> features;
   final VoidCallback? onSelect;
 
-  final bool isArtisan;
-
   const PackageCard({
     Key? key,
     required this.planName,
     required this.price,
     required this.features,
     this.onSelect,
-    required this.isArtisan,
   }) : super(key: key);
 
   @override
@@ -91,8 +88,7 @@ class PackageCard extends StatelessWidget {
                   () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            NavBarRootScreen(isArtisan: isArtisan),
+                        builder: (context) => NavBarRootScreen(),
                       ),
                     );
                   },
