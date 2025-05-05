@@ -35,7 +35,7 @@ class CommunityScreen extends StatelessWidget {
     email: 'fatima@example.com',
     phone: '0779876543',
     gender: 'Female',
-    location: 'Annaba, Algeria',
+    location: 'Ain Temouchent',
   );
 
   UserModel user5 = UserModel(
@@ -126,7 +126,7 @@ class CommunityScreen extends StatelessWidget {
         id: '4',
         user: user4,
         content:
-            'Looking for an electrician in Annaba to fix some wiring issues in my house. It’s urgent—can anyone recommend someone reliable?',
+            'Looking for an electrician in Ain Temouchent to fix some wiring issues in my house. It’s urgent—can anyone recommend someone reliable?',
         category: 'Electrical',
         timestamp: DateTime.now().subtract(const Duration(hours: 10)),
         likes: 7,

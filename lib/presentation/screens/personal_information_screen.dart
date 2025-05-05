@@ -97,7 +97,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 MyTextField(
                   hintText: '',
-                  initialValue: 'Borhanedine',
+                  initialValue: 'Farouk',
                   prefixIcon: Icon(
                     Icons.person,
                     color: AppColors.greyColor,
@@ -111,7 +111,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 MyTextField(
                   hintText: '',
-                  initialValue: 'Boussaha',
+                  initialValue: 'Mansouri',
                   prefixIcon: Icon(
                     Icons.person,
                     color: AppColors.greyColor,
@@ -126,7 +126,7 @@ class PersonalInformationScreen extends StatelessWidget {
                 SizedBox(height: 8),
                 MyTextField(
                   hintText: '',
-                  initialValue: 'borhanedine@gmail.com',
+                  initialValue: 'faroukk@gmail.com',
                   prefixIcon: Icon(
                     Icons.email,
                     color: AppColors.greyColor,

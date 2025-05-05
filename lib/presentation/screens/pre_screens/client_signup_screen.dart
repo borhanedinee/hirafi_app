@@ -382,7 +382,7 @@ class _ClientSignupScreenState extends State<ClientSignupScreen> {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => EmailVerificationScreen(
-                  email: 'boussahaborhanedine@gmail.com',
+                  email: 'faroukmn@gmail.com',
                 ),
               ),
             );

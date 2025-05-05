@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppThemes.darkTheme,
       theme: AppThemes.lightTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
       home: GetBuilder<LocaleController>(
         builder: (controller) => SplashScreen(),
       ),

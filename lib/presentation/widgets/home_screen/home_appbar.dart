@@ -32,28 +32,29 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          const SizedBox(width: 8),
           Image.asset(
             'assets/images/logos/logo1.png',
             height: 35,
             width: 50,
             fit: BoxFit.fill,
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 24),
           Get.find<GlobalDataController>().isArtisan!
               ? const SizedBox()
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Borhanedine B',
+                      'Farouk Mn',
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 13),
                     ),
                     Text(
                       loc.homeAppBar_location,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppColors.greyColor,
                             fontSize: 10,
                           ),

@@ -443,7 +443,10 @@ class _FillOfferDetailsScreenState extends State<FillOfferDetailsScreen> {
                       Text(
                         !widget.isDirectOffer
                             ? loc.fillOfferDetailsScreen_sendNowButton
-                            : loc.fillOfferDetailsScreen_nextButton,
+                            : widget.isSendDirectly
+                                ? loc
+                                    .fillOfferDetailsScreen_sendOfferToArtisanButton
+                                : loc.fillOfferDetailsScreen_nextButton,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

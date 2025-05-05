@@ -78,7 +78,7 @@ class ClientDirectOfferItem extends StatelessWidget {
                         size: 12,
                       ),
                       Text(
-                        'Annaba, Annaba',
+                        'Ain Temouchent',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.greyColor,

@@ -372,7 +372,7 @@ class ClientProfileScreen extends StatelessWidget {
 
           // USER NAME
           Text(
-            'Boussaha Borhanedine', // Note: User name is typically dynamic, not localized
+            'Farouk Mn', // Note: User name is typically dynamic, not localized
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: AppColors.blackColor,
                   fontWeight: FontWeight.w600,
