@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
-import 'package:hirafi/models/group_model.dart';
+import 'package:hirafi/models/community_group_model.dart';
 import 'package:hirafi/models/post_model.dart';
 import 'package:hirafi/models/user_model.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
@@ -11,9 +11,9 @@ import 'package:hirafi/presentation/widgets/community_screen/dialogs/show_add_gr
 import 'package:hirafi/presentation/widgets/community_screen/group_item.dart';
 import 'package:hirafi/presentation/widgets/community_screen/post_item.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
-import 'package:hirafi/utils/dummy_data.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
+import 'package:hirafi/core/dummy_data.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class CommunityScreen extends StatelessWidget {

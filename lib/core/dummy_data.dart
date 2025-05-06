@@ -1,4 +1,4 @@
-import 'package:hirafi/utils/constants/urls.dart';
+import 'package:hirafi/core/constants/urls.dart';
 
 Map<String, List<String>> fieldsByCategory = {
   'Electrician': [

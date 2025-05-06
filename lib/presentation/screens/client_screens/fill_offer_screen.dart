@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:hirafi/presentation/screens/client_screens/artisans_matching_screen.dart';
 import 'package:hirafi/presentation/screens/client_screens/posted_offer_screen.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

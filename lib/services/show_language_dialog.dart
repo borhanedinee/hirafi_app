@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/presentation/controller/locale_controller.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 
 Future<void> showChangeLanguageDialog(
     BuildContext context, Function(String) onLanguageSelected) async {

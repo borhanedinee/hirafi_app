@@ -9,8 +9,8 @@ import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
 import 'package:hirafi/presentation/widgets/my_field_header.dart';
 import 'package:hirafi/presentation/widgets/my_header.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/user_model.dart';
 import 'package:hirafi/presentation/screens/messages_screen.dart';
-import 'package:hirafi/utils/app_colors.dart'; // Assuming AppColors is defined
+import 'package:hirafi/core/themes/app_colors.dart'; // Assuming AppColors is defined
 
 class ConversationCard extends StatelessWidget {
   final String timestamp;

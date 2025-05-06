@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:hirafi/presentation/screens/home_sub_screens/sub_categories_screen.dart';
 
 class WrapItem extends StatelessWidget {

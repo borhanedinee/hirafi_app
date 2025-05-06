@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:hirafi/presentation/screens/home_sub_screens/profiles_screen.dart';
-import 'package:hirafi/utils/dummy_data.dart';
+import 'package:hirafi/core/dummy_data.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SubCategoriesScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 
 class AppColors {
   static const Color primaryColor = Color(0xffff3600);

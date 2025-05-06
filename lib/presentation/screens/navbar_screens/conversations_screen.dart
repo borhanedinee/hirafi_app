@@ -5,8 +5,8 @@ import 'package:hirafi/models/user_model.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/widgets/conversations_screen/conversation_card.dart';
 import 'package:hirafi/presentation/widgets/my_text_field.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

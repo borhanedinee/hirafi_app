@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 
 class PackageCard extends StatelessWidget {
   final String planName;

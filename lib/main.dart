@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:hirafi/app_bindings.dart';
 import 'package:hirafi/presentation/controller/locale_controller.dart';
 import 'package:hirafi/presentation/screens/pre_screens/splash_screen.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/user_type_screen.dart';
 

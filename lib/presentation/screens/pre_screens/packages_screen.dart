@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
 import 'package:hirafi/presentation/widgets/packages_screen/package_card.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PackagesScreen extends StatelessWidget {

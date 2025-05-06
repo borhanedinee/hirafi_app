@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class MessageItem extends StatelessWidget {

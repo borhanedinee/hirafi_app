@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class CustomSearchBar extends StatelessWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -29,43 +30,49 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.white,
       elevation: 2,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(width: 8),
-          Image.asset(
-            'assets/images/logos/logo1.png',
-            height: 35,
-            width: 50,
-            fit: BoxFit.fill,
-          ),
-          const SizedBox(width: 24),
-          Get.find<GlobalDataController>().isArtisan!
-              ? const SizedBox()
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Farouk Mn',
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 13),
-                    ),
-                    Text(
-                      loc.homeAppBar_location,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.greyColor,
-                            fontSize: 10,
-                          ),
-                    ),
-                  ],
-                ),
-          const Spacer(),
-          Get.find<GlobalDataController>().isArtisan!
-              ? _buildUpgradeButton(context, loc)
-              : const SizedBox(),
-        ],
+      centerTitle: true,
+      title: SizedBox(
+        width: size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Get.find<GlobalDataController>().isArtisan!
+                ? const SizedBox()
+                : const SizedBox(width: 35),
+            Image.asset(
+              'assets/images/logos/logo1.png',
+              height: 35,
+              width: 50,
+              fit: BoxFit.fill,
+            ),
+            const SizedBox(width: 24),
+            Get.find<GlobalDataController>().isArtisan!
+                ? const SizedBox()
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Farouk Mn',
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 13),
+                      ),
+                      Text(
+                        loc.homeAppBar_location,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppColors.greyColor,
+                              fontSize: 10,
+                            ),
+                      ),
+                    ],
+                  ),
+            const Spacer(),
+            Get.find<GlobalDataController>().isArtisan!
+                ? _buildUpgradeButton(context, loc)
+                : const SizedBox(),
+          ],
+        ),
       ),
       actions: [
         IconButton(

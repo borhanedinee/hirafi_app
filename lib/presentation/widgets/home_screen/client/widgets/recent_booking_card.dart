@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart'; // Assuming this contains size and other utilities
 import 'package:hirafi/models/artisan_model.dart';
 import 'package:hirafi/presentation/screens/client_screens/recent_order_details_screen.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/enums/booking_status_enum.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/enums/booking_status_enum.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class RecentBookingCard extends StatelessWidget {

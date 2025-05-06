@@ -8,9 +8,9 @@ import 'package:hirafi/presentation/screens/payment_methods_screen.dart';
 import 'package:hirafi/presentation/screens/personal_information_screen.dart';
 import 'package:hirafi/services/show_image_view_dialog.dart';
 import 'package:hirafi/services/show_language_dialog.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
-import 'package:hirafi/utils/dummy_data.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
+import 'package:hirafi/core/dummy_data.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

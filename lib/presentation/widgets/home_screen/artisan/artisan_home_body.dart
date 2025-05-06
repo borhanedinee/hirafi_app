@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/artisan_control_card.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/client_direct_offer_item.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/offer_by_tender_item.dart';

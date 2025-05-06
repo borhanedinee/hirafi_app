@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/models/artisan_model.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
-import 'package:hirafi/utils/constants/urls.dart';
-import 'package:hirafi/utils/dummy_data.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
+import 'package:hirafi/core/constants/urls.dart';
+import 'package:hirafi/core/dummy_data.dart';
 import 'package:hirafi/presentation/screens/client_screens/artisan_profile_details_screen.dart';
 import 'package:hirafi/presentation/widgets/app_card.dart';
 import 'package:shimmer/shimmer.dart';

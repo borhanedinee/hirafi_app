@@ -8,10 +8,10 @@ import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/artisan_sinup2_screen.dart';
 import 'package:hirafi/presentation/screens/pre_screens/login_screen.dart';
 import 'package:hirafi/presentation/widgets/artisan_signup_screen/upload_document.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
-import 'package:hirafi/utils/constants/wilayas_to_daira.dart';
-import 'package:hirafi/utils/dummy_data.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
+import 'package:hirafi/core/constants/wilayas_to_daira.dart';
+import 'package:hirafi/core/dummy_data.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

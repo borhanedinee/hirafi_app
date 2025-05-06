@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/pre_screens/user_type_screen.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

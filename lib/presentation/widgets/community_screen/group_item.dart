@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hirafi/models/group_model.dart';
-import 'package:hirafi/utils/app_colors.dart';
+import 'package:hirafi/models/community_group_model.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GroupItem extends StatelessWidget {

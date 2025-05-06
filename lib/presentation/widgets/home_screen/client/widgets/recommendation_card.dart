@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hirafi/models/artisan_model.dart';
-import 'package:hirafi/utils/app_colors.dart';
-import 'package:hirafi/utils/app_theme.dart';
+import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Added for localization
 
 class RecommendationCard extends StatelessWidget {
