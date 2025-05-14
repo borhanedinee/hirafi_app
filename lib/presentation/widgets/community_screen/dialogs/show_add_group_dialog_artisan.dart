@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hirafi/core/themes/app_colors.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hirafi/presentation/screens/pre_screens/packages_screen.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 Future<void> showAddGroupArtisanDialog(BuildContext context) async {
@@ -62,12 +63,9 @@ Future<void> showAddGroupArtisanDialog(BuildContext context) async {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    // Handle upgrade action (e.g., navigate to subscription screen)
-                    Get.back();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Navigating to subscription page...'),
-                      ),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => const PackagesScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

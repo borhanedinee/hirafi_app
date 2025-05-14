@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:hirafi/main.dart';
-import 'package:hirafi/presentation/controller/global_data_controller.dart';
-import 'package:hirafi/core/themes/app_colors.dart';
+import 'package:hirafi/core/themes/app_theme.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/artisan_control_card.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/client_direct_offer_item.dart';
 import 'package:hirafi/presentation/widgets/home_screen/artisan/widgets/offer_by_tender_item.dart';
@@ -17,52 +13,58 @@ class ArtisanHomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(height: 15),
-          CustomSearchBar(),
-          const SizedBox(height: 20),
+    return LayoutBuilder(
+      builder: (context, constraints) => Container(
+        height: constraints.maxHeight,
+        decoration: AppThemes.scaffoldBackgroundDecoration,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 15),
+              CustomSearchBar(),
+              const SizedBox(height: 20),
 
-          // ARTISAN CONTROL CARD
-          ArtisanControlCard(),
+              // ARTISAN CONTROL CARD
+              ArtisanControlCard(),
 
-          SizedBox(height: 16),
+              SizedBox(height: 16),
 
-          // ARTISAN DIRECT OFFERS SENT BY CLIENTS
-          MyHeader(
-              header: AppLocalizations.of(context)!
-                  .artisanHomeContent_directOffers),
-          Column(
-            spacing: 16,
-            children: List.generate(
-              2,
-              (index) => ClientDirectOfferItem(
-                onAccept: () {},
-                onReject: () {},
+              // ARTISAN DIRECT OFFERS SENT BY CLIENTS
+              MyHeader(
+                  header: AppLocalizations.of(context)!
+                      .artisanHomeContent_directOffers),
+              Column(
+                spacing: 16,
+                children: List.generate(
+                  2,
+                  (index) => ClientDirectOfferItem(
+                    onAccept: () {},
+                    onReject: () {},
+                  ),
+                ),
               ),
-            ),
-          ),
-          const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-          // OFFERS BY TENDER
-          MyHeader(
-              header: AppLocalizations.of(context)!
-                  .artisanHomeContent_offersByTender),
+              // OFFERS BY TENDER
+              MyHeader(
+                  header: AppLocalizations.of(context)!
+                      .artisanHomeContent_offersByTender),
 
-          Column(
-            spacing: 16,
-            children: List.generate(
-              2,
-              (index) => OfferByTenderItem(
-                onBookmark: () {},
-                onSendProposal: () {},
+              Column(
+                spacing: 16,
+                children: List.generate(
+                  2,
+                  (index) => OfferByTenderItem(
+                    onBookmark: () {},
+                    onSendProposal: () {},
+                  ),
+                ),
               ),
-            ),
-          ),
 
-          const SizedBox(height: 70),
-        ],
+              const SizedBox(height: 70),
+            ],
+          ),
+        ),
       ),
     );
   }

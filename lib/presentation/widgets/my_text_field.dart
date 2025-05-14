@@ -11,21 +11,30 @@ class MyTextField extends StatelessWidget {
       this.fillColor,
       this.initialValue,
       this.controller,
-      this.onSubmitted});
+      this.onSubmitted,
+      this.keyBoardType,
+      this.errorText,
+      this.focusNode});
 
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final int? maxLines;
   final String hintText;
   final String? initialValue;
+  final String? errorText;
   final Color? fillColor;
   final TextEditingController? controller;
   final ValueChanged<String>? onSubmitted;
+  final TextInputType? keyBoardType;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyBoardType,
       controller: controller,
+      focusNode: focusNode,
+      forceErrorText: errorText,
       onFieldSubmitted: onSubmitted,
       initialValue: initialValue,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(

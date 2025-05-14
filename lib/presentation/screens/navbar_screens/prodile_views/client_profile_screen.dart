@@ -7,6 +7,7 @@ import 'package:hirafi/presentation/screens/help__center_screen.dart';
 import 'package:hirafi/presentation/screens/notifications_screen.dart';
 import 'package:hirafi/presentation/screens/payment_methods_screen.dart';
 import 'package:hirafi/presentation/screens/personal_information_screen.dart';
+import 'package:hirafi/presentation/screens/pre_screens/user_type_screen.dart';
 import 'package:hirafi/services/show_language_dialog.dart';
 import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:hirafi/core/themes/app_theme.dart';
@@ -215,7 +216,10 @@ class ClientProfileScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(),
             child: ElevatedButton.icon(
               onPressed: () {
-                print('Logout button pressed');
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => UserTypeScreen()),
+                  (route) => false,
+                );
               },
               icon: Icon(
                 LucideIcons.logOut,

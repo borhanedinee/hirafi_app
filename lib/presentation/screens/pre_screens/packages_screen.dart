@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/controller/global_data_controller.dart';
+import 'package:hirafi/presentation/screens/artisan_screens/payment_process_screen.dart';
+import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/presentation/widgets/packages_screen/package_card.dart';
 import 'package:hirafi/core/themes/app_colors.dart';
 import 'package:hirafi/core/themes/app_theme.dart';
@@ -51,6 +53,14 @@ class PackagesScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 PackageCard(
+                  onSelect: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => NavBarRootScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
                   planName: l10n.packagesScreen_freePackage_name,
                   price: l10n.packagesScreen_freePackage_price,
                   features: [
@@ -61,6 +71,16 @@ class PackagesScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
+                  onSelect: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PaymentProcessScreen(
+                          packageName: 'Silver Package',
+                          price: 500,
+                        ),
+                      ),
+                    );
+                  },
                   planName: l10n.packagesScreen_silverPackage_name,
                   price: l10n.packagesScreen_silverPackage_price,
                   features: [
@@ -71,6 +91,16 @@ class PackagesScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
+                  onSelect: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PaymentProcessScreen(
+                          packageName: 'Gold Package',
+                          price: 1500,
+                        ),
+                      ),
+                    );
+                  },
                   planName: l10n.packagesScreen_goldPackage_name,
                   price: l10n.packagesScreen_goldPackage_price,
                   features: [
@@ -81,6 +111,16 @@ class PackagesScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 PackageCard(
+                  onSelect: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PaymentProcessScreen(
+                          packageName: 'Premium Package',
+                          price: 2000,
+                        ),
+                      ),
+                    );
+                  },
                   planName: l10n.packagesScreen_premiumPackage_name,
                   price: l10n.packagesScreen_premiumPackage_price,
                   features: isArtisan

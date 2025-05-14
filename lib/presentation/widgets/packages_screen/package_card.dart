@@ -3,6 +3,8 @@ import 'package:hirafi/main.dart';
 import 'package:hirafi/presentation/screens/navbar_root_screen.dart';
 import 'package:hirafi/core/themes/app_colors.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class PackageCard extends StatelessWidget {
   final String planName;
   final String price;
@@ -19,6 +21,8 @@ class PackageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Container(
       width: size.width, // Fixed width to match the design
       padding: const EdgeInsets.all(16),
@@ -100,8 +104,8 @@ class PackageCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text(
-                'Select Plan',
+              child: Text(
+                l10n.packagesScreen_choosePackage.split(' ').first,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
